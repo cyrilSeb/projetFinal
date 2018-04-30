@@ -2,6 +2,11 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Stagiaire")
 public class Stagiaire extends User {
 	private Ordinateur ordinateur;
 	private List<Cursus> cursus;

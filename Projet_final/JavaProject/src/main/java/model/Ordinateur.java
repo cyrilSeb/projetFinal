@@ -2,6 +2,11 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Ordinateur")
 public class Ordinateur extends Materiel {
 	private String processeur;
 	private Integer ram;

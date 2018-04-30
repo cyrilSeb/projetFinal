@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ public class Salle {
 	private String numero;
 	@Embedded
 	private Adresse adresse;
-	private Cursus[] cursus;
+	private List<Cursus> cursus;
 	@Version
 	private int version;
 
@@ -46,11 +48,11 @@ public class Salle {
 		this.adresse = adresse;
 	}
 
-	public Cursus[] getCursus() {
+	public List<Cursus> getCursus() {
 		return cursus;
 	}
 
-	public void setCursus(Cursus[] cursus) {
+	public void setCursus(List<Cursus> cursus) {
 		this.cursus = cursus;
 	}
 }

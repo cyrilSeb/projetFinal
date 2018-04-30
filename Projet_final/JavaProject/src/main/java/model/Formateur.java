@@ -3,18 +3,23 @@ package model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Formateur")
 public class Formateur extends User {
-	private List<Date[]> disponibilite;
+	private List<Date[]> disponibilites;
 	private List<Competence> competences;
 	private List<Module> modules;
 	private Cursus cursus;
 
 	public List<Date[]> getDisponibilite() {
-		return disponibilite;
+		return disponibilites;
 	}
 
 	public void setDisponibilite(List<Date[]> disponibilite) {
-		this.disponibilite = disponibilite;
+		this.disponibilites = disponibilite;
 	}
 
 	public List<Competence> getCompetences() {

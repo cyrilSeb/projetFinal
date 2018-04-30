@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +21,37 @@ public abstract class User {
 	private String prenom;
 	private String login;
 	private String motDePasse;
+	@Embedded
 	private Adresse adresse;
+	@Embedded
 	private Coordonnees coordonnees;
-
+	private Statut statut;
 	@Version
+	private int version;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Statut getStatut() {
+		return statut;
+	}
+
+	public void setStatut(Statut statut) {
+		this.statut = statut;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public String getNom() {
 		return nom;
