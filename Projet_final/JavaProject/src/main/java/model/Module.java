@@ -2,10 +2,12 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -16,13 +18,16 @@ public class Module {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@Column(name = "Module_id")
 	private Long id;
+	@Column(name = "Module_dates")
 	private Date[] dates;
 	@OneToOne
 	private Matiere matiere;
 	@OneToOne
 	private Formateur formateur;
 	@ManyToOne
+	@JoinColumn(name = "Module_cursus")
 	private Cursus cursus;
 	@Version
 	private int version;

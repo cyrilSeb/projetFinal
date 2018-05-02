@@ -1,5 +1,8 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +14,16 @@ import javax.persistence.Version;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 20, name = "type")
 public abstract class Materiel {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@Column(name = "Materiel_code")
 	private Long code;
+	@Column(name = "Materiel_cout")
 	private Double cout;
+	@Column(name = "Materiel_disponible")
 	private Boolean disponible;
 	@Version
 	private int version;

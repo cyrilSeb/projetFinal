@@ -17,13 +17,15 @@ public class Salle {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@Column(name = "Salle_id")
 	private Long id;
+	@Column(name = "Salle_capacite")
 	private Integer capacite;
-	@Column(name = "numero_salle")
+	@Column(name = "Salle_numero")
 	private String numero;
 	@Embedded
 	private Adresse adresse;
-	@OneToMany
+	@OneToMany(mappedBy = "salle")
 	private List<Cursus> cursus;
 	@Version
 	private int version;

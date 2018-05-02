@@ -1,5 +1,8 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,14 +15,20 @@ import javax.persistence.Version;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 20, name = "type")
 public abstract class User {
 	@Id
-	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@SequenceGenerator(name = "seqUser", sequenceName = "seq_user", initialValue = 101, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUser")
+	@Column(name = "user_id")
 	private Long id;
+	@Column(name = "user_nom")
 	private String nom;
+	@Column(name = "user_prenom")
 	private String prenom;
+	@Column(name = "user_login")
 	private String login;
+	@Column(name = "user_mot_de_passe")
 	private String motDePasse;
 	@Embedded
 	private Adresse adresse;

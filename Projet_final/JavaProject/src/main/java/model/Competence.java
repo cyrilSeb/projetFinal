@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Version;
 public class Competence {
 	@EmbeddedId
 	private FormateurMatierePK key;
+	@Column(name = "competence_niveau")
 	private Niveau niveau;
 	@Version
 	private int version;

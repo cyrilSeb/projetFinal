@@ -3,9 +3,11 @@ package model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,11 +16,15 @@ import javax.persistence.Version;
 @Entity
 public class Cursus {
 	@Id
+	@Column(name = "Cursus_nom")
 	private String nom;
+	@Column(name = "Cursus_dates")
 	private Date[] dates;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_gestionnaire")
 	private Gestionnaire gestionnaire;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_referent")
 	private Formateur referent;
 	@OneToMany(mappedBy = "cursus")
 	private List<Module> modules;
@@ -27,6 +33,7 @@ public class Cursus {
 	@OneToMany(mappedBy = "cursus")
 	private List<Stagiaire> stagiaires;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_salle")
 	private Salle salle;
 	@Version
 	private int version;
