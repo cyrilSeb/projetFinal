@@ -12,6 +12,13 @@ import repository.*;
 public class Test {
 	public static void main(String[] args) {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		CursusRepository cursusRepository = ctx.getBean(CursusRepository.class);
+		CompetenceRepository competenceRepository = ctx.getBean(CompetenceRepository.class);
+		MaterielRepository materielRepository = ctx.getBean(MaterielRepository.class);
+		MatiereRepository matiereRepository = ctx.getBean(MatiereRepository.class);
+		ModuleRepository moduleRepository = ctx.getBean(ModuleRepository.class);
+		SalleRepository salleRepository = ctx.getBean(SalleRepository.class);
+		UserRepository userRepository = ctx.getBean(UserRepository.class);
 
 		// Formateur
 		Formateur jacky = new Formateur();
@@ -52,7 +59,6 @@ public class Test {
 
 		// Ordinateur
 		Ordinateur asus = new Ordinateur();
-		asus.setCode((long) 48);
 		asus.setCout((double) 15);
 		asus.setDD(1024);
 		asus.setProcesseur("INTEL CORE i5");
@@ -60,7 +66,6 @@ public class Test {
 
 		// Projecteur
 		Projecteur acer = new Projecteur();
-		acer.setCode((long) 42);
 		acer.setCout((double) 10);
 
 		// Matiere 1
@@ -78,16 +83,96 @@ public class Test {
 		info.setTitre("JAVA/JEE");
 
 		// Module
-		Module ifo = new Module();
+		Module modInfo = new Module();
+
+		// Cursus
+		Cursus mpi = new Cursus();
+		mpi.setNom("Mathematiques, Physique et Informatique");
+
+		// Salle
+		Salle salle = new Salle();
+		salle.setCapacite(40);
+		salle.setNumero("F001");
+
+		// Creation en base
+		cursusRepository.save(mpi);
+		materielRepository.save(acer);
+		materielRepository.save(asus);
+		matiereRepository.save(compter);
+		matiereRepository.save(info);
+		moduleRepository.save(modInfo);
+		salleRepository.save(salle);
+		userRepository.save(jacky);
+		userRepository.save(johanna);
+		userRepository.save(richard);
+		userRepository.save(olivier);
 
 		// Associations
+		FormateurMatierePK cptKey = new FormateurMatierePK();
+		cptKey.setFormateur(jacky);
+		cptKey.setMatiere(info);
+		
+		Competence cpt = new Competence();
+		cpt.setKey(cptKey);
+		cpt.setNiveau(Niveau.Expert);
+		competenceRepository.save(cpt);
+		
+		Set<Competence> cpts = new HashSet<Competence>();
+		cpts.add(cpt);
+
+		jacky.setCompetences(cpts);
+		jacky.setCursus(mpi);
+
+		Set<Module> mods = new HashSet<Module>();
+		mods.add(modInfo);
+
+		jacky.setModules(mods);
+
+		Set<Cursus> setCursus = new HashSet<Cursus>();
+		setCursus.add(mpi);
+
+		johanna.setCursus(setCursus);
+
+		richard.setCursus(mpi);
 		richard.setOrdinateur(asus);
+
 		asus.setStagiaire(richard);
+
+		acer.setCursus(mpi);
+
+		mpi.setGestionnaire(johanna);
+		mpi.setModules(mods);
+		mpi.setProjecteur(acer);
+		mpi.setReferent(jacky);
+
+		Set<Stagiaire> stags = new HashSet<Stagiaire>();
+		stags.add(richard);
+
+		mpi.setStagiaires(stags);
+
+		modInfo.setCursus(mpi);
+		modInfo.setFormateur(jacky);
+		modInfo.setMatiere(info);
+
+		salle.setCursus(setCursus);
 
 		Set<Matiere> infoPrerequis = new HashSet<Matiere>();
 		infoPrerequis.add(compter);
 		info.setPrerequis(infoPrerequis);
 
-		CursusRepository cursusRepository = ctx.getBean(CursusRepository.class);
+		// Update
+		cursusRepository.save(mpi);
+		competenceRepository.save(cpt);
+		materielRepository.save(acer);
+		materielRepository.save(asus);
+		matiereRepository.save(compter);
+		matiereRepository.save(info);
+		moduleRepository.save(modInfo);
+		salleRepository.save(salle);
+		userRepository.save(jacky);
+		userRepository.save(johanna);
+		userRepository.save(richard);
+		userRepository.save(olivier);
+
 	}
 }
