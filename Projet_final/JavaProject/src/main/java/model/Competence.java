@@ -1,12 +1,14 @@
 package model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 @Entity
 public class Competence {
-	@Id
+	@EmbeddedId
 	private FormateurMatierePK key;
 	private Niveau niveau;
 	@Version

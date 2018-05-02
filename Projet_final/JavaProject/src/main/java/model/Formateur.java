@@ -5,20 +5,25 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("Formateur")
 public class Formateur extends User {
-	private List<Date[]> disponibilites;
+	private Date[] disponibilites;
+	@OneToMany
 	private List<Competence> competences;
+	@OneToMany
 	private List<Module> modules;
+	@OneToOne
 	private Cursus cursus;
 
-	public List<Date[]> getDisponibilite() {
+	public Date[] getDisponibilite() {
 		return disponibilites;
 	}
 
-	public void setDisponibilite(List<Date[]> disponibilite) {
+	public void setDisponibilite(Date[] disponibilite) {
 		this.disponibilites = disponibilite;
 	}
 

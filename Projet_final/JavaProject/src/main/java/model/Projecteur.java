@@ -2,10 +2,12 @@ package model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
-@DiscriminatorValue("Video_projector")
+@DiscriminatorValue("Video_projecteur")
 public class Projecteur extends Materiel {
+	@OneToOne
 	private Cursus cursus;
 
 	public Cursus getCursus() {
