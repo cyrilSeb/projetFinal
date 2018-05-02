@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "Salle")
 public class Salle {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
@@ -26,7 +28,7 @@ public class Salle {
 	@Embedded
 	private Adresse adresse;
 	@OneToMany(mappedBy = "salle")
-	private List<Cursus> cursus;
+	private Set<Cursus> cursus;
 	@Version
 	private int version;
 
@@ -54,11 +56,11 @@ public class Salle {
 		this.adresse = adresse;
 	}
 
-	public List<Cursus> getCursus() {
+	public Set<Cursus> getCursus() {
 		return cursus;
 	}
 
-	public void setCursus(List<Cursus> cursus) {
+	public void setCursus(Set<Cursus> cursus) {
 		this.cursus = cursus;
 	}
 }

@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Embeddable
 public class FormateurMatierePK implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "formateur_id")
 	private Formateur formateur;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "matiere_id")
 	private Matiere matiere;
 
 	public Formateur getFormateur() {

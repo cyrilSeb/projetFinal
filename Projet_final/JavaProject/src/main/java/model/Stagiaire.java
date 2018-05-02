@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -11,7 +12,7 @@ import javax.persistence.OneToOne;
 public class Stagiaire extends User {
 	@OneToOne
 	private Ordinateur ordinateur;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Stagiaire_cursus")
 	private Cursus cursus;
 

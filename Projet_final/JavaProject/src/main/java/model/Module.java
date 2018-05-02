@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "Module")
 public class Module {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
@@ -24,9 +27,9 @@ public class Module {
 	private Date[] dates;
 	@OneToOne
 	private Matiere matiere;
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Formateur formateur;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Module_cursus")
 	private Cursus cursus;
 	@Version

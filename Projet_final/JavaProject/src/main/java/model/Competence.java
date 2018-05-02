@@ -3,15 +3,18 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name="Competence")
 public class Competence {
 	@EmbeddedId
 	private FormateurMatierePK key;
 	@Column(name = "competence_niveau")
+	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
 	@Version
 	private int version;
