@@ -4,7 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
@@ -12,11 +16,17 @@ public class Cursus {
 	@Id
 	private String nom;
 	private Date[] dates;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Gestionnaire gestionnaire;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Formateur referent;
+	@OneToMany(mappedBy = "cursus")
 	private List<Module> modules;
+	@OneToOne
 	private Projecteur projecteur;
+	@OneToMany(mappedBy = "cursus")
 	private List<Stagiaire> stagiaires;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Salle salle;
 	@Version
 	private int version;
