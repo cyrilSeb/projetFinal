@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("Stagiaire")
 public class Stagiaire extends User {
+	@OneToOne
 	private Ordinateur ordinateur;
+	@OneToMany
 	private List<Cursus> cursus;
 
 	public Ordinateur getOrdinateur() {

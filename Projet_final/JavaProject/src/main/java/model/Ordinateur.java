@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("Ordinateur")
@@ -12,7 +13,7 @@ public class Ordinateur extends Materiel {
 	private Integer ram;
 	private Integer DD;
 	private Date anneeAchat;
-
+	@OneToOne
 	private Stagiaire stagiaire;
 
 	public String getProcesseur() {
