@@ -1,5 +1,5 @@
 package model;
 
-public enum Statut {
+public enum Role {
 	ADMIN, USER, FORMATEUR, GESTION, TECHNICIEN;
 }
