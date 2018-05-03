@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,7 +65,7 @@ public class CursusRestController {
 		return new ResponseEntity<List<Cursus>>(cursusRepository.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = { "", "/" }, method = RequestMethod.POST)
+	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Cursus cursus, BindingResult rs, UriComponentsBuilder ucb) {
 		ResponseEntity<Void> check;
 		if (cursus.getId() != null) {
@@ -98,6 +99,160 @@ public class CursusRestController {
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(ucb.path("/cursus/{id}").buildAndExpand(cursus.getId()).toUri());
 			return new ResponseEntity<>(header, HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.PUT)
+	public ResponseEntity<Cursus> update(@RequestBody Cursus cursus) {
+		Optional<Cursus> optCrs = cursusRepository.findById(cursus.getId());
+		if (optCrs.isPresent()) {
+			Cursus crs = optCrs.get();
+			if (cursus.getNom() != null) {
+				crs.setNom(cursus.getNom());
+			}
+			if (cursus.getDates() != null) {
+				crs.setDates(cursus.getDates());
+			}
+			if (cursus.getGestionnaire() != null) {
+				Optional<User> optUser = userRepository.findById(cursus.getGestionnaire().getId());
+				if (optUser.isPresent()) {
+					if (optUser.get() instanceof Gestionnaire) {
+						crs.setGestionnaire((Gestionnaire) optUser.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+					}
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				}
+			}
+			if (cursus.getReferent() != null) {
+				Optional<User> optUser = userRepository.findById(cursus.getReferent().getId());
+				if (optUser.isPresent()) {
+					if (optUser.get() instanceof Formateur) {
+						crs.setReferent((Formateur) optUser.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+					}
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				}
+			}
+			if (cursus.getModules() != null) {
+				Set<Module> setMods = cursus.getModules();
+				cursus.getModules().clear();
+				while (setMods.iterator().hasNext()) {
+					Module mod = setMods.iterator().next();
+					if (mod.getId() != null) {
+						Optional<Module> optMod = moduleRepository.findById(mod.getId());
+						if (optMod.isPresent()) {
+							cursus.getModules().add(optMod.get());
+						} else {
+							return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+						}
+					}
+				}
+			}
+			if (cursus.getProjecteur() != null) {
+				Optional<Materiel> optMat = materielRepository.findById(cursus.getProjecteur().getCode());
+				if (optMat.isPresent()) {
+					if (optMat.get() instanceof Projecteur) {
+						cursus.setProjecteur((Projecteur) optMat.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+					}
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				}
+			}
+			if (cursus.getStagiaires() != null) {
+				Set<Stagiaire> setStags = cursus.getStagiaires();
+				cursus.getStagiaires().clear();
+				while (setStags.iterator().hasNext()) {
+					Stagiaire stag = setStags.iterator().next();
+					Optional<User> optUser = userRepository.findById(stag.getId());
+					if (optUser.isPresent()) {
+						if (optUser.get() instanceof Stagiaire) {
+							cursus.getStagiaires().add((Stagiaire) optUser.get());
+						} else {
+							return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						}
+					} else {
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					}
+				}
+			}
+			if (cursus.getSalle() != null) {
+				Optional<Salle> optSalle = salleRepository.findById(cursus.getSalle().getId());
+				if (optSalle.isPresent()) {
+					crs.setSalle(optSalle.get());
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				}
+			}
+			cursusRepository.save(crs);
+			return new ResponseEntity<Cursus>(crs, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long numero) {
+		Optional<Cursus> optCrs = cursusRepository.findById(numero);
+		if (optCrs.isPresent()) {
+			Cursus cursus = optCrs.get();
+			if (cursus.getGestionnaire() != null) {
+				Optional<User> optUser = userRepository.findById(cursus.getGestionnaire().getId());
+				Gestionnaire gest = (Gestionnaire) optUser.get();
+				gest.getCursus().remove(cursus);
+				userRepository.save(gest);
+				cursus.setGestionnaire(null);
+			}
+			if (cursus.getModules() != null) {
+				while (cursus.getModules().iterator().hasNext()) {
+					Module mod = cursus.getModules().iterator().next();
+					Optional<Module> optMod = moduleRepository.findById(mod.getId());
+					mod = optMod.get();
+					mod.setCursus(null);
+					moduleRepository.save(mod);
+				}
+				cursus.setModules(null);
+			}
+			if (cursus.getProjecteur() != null) {
+				Optional<Materiel> optMat = materielRepository.findById(cursus.getProjecteur().getCode());
+				Projecteur projo = (Projecteur) optMat.get();
+				projo.setCursus(null);
+				materielRepository.save(projo);
+				cursus.setProjecteur(null);
+			}
+			if (cursus.getReferent() != null) {
+				Optional<User> optUser = userRepository.findById(cursus.getReferent().getId());
+				Formateur form = (Formateur) optUser.get();
+				form.setCursus(null);
+				userRepository.save(form);
+				cursus.setReferent(null);
+			}
+			if (cursus.getSalle() != null) {
+				Optional<Salle> optSalle = salleRepository.findById(cursus.getSalle().getId());
+				Salle salle = optSalle.get();
+				salle.getCursus().remove(cursus);
+				salleRepository.save(salle);
+				cursus.setSalle(null);
+			}
+			if (cursus.getStagiaires() != null) {
+				while (cursus.getStagiaires().iterator().hasNext()) {
+					Stagiaire stag = cursus.getStagiaires().iterator().next();
+					Optional<User> optUser = userRepository.findById(stag.getId());
+					stag = (Stagiaire) optUser.get();
+					stag.setCursus(null);
+					userRepository.save(stag);
+				}
+				cursus.setModules(null);
+			}
+			cursusRepository.deleteById(numero);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
