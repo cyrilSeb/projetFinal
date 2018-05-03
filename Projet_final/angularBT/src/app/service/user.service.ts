@@ -1,4 +1,4 @@
-import { User } from './model/user';
+import { User } from '../model/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -6,17 +6,23 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UserService {
 
-  private baseUrl:string='http://localhost:8080/projetfinal/user';
+  private baseUrl:string='http://localhost:8080/projetfinal';
   
   constructor(private http: HttpClient) { 
     
   }
   
   login(username: string, password: string) {
-      
-    }
+      if (this.findByUsername(username, password)==null){
+        return this.http.get<User>(this.baseUrl);
+      }else{
+        return this.http.get<User>(`${this.baseUrl}/${'home'}`);
+      }
+        
+  }
 
-    list() :Observable<User[]>{
+
+   public list() :Observable<User[]>{
     return this.http.get<User[]>(this.baseUrl);
   }
   
@@ -26,6 +32,10 @@ export class UserService {
   
   public findById(id):Observable<User>{
     return this.http.get<User>(`${this.baseUrl}/${id}`);
+  }
+  
+  public findByUsername(username, password):Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}/${username}`);
   }
 
   public update(user: User):Observable<any>{

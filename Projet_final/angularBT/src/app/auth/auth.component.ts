@@ -1,5 +1,5 @@
 import {User} from '../model/user';
-import {UserService} from '../user.service';
+import {UserService} from '../service/user.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -18,14 +18,14 @@ export class AuthComponent implements OnInit {
   }
 
   login() {
-//    this.userService.login(this.model.username, this.model.password)
-//      .subscribe(
-//      data => {
-//        this.router.navigate(['home']);
-//
-//      }, error => {
-//        console.log(`erreur:${error}`);
-//      });
+    this.userService.login(this.model.username, this.model.password)
+      .subscribe(
+      data => {
+        this.router.navigate(['home']);
+
+      }, error => {
+        console.log(`erreur:${error}`);
+      });
 
   }
 
