@@ -33,9 +33,7 @@ public class CompetenceRestController {
 	@JsonView(JsonViews.Common.class) // permet de spécifier que l'on veut recup JSON spécifique, la vue
 	@RequestMapping(path={"","/"}, method=RequestMethod.GET)	//pour avoir une adresse commune
 	public ResponseEntity<List<Competence>> findAll(){
-		
 		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
-		
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
