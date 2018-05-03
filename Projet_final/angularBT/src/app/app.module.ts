@@ -13,17 +13,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalleComponent } from './salle/salle.component';
 import { EditsalleComponent } from './editsalle/editsalle.component';
 import { SalleService } from './service/salle.service';
-import { CursuslistComponent } from './cursuslist/cursuslist.component';
-import { CursusService } from './service/cursus.service';
-import { CursuseditComponent } from './cursusedit/cursusedit.component';
+import { MaterielComponent } from './materiel/materiel.component';
+import { MaterielService } from './service/materiel.service';
 
 
 const appRoutes: Routes=[
-{path: '', component: AuthComponent},
-  { path: 'home',canActivate: [AuthgardGuard],component: HomeComponent},
-  {path: 'salle',component: SalleComponent},
-  {path: 'editsalle',component: EditsalleComponent},
-  {path: 'cursus', component: SalleComponent}
+{
+  path: '', 
+  component: AuthComponent
+},
+  
+  {
+    path: 'home',
+    canActivate: [AuthgardGuard],
+    component: HomeComponent
+  },
+  
+  {
+    path: 'salle',
+    component: SalleComponent
+  },
+  {
+    path: 'materiel',
+    component: MaterielComponent
+  }
 ]
 
 @NgModule({
@@ -33,14 +46,17 @@ const appRoutes: Routes=[
     HomeComponent,
     SalleComponent,
     EditsalleComponent,
-    CursuslistComponent,
-    CursuseditComponent,
+    MaterielComponent,
 
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule
   ],
-  providers: [UserService,AuthgardGuard, SalleService,CursusService],
+  providers: [UserService,AuthgardGuard, SalleService,MaterielService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+ice,CursusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
