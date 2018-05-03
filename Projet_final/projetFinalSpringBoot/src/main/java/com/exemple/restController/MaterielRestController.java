@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.JsonViews;
+import com.exemple.model.Materiel;
 import com.exemple.repository.MaterielRepository;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import model.JsonViews;
-import model.Materiel;
 
 	@RestController
 	@RequestMapping("/rest/materiel")

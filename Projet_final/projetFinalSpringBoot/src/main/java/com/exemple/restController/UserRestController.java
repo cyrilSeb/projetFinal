@@ -20,8 +20,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.exemple.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import model.JsonViews;
-import model.User;
+import com.exemple.model.JsonViews;
+import com.exemple.model.User;
 
 
 @RestController

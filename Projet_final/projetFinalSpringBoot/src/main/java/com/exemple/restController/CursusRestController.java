@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.Cursus;
+import com.exemple.model.JsonViews;
 import com.exemple.repository.CursusRepository;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import model.JsonViews;
-import model.Cursus;
 
 @RestController
 @RequestMapping("/rest/cursus")
