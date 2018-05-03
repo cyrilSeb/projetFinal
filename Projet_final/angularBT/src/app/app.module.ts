@@ -12,6 +12,7 @@ import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SalleComponent } from './salle/salle.component';
 import { EditsalleComponent } from './editsalle/editsalle.component';
+import { SalleService } from './service/salle.service';
 
 
 const appRoutes: Routes=[
@@ -44,7 +45,7 @@ const appRoutes: Routes=[
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule
   ],
-  providers: [UserService,AuthgardGuard],
+  providers: [UserService,AuthgardGuard, SalleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
