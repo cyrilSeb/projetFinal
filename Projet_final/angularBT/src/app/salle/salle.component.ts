@@ -1,3 +1,4 @@
+import { Salle } from '../model/salle';
 import { SalleService } from '../service/salle.service';
 import { Component, OnInit } from '@angular/core';
 
