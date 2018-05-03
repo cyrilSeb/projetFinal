@@ -114,27 +114,31 @@ public class CursusRestController {
 				crs.setDates(cursus.getDates());
 			}
 			if (cursus.getGestionnaire() != null) {
-				Optional<User> optUser = userRepository.findById(cursus.getGestionnaire().getId());
-				if (optUser.isPresent()) {
-					if (optUser.get() instanceof Gestionnaire) {
-						crs.setGestionnaire((Gestionnaire) optUser.get());
+				if (cursus.getGestionnaire().getId() != null) {
+					Optional<User> optUser = userRepository.findById(cursus.getGestionnaire().getId());
+					if (optUser.isPresent()) {
+						if (optUser.get() instanceof Gestionnaire) {
+							crs.setGestionnaire((Gestionnaire) optUser.get());
+						} else {
+							return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						}
 					} else {
-						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 					}
-				} else {
-					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 				}
 			}
 			if (cursus.getReferent() != null) {
-				Optional<User> optUser = userRepository.findById(cursus.getReferent().getId());
-				if (optUser.isPresent()) {
-					if (optUser.get() instanceof Formateur) {
-						crs.setReferent((Formateur) optUser.get());
+				if (cursus.getReferent().getId() != null) {
+					Optional<User> optUser = userRepository.findById(cursus.getReferent().getId());
+					if (optUser.isPresent()) {
+						if (optUser.get() instanceof Formateur) {
+							crs.setReferent((Formateur) optUser.get());
+						} else {
+							return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						}
 					} else {
-						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 					}
-				} else {
-					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 				}
 			}
 			if (cursus.getModules() != null) {
@@ -153,26 +157,11 @@ public class CursusRestController {
 				}
 			}
 			if (cursus.getProjecteur() != null) {
-				Optional<Materiel> optMat = materielRepository.findById(cursus.getProjecteur().getCode());
-				if (optMat.isPresent()) {
-					if (optMat.get() instanceof Projecteur) {
-						cursus.setProjecteur((Projecteur) optMat.get());
-					} else {
-						return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-					}
-				} else {
-					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-				}
-			}
-			if (cursus.getStagiaires() != null) {
-				Set<Stagiaire> setStags = cursus.getStagiaires();
-				cursus.getStagiaires().clear();
-				while (setStags.iterator().hasNext()) {
-					Stagiaire stag = setStags.iterator().next();
-					Optional<User> optUser = userRepository.findById(stag.getId());
-					if (optUser.isPresent()) {
-						if (optUser.get() instanceof Stagiaire) {
-							cursus.getStagiaires().add((Stagiaire) optUser.get());
+				if (cursus.getProjecteur().getCode() != null) {
+					Optional<Materiel> optMat = materielRepository.findById(cursus.getProjecteur().getCode());
+					if (optMat.isPresent()) {
+						if (optMat.get() instanceof Projecteur) {
+							cursus.setProjecteur((Projecteur) optMat.get());
 						} else {
 							return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
 						}
@@ -181,12 +170,33 @@ public class CursusRestController {
 					}
 				}
 			}
+			if (cursus.getStagiaires() != null) {
+				Set<Stagiaire> setStags = cursus.getStagiaires();
+				cursus.getStagiaires().clear();
+				while (setStags.iterator().hasNext()) {
+					Stagiaire stag = setStags.iterator().next();
+					if (stag.getId() != null) {
+						Optional<User> optUser = userRepository.findById(stag.getId());
+						if (optUser.isPresent()) {
+							if (optUser.get() instanceof Stagiaire) {
+								cursus.getStagiaires().add((Stagiaire) optUser.get());
+							} else {
+								return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+							}
+						} else {
+							return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+						}
+					}
+				}
+			}
 			if (cursus.getSalle() != null) {
-				Optional<Salle> optSalle = salleRepository.findById(cursus.getSalle().getId());
-				if (optSalle.isPresent()) {
-					crs.setSalle(optSalle.get());
-				} else {
-					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				if (cursus.getSalle().getId() != null) {
+					Optional<Salle> optSalle = salleRepository.findById(cursus.getSalle().getId());
+					if (optSalle.isPresent()) {
+						crs.setSalle(optSalle.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					}
 				}
 			}
 			cursusRepository.save(crs);

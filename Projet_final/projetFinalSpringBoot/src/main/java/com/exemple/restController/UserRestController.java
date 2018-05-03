@@ -24,6 +24,8 @@ import com.exemple.model.JsonViews;
 import com.exemple.model.Materiel;
 import com.exemple.model.Module;
 import com.exemple.model.Ordinateur;
+import com.exemple.model.Projecteur;
+import com.exemple.model.Salle;
 import com.exemple.model.Stagiaire;
 import com.exemple.model.Technicien;
 import com.exemple.model.User;
@@ -83,11 +85,13 @@ public class UserRestController {
 			}
 		}
 		if (formateur.getCursus() != null) {
-			Optional<Cursus> opt = cursusRepository.findById(formateur.getCursus().getId());
-			if (opt.isPresent()) {
-				formateur.setCursus(opt.get());
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			if (formateur.getCursus().getId() != null) {
+				Optional<Cursus> opt = cursusRepository.findById(formateur.getCursus().getId());
+				if (opt.isPresent()) {
+					formateur.setCursus(opt.get());
+				} else {
+					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+				}
 			}
 		}
 		if (formateur.getModules() != null) {
@@ -95,11 +99,13 @@ public class UserRestController {
 			formateur.getModules().clear();
 			while (setMods.iterator().hasNext()) {
 				Module mod = setMods.iterator().next();
-				Optional<Module> opt = moduleRepository.findById(mod.getId());
-				if (opt.isPresent()) {
-					formateur.getModules().add(opt.get());
-				} else {
-					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+				if (mod.getId() != null) {
+					Optional<Module> opt = moduleRepository.findById(mod.getId());
+					if (opt.isPresent()) {
+						formateur.getModules().add(opt.get());
+					} else {
+						return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+					}
 				}
 			}
 		}
@@ -114,11 +120,13 @@ public class UserRestController {
 			gestionnaire.getCursus().clear();
 			while (setCursus.iterator().hasNext()) {
 				Cursus cursus = setCursus.iterator().next();
-				Optional<Cursus> opt = cursusRepository.findById(cursus.getId());
-				if (opt.isPresent()) {
-					gestionnaire.getCursus().add(opt.get());
-				} else {
-					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+				if (cursus.getId() != null) {
+					Optional<Cursus> opt = cursusRepository.findById(cursus.getId());
+					if (opt.isPresent()) {
+						gestionnaire.getCursus().add(opt.get());
+					} else {
+						return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+					}
 				}
 			}
 		}
@@ -129,23 +137,27 @@ public class UserRestController {
 	public ResponseEntity<Void> createStagiaire(@RequestBody Stagiaire stagiaire, BindingResult rs,
 			UriComponentsBuilder ucb) {
 		if (stagiaire.getCursus() != null) {
-			Optional<Cursus> opt = cursusRepository.findById(stagiaire.getCursus().getId());
-			if (opt.isPresent()) {
-				stagiaire.setCursus(opt.get());
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			if (stagiaire.getCursus().getId() != null) {
+				Optional<Cursus> opt = cursusRepository.findById(stagiaire.getCursus().getId());
+				if (opt.isPresent()) {
+					stagiaire.setCursus(opt.get());
+				} else {
+					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+				}
 			}
 		}
 		if (stagiaire.getOrdinateur() != null) {
-			Optional<Materiel> opt = materielRepository.findById(stagiaire.getOrdinateur().getCode());
-			if (opt.isPresent()) {
-				if (opt.get() instanceof Ordinateur) {
-					stagiaire.setOrdinateur((Ordinateur) opt.get());
+			if (stagiaire.getOrdinateur().getCode() != null) {
+				Optional<Materiel> opt = materielRepository.findById(stagiaire.getOrdinateur().getCode());
+				if (opt.isPresent()) {
+					if (opt.get() instanceof Ordinateur) {
+						stagiaire.setOrdinateur((Ordinateur) opt.get());
+					} else {
+						return new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
+					}
 				} else {
-					return new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
+					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 				}
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
 		}
 		return create(stagiaire, rs, ucb);
@@ -155,6 +167,134 @@ public class UserRestController {
 	public ResponseEntity<Void> createTechnicien(@RequestBody Technicien technicien, BindingResult rs,
 			UriComponentsBuilder ucb) {
 		return create(technicien, rs, ucb);
+	}
+
+	@RequestMapping(value = "/formateur", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateFormateur(@RequestBody Formateur formateur) {
+		Optional<User> opt = userRepository.findById(formateur.getId());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Formateur) {
+				Formateur user = (Formateur) opt.get();
+				if (user.getCompetences() != null) {
+					Set<Competence> setCpts = user.getCompetences();
+					user.getCompetences().clear();
+					while (setCpts.iterator().hasNext()) {
+						Competence cpt = setCpts.iterator().next();
+						Optional<Competence> optCpt = competenceRepository.findById(cpt.getKey());
+						if (optCpt.isPresent()) {
+							user.getCompetences().add(optCpt.get());
+						}
+					}
+				}
+				if (user.getCursus() != null) {
+					if (user.getCursus().getId() != null) {
+						Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
+						if (optCrs.isPresent()) {
+							user.setCursus(optCrs.get());
+						}
+					}
+				}
+				if (user.getModules() != null) {
+					Set<Module> setMods = user.getModules();
+					user.getModules().clear();
+					while (setMods.iterator().hasNext()) {
+						Module mod = setMods.iterator().next();
+						if (mod.getId() != null) {
+							Optional<Module> optMod = moduleRepository.findById(mod.getId());
+							if (optMod.isPresent()) {
+								user.getModules().add(optMod.get());
+							}
+						}
+					}
+				}
+				return update(user);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/gestionnaire", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateGestionnaire(@RequestBody Gestionnaire gestionnaire) {
+		Optional<User> opt = userRepository.findById(gestionnaire.getId());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Gestionnaire) {
+				Gestionnaire user = (Gestionnaire) opt.get();
+				if (user.getCursus() != null) {
+					Set<Cursus> setCrs = user.getCursus();
+					user.getCursus().clear();
+					while (setCrs.iterator().hasNext()) {
+						Cursus crs = setCrs.iterator().next();
+						if (crs.getId() != null) {
+							Optional<Cursus> optCrs = cursusRepository.findById(crs.getId());
+							if (optCrs.isPresent()) {
+								user.getCursus().add(optCrs.get());
+							}
+						}
+					}
+				}
+				return update(user);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/stagiaire", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateStagiaire(@RequestBody Stagiaire stagiaire) {
+		Optional<User> opt = userRepository.findById(stagiaire.getId());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Stagiaire) {
+				Stagiaire user = (Stagiaire) opt.get();
+				if (user.getCursus() != null) {
+					if (user.getCursus().getId() != null) {
+						Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
+						if (optCrs.isPresent()) {
+							user.setCursus(optCrs.get());
+						}
+					}
+				}
+				if (user.getOrdinateur() != null) {
+					if (user.getOrdinateur().getCode() != null) {
+						Optional<Materiel> optMat = materielRepository.findById(user.getOrdinateur().getCode());
+						if (optMat.isPresent()) {
+							if (optMat.get() instanceof Ordinateur) {
+								user.setOrdinateur((Ordinateur) optMat.get());
+							}
+						}
+					}
+				}
+				return update(user);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/technicien", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateTechnicien(@RequestBody Technicien technicien) {
+		Optional<User> opt = userRepository.findById(technicien.getId());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Technicien) {
+				Technicien user = (Technicien) opt.get();
+				return update(user);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	private ResponseEntity<User> update(User user) {
+		userRepository.save(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
 	private ResponseEntity<Void> create(User user, BindingResult rs, UriComponentsBuilder ucb) {
