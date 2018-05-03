@@ -19,26 +19,11 @@ import { CursuseditComponent } from './cursusedit/cursusedit.component';
 
 
 const appRoutes: Routes=[
-{
-  path: '', 
-  component: AuthComponent
-},
-  
-  {
-    path: 'home',
-    canActivate: [AuthgardGuard],
-    component: HomeComponent
-  },
-  
-  {
-    path: 'salle',
-    component: SalleComponent
-  },
-  
-  {
-    path: 'cursus',
-    component: SalleComponent
-  }
+{path: '', component: AuthComponent},
+  { path: 'home',canActivate: [AuthgardGuard],component: HomeComponent},
+  {path: 'salle',component: SalleComponent},
+  {path: 'editsalle',component: EditsalleComponent},
+  {path: 'cursus', component: SalleComponent}
 ]
 
 @NgModule({

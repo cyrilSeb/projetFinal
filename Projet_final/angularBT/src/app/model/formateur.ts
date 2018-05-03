@@ -1,8 +1,10 @@
 import { Competences } from './competences';
 import { Cursus } from './cursus';
 import { Module } from './module';
-export class Formateur {
-  constructor (private _disponnibilite: Date[]=null, private _competences : Competences, private _module : Module, private _cursus: Cursus ){  
+import { User } from './user';
+export class Formateur extends User{
+  constructor(private _disponnibilite: Date[] = null, private _competences: Competences, private _module: Module, private _cursus: Cursus) {
+    super();
   }
   
    public get disponnibilite(): Date[] {

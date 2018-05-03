@@ -1,3 +1,49 @@
-<p>
-  cursusedit works!
-</p>
+<div>
+	<fieldset>
+		<legend> edition de cursus</legend>
+		<form>
+		<input type="hidden" [(ngModel)]="cursus.id" name="id">
+		
+			<div class="form-group">
+				<label for="nom">nom:</label>
+				<input id="nom" Class="form-control" [(ngModel)]="cursus.nom" name="nom">
+			</div>
+			<div class="form-group">
+				<label for="dates">dates:</label>
+				<input id="dates" Class="form-control" [(ngModel)]="cursus.date" name="dates">
+			</div>
+			<div class="form-group">
+				<label for="gestionnaire">gestionnaire:</label>
+				<input id="gestionnaire" Class="form-control" [(ngModel)]="cursus.gestionnaire.id" name="gestionnaire">
+			</div>
+			<div class="form-group">
+				<label for="referent">referent:</label>
+				<input id="referent" Class="form-control" [(ngModel)]="cursus.referent.id" name="referent">
+			</div>
+			<div class="form-group">
+				<label for="modules">modules:</label>
+				<input id="modules" Class="form-control" [(ngModel)]="cursus.module.id" name="modules">
+			</div>
+			<div class="form-group">
+				<label for="projecteur">projecteur:</label>
+				<input id="projecteur" Class="form-control" [(ngModel)]="cursus.projecteur.code" name="projecteur">
+			</div>
+			<div class="form-group">
+				<label for="stagiaires">stagiaires:</label>
+				<input id="stagiaires" Class="form-control" [(ngModel)]="cursus.stagiaire.id" name="stagiaires">
+			</div>
+			<div class="form-group">
+				<label for="salle">salle:</label>
+				<input id="salle" Class="form-control" [(ngModel)]="cursus.salle.numero" name="salle">
+			</div>
+			<div class="form-group">
+				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
+				<button (click)="retour()" class="btn btn-info">retour</button>
+			</div>
+		
+		</form>
+
+	</fieldset>
+
+</div>
+
