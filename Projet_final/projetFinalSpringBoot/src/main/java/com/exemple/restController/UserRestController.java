@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -289,6 +290,76 @@ public class UserRestController {
 			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long numero) {
+		Optional<User> opt = userRepository.findById(numero);
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Formateur) {
+				Formateur user = (Formateur) opt.get();
+				if (user.getCompetences() != null) {
+					Set<Competence> setCps = user.getCompetences();
+					user.getCompetences().clear();
+					while (setCps.iterator().hasNext()) {
+						Competence cps = setCps.iterator().next();
+						Optional<Competence> optCps = competenceRepository.findById(cps.getKey());
+						cps = optCps.get();
+						competenceRepository.delete(cps);
+					}
+				}
+				if (user.getCursus() != null) {
+					Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
+					Cursus crs = optCrs.get();
+					crs.setReferent(null);
+					cursusRepository.save(crs);
+				}
+				if (user.getModules() != null) {
+					Set<Module> setCps = user.getModules();
+					user.getModules().clear();
+					while (setCps.iterator().hasNext()) {
+						Module cps = setCps.iterator().next();
+						Optional<Module> optCps = moduleRepository.findById(cps.getId());
+						cps = optCps.get();
+						cps.setFormateur(null);
+						moduleRepository.save(cps);
+					}
+				}
+			}
+			if (opt.get() instanceof Gestionnaire) {
+				Gestionnaire user = (Gestionnaire) opt.get();
+				if (user.getCursus() != null) {
+					Set<Cursus> setCrs = user.getCursus();
+					user.getCursus().clear();
+					while (setCrs.iterator().hasNext()) {
+						Cursus crs = setCrs.iterator().next();
+						Optional<Cursus> optCrs = cursusRepository.findById(crs.getId());
+						crs = optCrs.get();
+						crs.setGestionnaire(null);
+						cursusRepository.save(crs);
+					}
+				}
+			}
+			if (opt.get() instanceof Stagiaire) {
+				Stagiaire user = (Stagiaire) opt.get();
+				if (user.getCursus() != null) {
+					Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
+					Cursus crs = optCrs.get();
+					crs.getStagiaires().remove(user);
+					cursusRepository.save(crs);
+				}
+				if (user.getOrdinateur() != null) {
+					Optional<Materiel> optMat = materielRepository.findById(user.getOrdinateur().getCode());
+					Ordinateur mat = (Ordinateur) optMat.get();
+					mat.setStagiaire(null);
+					materielRepository.save(mat);
+				}
+			}
+			userRepository.deleteById(numero);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
