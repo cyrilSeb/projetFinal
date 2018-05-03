@@ -19,6 +19,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 20, name = "type")
@@ -28,19 +30,28 @@ public abstract class User {
 	@SequenceGenerator(name = "seqUser", sequenceName = "seq_user", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUser")
 	@Column(name = "user_id")
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "user_nom")
+	@JsonView(JsonViews.Common.class)
 	private String nom;
 	@Column(name = "user_prenom")
+	@JsonView(JsonViews.Common.class)
 	private String prenom;
+	@JsonView(JsonViews.Authentification.class)
 	private String username;
+	@JsonView(JsonViews.Authentification.class)
 	private String password;
 	@Embedded
+	@JsonView(JsonViews.Common.class)
 	private Adresse adresse;
 	@Embedded
+	@JsonView(JsonViews.Common.class)
 	private Coordonnees coordonnees;
+	@JsonView(JsonViews.Authentification.class)
 	private boolean enable;
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@JsonView(JsonViews.Authentification.class)
 	private Set<UserRole> roles;
 	@Version
 	private int version;
