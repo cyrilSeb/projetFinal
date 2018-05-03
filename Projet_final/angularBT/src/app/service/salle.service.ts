@@ -28,8 +28,8 @@ export class SalleService {
   
   public create(salle: Salle): Observable<any>{
     const obj={
-      prenom:salle.numero,
-      nom:salle.capacite,
+      numero:salle.numero,
+      capacite:salle.capacite,
       adresse:{
         numero:salle.adresse.numero,
         rue:salle.adresse.rue,

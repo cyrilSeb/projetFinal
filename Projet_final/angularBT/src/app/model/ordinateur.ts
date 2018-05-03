@@ -1,7 +1,7 @@
 import { Materiel } from './materiel';
 import { Stagiaire } from './stagiaire';
 export class Ordinateur extends Materiel {
-  constructor(private _processeur: string = '', private _ram: number = null, private _DD: number = null, private _anneeAchat: Date = null, private _stagiaire: Stagiaire = '') {
+  constructor(private _processeur: string = '', private _ram: number = null, private _DD: number = null, private _anneeAchat: Date = null, private _stagiaire: Stagiaire = null) {
     super();
   }
   public get processeur(): string {

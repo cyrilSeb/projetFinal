@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalleComponent } from './salle/salle.component';
 import { EditsalleComponent } from './editsalle/editsalle.component';
 import { SalleService } from './service/salle.service';
+import { CursuslistComponent } from './cursuslist/cursuslist.component';
+import { CursusService } from './service/cursus.service';
+import { CursuseditComponent } from './cursusedit/cursusedit.component';
 
 
 const appRoutes: Routes=[
@@ -30,6 +33,11 @@ const appRoutes: Routes=[
   {
     path: 'salle',
     component: SalleComponent
+  },
+  
+  {
+    path: 'cursus',
+    component: SalleComponent
   }
 ]
 
@@ -40,12 +48,14 @@ const appRoutes: Routes=[
     HomeComponent,
     SalleComponent,
     EditsalleComponent,
+    CursuslistComponent,
+    CursuseditComponent,
 
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule
   ],
-  providers: [UserService,AuthgardGuard, SalleService],
+  providers: [UserService,AuthgardGuard, SalleService,CursusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

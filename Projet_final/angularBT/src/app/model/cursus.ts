@@ -5,10 +5,16 @@ import { Projecteur } from './projecteur';
 import { Salle } from './salle';
 import { Stagiaire } from './stagiaire';
 export class Cursus {
-  constructor (private _nom: string ='', private _date: Date=null, private _gestionnaire : Gestionnaire, private _referent : Formateur,
-  private _module :Module, private _projecteur: Projecteur=null, private _stagiaire : Stagiaire='',private _salle : Salle){  
+  constructor (private _id: string='',private _nom: string ='', private _date: Date=null, private _gestionnaire : Gestionnaire, private _referent : Formateur,
+  private _module :Module, private _projecteur: Projecteur=null, private _stagiaire : Stagiaire=null,private _salle : Salle){  
   }
   
+  public get id(): string {
+    return this._id;
+  } 
+  public set  id(_id: string) {
+    this._id = _id;
+  }
   public get nom(): string {
     return this._nom;
   } 

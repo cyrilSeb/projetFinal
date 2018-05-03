@@ -9865,3 +9865,73 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 2 0 2018-05-03 17:39:58.068
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-05-03 17:39:58.068
+!MESSAGE A conflict occurred for CTRL+SHIFT+C:
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.copy,Copy,
+		,
+		Category(org.eclipse.tm.terminal.category1,Terminal view commands,Terminal view commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@f543415,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.tm.terminal.EditContext,,,system)
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(com.genuitec.eclipse.typescript.text.toggleComment,Toggle Comment,
+		,
+		Category(com.genuitec.eclipse.typescript.typeScriptNature.category,TypeScript,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d08275e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.genuitec.eclipse.typescript.text.typeScriptEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-05-03 17:39:58.068
+!MESSAGE A conflict occurred for ALT+ARROW_UP:
+Binding(ALT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.moveLineUp,Move Lines Up,
+		Moves the selected lines up,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3fd5e551,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(ALT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.maximize,Maximize Active View or Editor,
+		,
+		Category(org.eclipse.tm.terminal.category1,Terminal view commands,Terminal view commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@27504ed3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.tm.terminal.EditContext,,,system)
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 17:46:47.305
+!MESSAGE Error: Dynamic fixes are not supported for multiple files
+!STACK 0
+com.genuitec.eclipse.typescript.services.internal.Bridge$BridgeException: Error: Dynamic fixes are not supported for multiple files
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:60:23)
+	at Array.forEach(native)
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:59)
+	at Array.forEach(native)
+	at TSCodeFixDynamicProvider.createDynamicQuickFix(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:15)
+	at TSQuickFixProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:33:33)
+	at LanguageServiceHost.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceHost.js:224:59)
+	at LanguageServiceProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceProvider.js:31:21)
+	at LanguageEndpoint.prepareDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageEndpoint.js:625:43)
+	at Main.processRequest(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\main.js:91:33)
+	at <js-bridge.call>(Unknown Source)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.processRequest(Bridge.java:234)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.call(Bridge.java:161)
+	at com.genuitec.eclipse.typescript.services.language.LanguageEndpoint.prepareDynamicQuickFixes(LanguageEndpoint.java:342)
+	at com.genuitec.eclipse.typescript.text.FileLanguageService.prepareDynamicQuickFixes(FileLanguageService.java:320)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.processAnnotation(TypeScriptQuickAssistProcessor.java:207)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.computeQuickAssistProposals(TypeScriptQuickAssistProcessor.java:97)
+	at com.genuitec.eclipse.typescript.text.AbstractTextHover.getHoverInfo2(AbstractTextHover.java:122)
+	at com.genuitec.eclipse.typescript.text.TextHover.getHoverInfo2(TextHover.java:74)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 17:46:47.308
+!MESSAGE Dynamic quick fix of type dynamic:ts:2339:ts-codefix has not been provided by TypeScript bridge.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 17:46:56.222
+!MESSAGE Dynamic quick fix of type dynamic:ts:2339:ts-codefix has not been provided by TypeScript bridge.
