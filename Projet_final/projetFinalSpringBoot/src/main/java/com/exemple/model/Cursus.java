@@ -6,11 +6,14 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -20,6 +23,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "Cursus")
 public class Cursus {
 	@Id
+	@SequenceGenerator(name = "seqCursus", sequenceName = "seq_cursus", initialValue = 101, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCursus")
+	@Column(name = "Cursus_id")
+	@JsonView(JsonViews.Common.class)
+	private Long id;
 	@Column(name = "Cursus_nom")
 	@JsonView(JsonViews.Common.class)
 	private String nom;
@@ -120,5 +128,13 @@ public class Cursus {
 
 	public void setSalle(Salle salle) {
 		this.salle = salle;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
