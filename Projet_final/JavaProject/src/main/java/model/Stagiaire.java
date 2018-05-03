@@ -1,10 +1,10 @@
 package model;
 
-import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -12,8 +12,9 @@ import javax.persistence.OneToOne;
 public class Stagiaire extends User {
 	@OneToOne
 	private Ordinateur ordinateur;
-	@OneToMany
-	private List<Cursus> cursus;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Stagiaire_cursus")
+	private Cursus cursus;
 
 	public Ordinateur getOrdinateur() {
 		return ordinateur;
@@ -23,11 +24,11 @@ public class Stagiaire extends User {
 		this.ordinateur = ordinateur;
 	}
 
-	public List<Cursus> getCursus() {
+	public Cursus getCursus() {
 		return cursus;
 	}
 
-	public void setCursus(List<Cursus> cursus) {
+	public void setCursus(Cursus cursus) {
 		this.cursus = cursus;
 	}
 }

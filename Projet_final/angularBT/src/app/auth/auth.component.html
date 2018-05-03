@@ -1,0 +1,22 @@
+<div >
+	<fieldset>
+	<legend>authentification requise</legend>
+	<form (submit)='submit($event)'>
+<!-- 	<div *ngIf="${ not empty param['error'] }">erreur d'authentification</div> -->
+<!-- 		<input type="hidden" [(ngModel)]="user.id" name="id"> -->
+		
+			<div class="form-group">
+				<label for="username">username:</label>
+				<input type="text" id="username" Class="form-control" [(ngModel)]="user.username" name="username">
+			</div>
+			<div class="form-group">
+				<label for="password">password:</label>
+				<input type="password" id="password" Class="form-control" [(ngModel)]="user.password" name="password">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="login" class="btn btn-success"/>
+			</div>
+		
+		</form>
+	</fieldset>
+</div>

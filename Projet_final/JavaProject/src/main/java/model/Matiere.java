@@ -1,26 +1,34 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "Matiere")
 public class Matiere {
 	@Id
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@Column(name = "Matiere_id")
 	private Long id;
+	@Column(name = "Matiere_titre")
 	private String titre;
+	@Column(name = "Matiere_nombre_d_heures")
 	private Integer nbHeure;
+	@Column(name = "Matiere_objectifs")
 	private String Objectifs;
 	@OneToMany
-	private List<Matiere> prerequis;
+	private Set<Matiere> prerequis;
+	@Column(name = "Matiere_contenu")
 	private String contenu;
 	@Version
 	private int version;
@@ -57,11 +65,11 @@ public class Matiere {
 		Objectifs = objectifs;
 	}
 
-	public List<Matiere> getPrerequis() {
+	public Set<Matiere> getPrerequis() {
 		return prerequis;
 	}
 
-	public void setPrerequis(List<Matiere> prerequis) {
+	public void setPrerequis(Set<Matiere> prerequis) {
 		this.prerequis = prerequis;
 	}
 

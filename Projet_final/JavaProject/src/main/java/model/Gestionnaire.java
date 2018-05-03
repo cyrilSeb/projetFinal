@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -10,13 +10,13 @@ import javax.persistence.OneToMany;
 @DiscriminatorValue("Gestionnaire")
 public class Gestionnaire extends User {
 	@OneToMany(mappedBy = "gestionnaire")
-	private List<Cursus> cursus;
+	private Set<Cursus> cursus;
 
-	public List<Cursus> getCursus() {
+	public Set<Cursus> getCursus() {
 		return cursus;
 	}
 
-	public void setCursus(List<Cursus> cursus) {
+	public void setCursus(Set<Cursus> cursus) {
 		this.cursus = cursus;
 	}
 }

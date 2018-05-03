@@ -1,32 +1,41 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "Cursus")
 public class Cursus {
 	@Id
+	@Column(name = "Cursus_nom")
 	private String nom;
+	@Column(name = "Cursus_dates")
 	private Date[] dates;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_gestionnaire")
 	private Gestionnaire gestionnaire;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_referent")
 	private Formateur referent;
 	@OneToMany(mappedBy = "cursus")
-	private List<Module> modules;
+	private Set<Module> modules;
 	@OneToOne
 	private Projecteur projecteur;
 	@OneToMany(mappedBy = "cursus")
-	private List<Stagiaire> stagiaires;
+	private Set<Stagiaire> stagiaires;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Cursus_salle")
 	private Salle salle;
 	@Version
 	private int version;
@@ -71,11 +80,11 @@ public class Cursus {
 		this.referent = referent;
 	}
 
-	public List<Module> getModules() {
+	public Set<Module> getModules() {
 		return modules;
 	}
 
-	public void setModules(List<Module> modules) {
+	public void setModules(Set<Module> modules) {
 		this.modules = modules;
 	}
 
@@ -87,11 +96,11 @@ public class Cursus {
 		this.projecteur = projecteur;
 	}
 
-	public List<Stagiaire> getStagiaires() {
+	public Set<Stagiaire> getStagiaires() {
 		return stagiaires;
 	}
 
-	public void setStagiaires(List<Stagiaire> stagiaires) {
+	public void setStagiaires(Set<Stagiaire> stagiaires) {
 		this.stagiaires = stagiaires;
 	}
 

@@ -1,5 +1,9 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+
 import java.util.Set;
 
 import javax.persistence.Embedded;
@@ -17,13 +21,17 @@ import javax.persistence.Version;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name="users")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 20, name = "type")
+@Table(name = "users")
 public abstract class User {
 	@Id
-	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
+	@SequenceGenerator(name = "seqUser", sequenceName = "seq_user", initialValue = 101, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUser")
+	@Column(name = "user_id")
 	private Long id;
+	@Column(name = "user_nom")
 	private String nom;
+	@Column(name = "user_prenom")
 	private String prenom;
 	private String username;
 	private String password;
@@ -32,7 +40,7 @@ public abstract class User {
 	@Embedded
 	private Coordonnees coordonnees;
 	private boolean enable;
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<UserRole> roles;
 	@Version
 	private int version;
@@ -116,21 +124,21 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public User(){
+
+	public User() {
 	}
-	
-	public User(User u){
-		this.username=u.username;
-		this.password=u.password;
-		this.enable=u.enable;
+
+	public User(User u) {
+		this.username = u.username;
+		this.password = u.password;
+		this.enable = u.enable;
 	}
 
 	public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
-	
-}
-	
+
+	}
+
 }

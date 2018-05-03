@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -9,9 +10,13 @@ import javax.persistence.OneToOne;
 @Entity
 @DiscriminatorValue("Ordinateur")
 public class Ordinateur extends Materiel {
+	@Column(name = "Ordinateur_processeur")
 	private String processeur;
+	@Column(name = "Ordinateur_RAM")
 	private Integer ram;
+	@Column(name = "Ordinateur_capacite_DD")
 	private Integer DD;
+	@Column(name = "Ordinateur_annee_d_achat")
 	private Date anneeAchat;
 	@OneToOne
 	private Stagiaire stagiaire;
