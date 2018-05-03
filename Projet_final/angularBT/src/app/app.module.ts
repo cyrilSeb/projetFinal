@@ -10,6 +10,8 @@ import { RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SalleComponent } from './salle/salle.component';
+import { EditsalleComponent } from './editsalle/editsalle.component';
 
 
 const appRoutes: Routes=[
@@ -30,6 +32,8 @@ const appRoutes: Routes=[
     AppComponent,
     AuthComponent,
     HomeComponent,
+    SalleComponent,
+    EditsalleComponent,
 
   ],
   imports: [

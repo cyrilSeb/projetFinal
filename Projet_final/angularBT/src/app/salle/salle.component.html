@@ -1,0 +1,27 @@
+<table class="table table-hover">
+  <tr>
+  	<th>numero</th>
+    <th>capacite</th>
+    <th>rue</th>
+    <th>code Postal</th>
+    <th>ville</th>
+    <th>pays</th>
+    <th>cursus</th>
+  </tr>
+  <tr *ngFor="let salle of salles">
+    <td>{{salle.numero}}</td>
+    <td>{{salle.capacite}}</td>
+    <td>{{salle.nom}}</td>
+    <td>{{salle.civilite}}</td>
+    <td>{{(salle.adresse)?salle.adresse.numero:''}} {{(salle.adresse)?salle.adresse.rue:''}}</td>
+    <td>{{(salle.adresse)?salle.adresse.codePostal:''}}</td>
+    <td>{{(salle.adresse)?salle.adresse.ville:''}}</td>
+    <td>{{(salle.adresse)?salle.adresse.pays,:''}}</td>
+    <td>{{salle.cursus}}</td>
+    <td><a class="btn btn-info" href="" [routerLink]="['/salle','edit',salle.id]">editer</a></td>
+    <td><button class="btn btn-danger" (click)="delete(salle.id)">supprimer</button></td>
+  </tr>
+</table>
+<div>
+	<a class="btn btn-info" href="" [routerLink]="['/salle','edit','']">creer un adherent</a>
+</div>

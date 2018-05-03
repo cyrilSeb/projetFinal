@@ -9753,3 +9753,68 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 15:57:21.182
+!MESSAGE Dynamic quick fix of type dynamic:ts:add-import:AdherentService has not been provided by TypeScript bridge.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 15:57:28.576
+!MESSAGE Error: Dynamic fixes are not supported for multiple files
+!STACK 0
+com.genuitec.eclipse.typescript.services.internal.Bridge$BridgeException: Error: Dynamic fixes are not supported for multiple files
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:60:23)
+	at Array.forEach(native)
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:59)
+	at Array.forEach(native)
+	at TSCodeFixDynamicProvider.createDynamicQuickFix(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:15)
+	at TSQuickFixProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:33:33)
+	at LanguageServiceHost.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceHost.js:224:59)
+	at LanguageServiceProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceProvider.js:31:21)
+	at LanguageEndpoint.prepareDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageEndpoint.js:625:43)
+	at Main.processRequest(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\main.js:91:33)
+	at <js-bridge.call>(Unknown Source)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.processRequest(Bridge.java:234)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.call(Bridge.java:161)
+	at com.genuitec.eclipse.typescript.services.language.LanguageEndpoint.prepareDynamicQuickFixes(LanguageEndpoint.java:342)
+	at com.genuitec.eclipse.typescript.text.FileLanguageService.prepareDynamicQuickFixes(FileLanguageService.java:320)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.processAnnotation(TypeScriptQuickAssistProcessor.java:207)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.computeQuickAssistProposals(TypeScriptQuickAssistProcessor.java:97)
+	at com.genuitec.eclipse.typescript.text.AbstractTextHover.getHoverInfo2(AbstractTextHover.java:122)
+	at com.genuitec.eclipse.typescript.text.TextHover.getHoverInfo2(TextHover.java:74)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 15:57:28.583
+!MESSAGE Dynamic quick fix of type dynamic:ts:2339:ts-codefix has not been provided by TypeScript bridge.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 16:09:17.358
+!MESSAGE Dynamic quick fix of type dynamic:ts:add-import:AdherentService has not been provided by TypeScript bridge.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 16:09:27.844
+!MESSAGE Dynamic quick fix of type dynamic:ts:add-import:Adherent has not been provided by TypeScript bridge.
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 16:19:30.222
+!MESSAGE Error: Dynamic fixes are not supported for multiple files
+!STACK 0
+com.genuitec.eclipse.typescript.services.internal.Bridge$BridgeException: Error: Dynamic fixes are not supported for multiple files
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:60:23)
+	at Array.forEach(native)
+	at <static>.<anonymous>(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:59)
+	at Array.forEach(native)
+	at TSCodeFixDynamicProvider.createDynamicQuickFix(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:58:15)
+	at TSQuickFixProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\quickfix\fixes.js:33:33)
+	at LanguageServiceHost.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceHost.js:224:59)
+	at LanguageServiceProvider.createDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageServiceProvider.js:31:21)
+	at LanguageEndpoint.prepareDynamicQuickFixes(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\language\languageEndpoint.js:625:43)
+	at Main.processRequest(C:\Users\ajc\Desktop\eclipse\plugins\com.genuitec.eclipse.typescript_2.5.3.201804262329\bin\bridge\main.js:91:33)
+	at <js-bridge.call>(Unknown Source)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.processRequest(Bridge.java:234)
+	at com.genuitec.eclipse.typescript.services.internal.Bridge.call(Bridge.java:161)
+	at com.genuitec.eclipse.typescript.services.language.LanguageEndpoint.prepareDynamicQuickFixes(LanguageEndpoint.java:342)
+	at com.genuitec.eclipse.typescript.text.FileLanguageService.prepareDynamicQuickFixes(FileLanguageService.java:320)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.processAnnotation(TypeScriptQuickAssistProcessor.java:207)
+	at com.genuitec.eclipse.typescript.quickfix.TypeScriptQuickAssistProcessor.computeQuickAssistProposals(TypeScriptQuickAssistProcessor.java:97)
+	at com.genuitec.eclipse.typescript.text.AbstractTextHover.getHoverInfo2(AbstractTextHover.java:122)
+	at com.genuitec.eclipse.typescript.text.TextHover.getHoverInfo2(TextHover.java:74)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.genuitec.eclipse.typescript 4 0 2018-05-03 16:19:30.370
+!MESSAGE Dynamic quick fix of type dynamic:ts:2339:ts-codefix has not been provided by TypeScript bridge.
