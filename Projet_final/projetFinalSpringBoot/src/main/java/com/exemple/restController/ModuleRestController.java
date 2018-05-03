@@ -27,4 +27,10 @@ public class ModuleRestController {
 	public ResponseEntity<List<Module>> findAll() {
 		return new ResponseEntity<List<Module>>(moduleRepository.findAll(), HttpStatus.OK);
 	}
+
+	@JsonView(JsonViews.Module.class)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ResponseEntity<List<Module>> findAllWithLinks() {
+		return new ResponseEntity<List<Module>>(moduleRepository.findAll(), HttpStatus.OK);
+	}
 }

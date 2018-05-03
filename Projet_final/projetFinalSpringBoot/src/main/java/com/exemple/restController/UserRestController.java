@@ -27,4 +27,10 @@ public class UserRestController {
 	public ResponseEntity<List<User>> findAll() {
 		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
 	}
+
+	@JsonView(JsonViews.User.class)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> findAllWithLinks() {
+		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
+	}
 }

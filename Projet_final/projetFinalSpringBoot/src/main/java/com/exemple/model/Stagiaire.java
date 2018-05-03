@@ -13,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @DiscriminatorValue("Stagiaire")
 public class Stagiaire extends User {
 	@OneToOne
-	@JsonView(JsonViews.UserWithOrdi.class)
+	@JsonView(JsonViews.User.class)
 	private Ordinateur ordinateur;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Stagiaire_cursus")
-	@JsonView(JsonViews.UserWithCursus.class)
+	@JsonView(JsonViews.User.class)
 	private Cursus cursus;
 
 	public Ordinateur getOrdinateur() {

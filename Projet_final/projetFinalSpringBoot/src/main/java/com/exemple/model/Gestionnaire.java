@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @DiscriminatorValue("Gestionnaire")
 public class Gestionnaire extends User {
 	@OneToMany(mappedBy = "gestionnaire")
-	@JsonView(JsonViews.UserWithCursus.class)
+	@JsonView(JsonViews.User.class)
 	private Set<Cursus> cursus;
 
 	public Set<Cursus> getCursus() {

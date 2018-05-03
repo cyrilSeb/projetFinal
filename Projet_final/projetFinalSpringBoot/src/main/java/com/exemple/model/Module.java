@@ -30,14 +30,14 @@ public class Module {
 	@JsonView(JsonViews.Common.class)
 	private Date[] dates;
 	@OneToOne
-	@JsonView(JsonViews.ModuleWithMatiere.class)
+	@JsonView(JsonViews.Module.class)
 	private Matiere matiere;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonView(JsonViews.ModuleWithFormateur.class)
+	@JsonView(JsonViews.Module.class)
 	private Formateur formateur;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Module_cursus")
-	@JsonView(JsonViews.ModuleWithCursus.class)
+	@JsonView(JsonViews.Module.class)
 	private Cursus cursus;
 	@Version
 	private int version;

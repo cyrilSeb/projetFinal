@@ -18,13 +18,13 @@ public class Formateur extends User {
 	@JsonView(JsonViews.Common.class)
 	private Date[] disponibilites;
 	@OneToMany(mappedBy = "key.formateur")
-	@JsonView(JsonViews.UserWithCompetence.class)
+	@JsonView(JsonViews.User.class)
 	private Set<Competence> competences;
 	@OneToMany(mappedBy = "formateur")
-	@JsonView(JsonViews.UserWithModule.class)
+	@JsonView(JsonViews.User.class)
 	private Set<Module> modules;
 	@OneToOne
-	@JsonView(JsonViews.UserWithCursus.class)
+	@JsonView(JsonViews.User.class)
 	private Cursus cursus;
 
 	public Date[] getDisponibilite() {

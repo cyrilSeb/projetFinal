@@ -27,4 +27,10 @@ public class CursusRestController {
 	public ResponseEntity<List<Cursus>> findAll() {
 		return new ResponseEntity<List<Cursus>>(cursusRepository.findAll(), HttpStatus.OK);
 	}
+
+	@JsonView(JsonViews.Cursus.class)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ResponseEntity<List<Cursus>> findAllWithLinks() {
+		return new ResponseEntity<List<Cursus>>(cursusRepository.findAll(), HttpStatus.OK);
+	}
 }

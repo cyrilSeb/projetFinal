@@ -28,24 +28,24 @@ public class Cursus {
 	private Date[] dates;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_gestionnaire")
-	@JsonView(JsonViews.CursusWithGestionnaire.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Gestionnaire gestionnaire;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_referent")
-	@JsonView(JsonViews.CursusWithReferent.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Formateur referent;
 	@OneToMany(mappedBy = "cursus")
-	@JsonView(JsonViews.CursusWithModules.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Set<Module> modules;
 	@OneToOne
-	@JsonView(JsonViews.CursusWithProjo.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Projecteur projecteur;
 	@OneToMany(mappedBy = "cursus")
-	@JsonView(JsonViews.CursusWithStagiaire.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Set<Stagiaire> stagiaires;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_salle")
-	@JsonView(JsonViews.CursusWithSalle.class)
+	@JsonView(JsonViews.Cursus.class)
 	private Salle salle;
 	@Version
 	private int version;

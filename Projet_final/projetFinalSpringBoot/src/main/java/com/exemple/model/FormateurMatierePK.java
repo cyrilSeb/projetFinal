@@ -13,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class FormateurMatierePK implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "formateur_id")
-	@JsonView(JsonViews.CompetenceWithFormateur.class)
+	@JsonView(JsonViews.Competence.class)
 	private Formateur formateur;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "matiere_id")
-	@JsonView(JsonViews.CompetenceWithMatiere.class)
+	@JsonView(JsonViews.Competence.class)
 	private Matiere matiere;
 
 	public Formateur getFormateur() {
