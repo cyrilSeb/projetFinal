@@ -11,6 +11,10 @@ import repository.*;
 
 public class Test {
 	public static void main(String[] args) {
+		creerBase();
+	}
+
+	public static void creerBase() {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		CursusRepository cursusRepository = ctx.getBean(CursusRepository.class);
 		CompetenceRepository competenceRepository = ctx.getBean(CompetenceRepository.class);
@@ -111,12 +115,12 @@ public class Test {
 		FormateurMatierePK cptKey = new FormateurMatierePK();
 		cptKey.setFormateur(jacky);
 		cptKey.setMatiere(info);
-		
+
 		Competence cpt = new Competence();
 		cpt.setKey(cptKey);
 		cpt.setNiveau(Niveau.Expert);
 		competenceRepository.save(cpt);
-		
+
 		Set<Competence> cpts = new HashSet<Competence>();
 		cpts.add(cpt);
 
@@ -173,6 +177,5 @@ public class Test {
 		userRepository.save(johanna);
 		userRepository.save(richard);
 		userRepository.save(olivier);
-
 	}
 }
