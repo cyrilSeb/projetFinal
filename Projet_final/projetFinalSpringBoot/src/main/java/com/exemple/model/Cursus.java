@@ -14,28 +14,38 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Cursus")
 public class Cursus {
 	@Id
 	@Column(name = "Cursus_nom")
+	@JsonView(JsonViews.Common.class)
 	private String nom;
 	@Column(name = "Cursus_dates")
+	@JsonView(JsonViews.Common.class)
 	private Date[] dates;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_gestionnaire")
+	@JsonView(JsonViews.CursusWithGestionnaire.class)
 	private Gestionnaire gestionnaire;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_referent")
+	@JsonView(JsonViews.CursusWithReferent.class)
 	private Formateur referent;
 	@OneToMany(mappedBy = "cursus")
+	@JsonView(JsonViews.CursusWithModules.class)
 	private Set<Module> modules;
 	@OneToOne
+	@JsonView(JsonViews.CursusWithProjo.class)
 	private Projecteur projecteur;
 	@OneToMany(mappedBy = "cursus")
+	@JsonView(JsonViews.CursusWithStagiaire.class)
 	private Set<Stagiaire> stagiaires;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cursus_salle")
+	@JsonView(JsonViews.CursusWithSalle.class)
 	private Salle salle;
 	@Version
 	private int version;

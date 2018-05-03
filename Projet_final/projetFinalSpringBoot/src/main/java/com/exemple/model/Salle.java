@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Salle")
 public class Salle {
@@ -20,14 +22,19 @@ public class Salle {
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
 	@Column(name = "Salle_id")
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "Salle_capacite")
+	@JsonView(JsonViews.Common.class)
 	private Integer capacite;
 	@Column(name = "Salle_numero")
+	@JsonView(JsonViews.Common.class)
 	private String numero;
 	@Embedded
+	@JsonView(JsonViews.Common.class)
 	private Adresse adresse;
 	@OneToMany(mappedBy = "salle")
+	@JsonView(JsonViews.SalleWithCursus.class)
 	private Set<Cursus> cursus;
 	@Version
 	private int version;

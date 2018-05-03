@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 
 
@@ -19,8 +21,10 @@ public class UserRole { //classe indispensable pour spring security, respecter c
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(JsonViews.Common.class)
 	private int id;
 	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Common.class)
 	private Role role;
 	@ManyToOne
 	@JoinColumn(name="username")

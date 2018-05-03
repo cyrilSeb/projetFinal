@@ -3,17 +3,24 @@ package com.exemple.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class Adresse {
 	@Column(name = "adresse_numero")
+	@JsonView(JsonViews.Common.class)
 	private Integer numero;
 	@Column(name = "adresse_rue")
+	@JsonView(JsonViews.Common.class)
 	private String rue;
 	@Column(name = "adresse_code_postal")
+	@JsonView(JsonViews.Common.class)
 	private String codePostal;
 	@Column(name = "adresse_ville")
+	@JsonView(JsonViews.Common.class)
 	private String ville;
 	@Column(name = "adresse_pays")
+	@JsonView(JsonViews.Common.class)
 	private String pays;
 
 	public Integer getNumero() {
