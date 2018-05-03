@@ -14,8 +14,17 @@ export class AuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(){
-    this.user.setUserLoggedIn();
-    this.router.navigate(['home']);
+  submit(e){
+    var username= e.elements[0].value;
+    var password= e.elements[1].value;
+    if (username== 'admin' && password =='admin'){
+      this.user.setUserLoggedIn();
+      this.router.navigate(['home']);
+    }
+    
+   if (username== 'gestion' && password =='gestion'){
+      this.user.setUserLoggedIn();
+      this.router.navigate(['home']);
+    }
   }
 }
