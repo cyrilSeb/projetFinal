@@ -24,6 +24,11 @@ const appRoutes: Routes=[
     path: 'home',
     canActivate: [AuthgardGuard],
     component: HomeComponent
+  },
+  
+  {
+    path: 'salle',
+    component: SalleComponent
   }
 ]
 
