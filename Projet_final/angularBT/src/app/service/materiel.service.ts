@@ -8,8 +8,8 @@ export class MaterielService {
   private baseUrl: string = 'http://localhost:8080/projetfinal/materiel';
   constructor(private http: HttpClient) { }
 
-  public list(): Observable<Materiel> {
-    return this.http.get<Materiel>(this.baseUrl);
+  public list(): Observable<Materiel[]> {
+    return this.http.get<Materiel[]>(this.baseUrl);
   }
   public delete(code: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${code}`);

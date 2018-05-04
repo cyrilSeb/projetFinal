@@ -1,3 +1,5 @@
+import { Materiel } from '../model/materiel';
+import { MaterielService } from '../service/materiel.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./materiel.component.css']
 })
 export class MaterielComponent implements OnInit {
-
-  constructor() { }
+  private materiels: Materiel[];
+  constructor(private materielService: MaterielService) { }
 
   ngOnInit() {
+     this.list();
   }
-
+ list(){
+    this.materielService.list().subscribe(result=>{
+      this.materiels=result;
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
+  }
+  
+  delete(id:number){
+    this.materielService.delete(id).subscribe(result=>{
+       this.list();
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
+  }
 }
