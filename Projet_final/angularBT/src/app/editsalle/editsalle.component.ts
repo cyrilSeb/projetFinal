@@ -33,7 +33,7 @@ export class EditsalleComponent implements OnInit {
   }
   
   retour(){
-    this.router.navigate(['/salle','list']);
+    this.router.navigate(['/salle']);
   }
   
   submit() {

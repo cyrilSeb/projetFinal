@@ -34,6 +34,10 @@ const appRoutes: Routes=[
     component: SalleComponent
   },
   {
+    path: 'editsalle',
+    component: EditsalleComponent
+  },
+  {
     path: 'materiel',
     component: MaterielComponent
   }
@@ -56,7 +60,4 @@ const appRoutes: Routes=[
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-ice,CursusService],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+

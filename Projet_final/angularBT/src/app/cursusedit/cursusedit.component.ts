@@ -1,5 +1,7 @@
 import { Cursus } from '../model/cursus';
+import { CursusService } from '../service/cursus.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cursusedit',
@@ -9,25 +11,25 @@ import { Component, OnInit } from '@angular/core';
 export class CursuseditComponent implements OnInit {
 
   private cursus: Cursus;
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService) { }
 
   ngOnInit() {
   }
   
   retour(){
-    this.router.navigate(['/salle','list']);
+    this.router.navigate(['/cursus','list']);
   }
   
   submit() {
-    if(!!this.salle.numero){
+    if(!!this.cursus.id){
       //maj
-    this.salleService.update(this.salle).subscribe(res=>{
+    this.cursusService.update(this.cursus).subscribe(res=>{
       this.retour();
         });
       
     }else{
       //creation
-      this.salleService.create(this.salle).subscribe(res=>{
+      this.cursusService.create(this.cursus).subscribe(res=>{
       this.retour();
         });
     }
