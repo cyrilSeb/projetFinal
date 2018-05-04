@@ -208,7 +208,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(formateur, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -236,7 +236,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(gestionnaire, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -269,7 +269,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(stagiaire, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -284,7 +284,7 @@ public class UserRestController {
 		if (opt.isPresent()) {
 			if (opt.get() instanceof Technicien) {
 				Technicien user = (Technicien) opt.get();
-				return update(user);
+				return update(technicien, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -363,9 +363,30 @@ public class UserRestController {
 		}
 	}
 
-	private ResponseEntity<User> update(User user) {
-		userRepository.save(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+	private ResponseEntity<User> update(User userNew, User userOld) {
+		if (userNew.getAdresse() != null) {
+			userOld.setAdresse(userNew.getAdresse());
+		}
+		if (userNew.getCoordonnees() != null) {
+			userOld.setCoordonnees(userNew.getCoordonnees());
+		}
+		if (userNew.getNom() != null) {
+			userOld.setNom(userNew.getNom());
+		}
+		if (userNew.getPassword() != null) {
+			userOld.setPassword(userNew.getPassword());
+		}
+		if (userNew.getPrenom() != null) {
+			userOld.setPrenom(userNew.getPrenom());
+		}
+		if (userNew.getRoles() != null) {
+			userOld.setRoles(userNew.getRoles());
+		}
+		if (userNew.getUsername() != null) {
+			userOld.setUsername(userNew.getUsername());
+		}
+		userRepository.save(userOld);
+		return new ResponseEntity<User>(userOld, HttpStatus.OK);
 	}
 
 	private ResponseEntity<Void> create(User user, BindingResult rs, UriComponentsBuilder ucb) {
