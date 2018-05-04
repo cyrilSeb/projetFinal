@@ -6,8 +6,28 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import model.*;
-import repository.*;
+import model.Adresse;
+import model.Competence;
+import model.Coordonnees;
+import model.Cursus;
+import model.Formateur;
+import model.FormateurMatierePK;
+import model.Gestionnaire;
+import model.Matiere;
+import model.Module;
+import model.Niveau;
+import model.Ordinateur;
+import model.Projecteur;
+import model.Salle;
+import model.Stagiaire;
+import model.Technicien;
+import repository.CompetenceRepository;
+import repository.CursusRepository;
+import repository.MaterielRepository;
+import repository.MatiereRepository;
+import repository.ModuleRepository;
+import repository.SalleRepository;
+import repository.UserRepository;
 
 public class Test {
 	public static void main(String[] args) {
@@ -125,7 +145,8 @@ public class Test {
 		cpts.add(cpt);
 
 		jacky.setCompetences(cpts);
-		jacky.setCursus(mpi);
+		jacky.setCursus(new HashSet<Cursus>());
+		jacky.getCursus().add(mpi);
 
 		Set<Module> mods = new HashSet<Module>();
 		mods.add(modInfo);

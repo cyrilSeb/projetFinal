@@ -18,74 +18,65 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import model.JsonViews;
 import model.Competence;
+import model.FormateurMatierePK;
+import model.JsonViews;
 import repository.CompetenceRepository;
 
 @RestController
-@RequestMapping("/rest/competence")
-@CrossOrigin(origins={"http://localhost:4200"})
+@RequestMapping("/competence")
+@CrossOrigin(origins = "*")
 public class CompetenceRestController {
 
 	@Autowired
 	private CompetenceRepository competenceRepository;
-	
-	@JsonView(JsonViews.Common.class) // permet de spécifier que l'on veut recup JSON spécifique, la vue
-	@RequestMapping(path={"","/"}, method=RequestMethod.GET)	//pour avoir une adresse commune
-	public ResponseEntity<List<Competence>> findAll(){
+
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.GET)
+	public ResponseEntity<List<Competence>> findAll() {
 		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
 	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Competence> findByKey(@PathVariable(name="id") Long id){
-		Optional<Competence> opt=competenceRepository.findById(id);
-		if(opt.isPresent()){
-			return new ResponseEntity<Competence>(opt.get(), HttpStatus.OK);
-		}else{
+
+	@JsonView(JsonViews.Competence.class)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ResponseEntity<List<Competence>> findAllWithLinks() {
+		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
+	}
+
+	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
+	public ResponseEntity<Void> create(@RequestBody Competence competence, BindingResult rs, UriComponentsBuilder ucb) {
+		if (competence.getKey() == null) {
+			return new ResponseEntity<Void>(HttpStatus.FAILED_DEPENDENCY);
+		}
+		competenceRepository.save(competence);
+		HttpHeaders header = new HttpHeaders();
+		header.setLocation(ucb.path("/cursus/{id}").buildAndExpand(competence.getKey()).toUri());
+		return new ResponseEntity<>(header, HttpStatus.OK);
+	}
+
+	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.PUT)
+	public ResponseEntity<Competence> update(@RequestBody Competence competence) {
+		Optional<Competence> opt = competenceRepository.findById(competence.getKey());
+		if (opt.isPresent()) {
+			if (competence.getKey() != null) {
+
+			}
+			Competence cpt = opt.get();
+			competenceRepository.save(cpt);
+			return new ResponseEntity<Competence>(cpt, HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		
 	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete (@PathVariable(name="id") Long id){
-		Optional<Competence> opt=competenceRepository.findById(id);
-		if(opt.isPresent()){
-			competenceRepository.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}else{
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") FormateurMatierePK numero) {
+		Optional<Competence> opt = competenceRepository.findById(numero);
+		if (opt.isPresent()) {
+			competenceRepository.deleteById(numero);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@RequestMapping(path={"","/"}, method=RequestMethod.POST)	//necessaire de mettre post pour acceder au body, get ne marche pas
-	public ResponseEntity<Void> create(@RequestBody Competence competence, BindingResult br, UriComponentsBuilder ucb){	//requestbody permet de dire, je cree/instancie adherent je vais recup info dans json et avec methode affectation a l'adherent
-		if (competence.getKey()!=null){
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-			
-		}else{
-			competenceRepository.save(competence);
-		}
-		HttpHeaders header=new HttpHeaders();
-		header.setLocation(ucb.path("/rest/competence/{id}").buildAndExpand(competence.getKey()).toUri()); //buildand expand est la pour indiquer l'id, peut avoir plusieur param a mettre dans l'ordre
-		return new ResponseEntity<>(header,HttpStatus.OK);
-	}
-	
-//	@RequestMapping(path={"","/"}, method=RequestMethod.PUT)
-//	public ResponseEntity<Competence>update(@RequestBody Competence competence){	//on prefere renvoyer adherent car on peut refaire des changements directement derriere
-//		
-//		Optional<Competence> opt=competenceRepository.findById(competence.getKey());
-//		if(opt.isPresent()){
-//			Competence competenceEnBase=opt.get();
-//			if (competence.getNiveau()!=null){
-//				competenceEnBase.setNiveau(competence.getNiveau());
-//			}
-//			competenceRepository.save(competenceEnBase);
-//			return new ResponseEntity<Competence>(competenceEnBase, HttpStatus.OK);
-//		}else{
-//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//			
-//		}
-//	}
 }

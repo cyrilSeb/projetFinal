@@ -18,81 +18,190 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import model.Cursus;
 import model.JsonViews;
 import model.Materiel;
+import model.Ordinateur;
+import model.Projecteur;
+import model.Stagiaire;
+import model.User;
+import repository.CursusRepository;
 import repository.MaterielRepository;
+import repository.UserRepository;
 
-	@RestController
-	@RequestMapping("/rest/materiel")
-	@CrossOrigin(origins={"http://localhost:4200"})
-	public class MaterielRestController {
+@RestController
+@RequestMapping("/materiel")
+@CrossOrigin(origins = "*")
+public class MaterielRestController {
+	@Autowired
+	private MaterielRepository materielRepository;
 
-		@Autowired
-		private MaterielRepository materielRepository;
-		
-		@JsonView(JsonViews.Common.class) // permet de spécifier que l'on veut recup JSON spécifique, la vue
-		@RequestMapping(path={"","/"}, method=RequestMethod.GET)	//pour avoir une adresse commune
-		public ResponseEntity<List<Materiel>> findAll(){
-			
-			return new ResponseEntity<List<Materiel>>(materielRepository.findAll(), HttpStatus.OK);
-			
-		}
-		
-		@RequestMapping(value="/{id}", method=RequestMethod.GET)
-		@JsonView(JsonViews.Common.class)
-		public ResponseEntity<Materiel> findByKey(@PathVariable(name="id") Long id){
-			Optional<Materiel> opt=materielRepository.findById(id);
-			if(opt.isPresent()){
-				return new ResponseEntity<Materiel>(opt.get(), HttpStatus.OK);
-			}else{
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-			
-		}
-		
-		@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-		public ResponseEntity<Void> delete (@PathVariable(name="id") Long id){
-			Optional<Materiel> opt=materielRepository.findById(id);
-			if(opt.isPresent()){
-				materielRepository.deleteById(id);
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}else{
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-		}
-		
-		@RequestMapping(path={"","/"}, method=RequestMethod.POST)	//necessaire de mettre post pour acceder au body, get ne marche pas
-		public ResponseEntity<Void> create(@RequestBody Materiel materiel, BindingResult br, UriComponentsBuilder ucb){	//requestbody permet de dire, je cree/instancie adherent je vais recup info dans json et avec methode affectation a l'adherent
-			if (materiel.getCode()!=null){
-				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-				
-			}else{
-				materielRepository.save(materiel);
-			}
-			HttpHeaders header=new HttpHeaders();
-			header.setLocation(ucb.path("/rest/materiel/{id}").buildAndExpand(materiel.getCode()).toUri()); //buildand expand est la pour indiquer l'id, peut avoir plusieur param a mettre dans l'ordre
-			return new ResponseEntity<>(header,HttpStatus.OK);
-		}
-		
-		@RequestMapping(path={"","/"}, method=RequestMethod.PUT)
-		public ResponseEntity<Materiel>update(@RequestBody Materiel materiel){	//on prefere renvoyer adherent car on peut refaire des changements directement derriere
-			
-			Optional<Materiel> opt=materielRepository.findById(materiel.getCode());
-			if(opt.isPresent()){
-				Materiel materielEnBase=opt.get();
-				if (materiel.getCout()!=null){
-					materielEnBase.setCout(materiel.getCout());
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private CursusRepository cursusRepository;
+
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.GET)
+	public ResponseEntity<List<Materiel>> findAll() {
+		return new ResponseEntity<List<Materiel>>(materielRepository.findAll(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/ordinateur", method = RequestMethod.POST)
+	public ResponseEntity<Void> createOrdi(@RequestBody Ordinateur ordi, BindingResult rs, UriComponentsBuilder ucb) {
+		if (ordi.getCode() != null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} else {
+			if (ordi.getStagiaire() != null) {
+				if (ordi.getStagiaire().getId() != null) {
+					Optional<User> opt = userRepository.findById(ordi.getStagiaire().getId());
+					if (opt.isPresent()) {
+						if (opt.get() instanceof Stagiaire) {
+							ordi.setStagiaire((Stagiaire) opt.get());
+						} else {
+							return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+						}
+					} else {
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					}
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 				}
-				if (materiel.getDisponible()!=null){
-					materielEnBase.setDisponible(materiel.getDisponible());
-				}
-				materielRepository.save(materielEnBase);
-				return new ResponseEntity<Materiel>(materielEnBase, HttpStatus.OK);
-			}else{
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-				
 			}
+			return create(ordi, rs, ucb);
 		}
 	}
 
+	@RequestMapping(value = "/projecteur", method = RequestMethod.POST)
+	public ResponseEntity<Void> createOrdi(@RequestBody Projecteur projo, BindingResult rs, UriComponentsBuilder ucb) {
+		if (projo.getCode() != null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} else {
+			if (projo.getCursus() != null) {
+				if (projo.getCursus().getId() != null) {
+					Optional<Cursus> opt = cursusRepository.findById(projo.getCursus().getId());
+					if (opt.isPresent()) {
+						projo.setCursus(opt.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					}
+				} else {
+					return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		return create(projo, rs, ucb);
+	}
 
+	@RequestMapping(value = "/ordinateur", method = RequestMethod.PUT)
+	public ResponseEntity<Materiel> updateOrdi(@RequestBody Ordinateur ordi) {
+		Optional<Materiel> opt = materielRepository.findById(ordi.getCode());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Ordinateur) {
+				Ordinateur matos = (Ordinateur) opt.get();
+				if (ordi.getAnneeAchat() != null) {
+					matos.setAnneeAchat(ordi.getAnneeAchat());
+				}
+				if (ordi.getDD() != null) {
+					matos.setDD(ordi.getDD());
+				}
+				if (ordi.getProcesseur() != null) {
+					matos.setProcesseur(ordi.getProcesseur());
+				}
+				if (ordi.getRam() != null) {
+					matos.setRam(ordi.getRam());
+				}
+				if (ordi.getStagiaire() != null) {
+					if (ordi.getStagiaire().getId() != null) {
+						Optional<User> optUser = userRepository.findById(ordi.getStagiaire().getId());
+						if (optUser.isPresent()) {
+							if (optUser.get() instanceof Stagiaire) {
+								matos.setStagiaire((Stagiaire) optUser.get());
+							} else {
+								return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+							}
+						} else {
+							return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+						}
+					}
+				}
+				return update(ordi, matos);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/projecteur", method = RequestMethod.PUT)
+	public ResponseEntity<Materiel> updateProjo(@RequestBody Projecteur projo) {
+		Optional<Materiel> opt = materielRepository.findById(projo.getCode());
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Projecteur) {
+				Projecteur matos = (Projecteur) opt.get();
+				if (projo.getCursus() != null) {
+					Optional<Cursus> optCrs = cursusRepository.findById(projo.getCursus().getId());
+					if (optCrs.isPresent()) {
+						matos.setCursus(optCrs.get());
+					} else {
+						return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					}
+				}
+				return update(projo, matos);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long numero) {
+		Optional<Materiel> opt = materielRepository.findById(numero);
+		if (opt.isPresent()) {
+			if (opt.get() instanceof Ordinateur) {
+				Ordinateur matos = (Ordinateur) opt.get();
+				if (matos.getStagiaire() != null) {
+					Optional<User> optUser = userRepository.findById(matos.getStagiaire().getId());
+					Stagiaire stag = (Stagiaire) optUser.get();
+					stag.setOrdinateur(null);
+					userRepository.save(stag);
+				}
+			}
+			if (opt.get() instanceof Projecteur) {
+				Projecteur matos = (Projecteur) opt.get();
+				if (matos.getCursus() != null) {
+					Optional<Cursus> optCrs = cursusRepository.findById(matos.getCursus().getId());
+					Cursus cursus = optCrs.get();
+					cursus.setProjecteur(null);
+					cursusRepository.save(cursus);
+				}
+			}
+			materielRepository.deleteById(numero);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	private ResponseEntity<Materiel> update(Materiel matosNew, Materiel matosOld) {
+		if (matosNew.getDisponible() != null) {
+			matosOld.setDisponible(matosOld.getDisponible());
+		}
+		if (matosNew.getCout() != null) {
+			matosOld.setCout(matosOld.getCout());
+		}
+		materielRepository.save(matosOld);
+		return new ResponseEntity<Materiel>(matosOld, HttpStatus.OK);
+	}
+
+	private ResponseEntity<Void> create(Materiel materiel, BindingResult rs, UriComponentsBuilder ucb) {
+		materielRepository.save(materiel);
+		HttpHeaders header = new HttpHeaders();
+		header.setLocation(ucb.path("/materiel/{id}").buildAndExpand(materiel.getCode()).toUri());
+		return new ResponseEntity<>(header, HttpStatus.OK);
+	}
+}
