@@ -19,13 +19,13 @@
  	 <td>{{cursus.id}}</td>
     <td>{{cursus.nom}}</td>
     <td>{{cursus.date}}</td>
-    <td>{{(!!cursus.gestionnaire)?cursus.gestionnaire.id:''}}</td>
-    <td>{{(!!cursus.referent)?cursus.referent.id:''}}</td>
-    <td>{{(!!cursus.salle)?cursus.salle.id:''}}</td>
+    <td>{{(!!cursus.gestionnaire)?cursus.gestionnaire.prenom:''}} {{(!!cursus.gestionnaire)?cursus.gestionnaire.nom:''}}</td>
+    <td>{{(!!cursus.referent)?cursus.referent.prenom:''}} {{(!!cursus.referent)?cursus.referent.nom:''}}</td>
+    <td>{{(!!cursus.salle)?cursus.salle.numero:''}}</td>
     <td><a class="btn btn-info" href="" [routerLink]="['/cursusedit',cursus.id]">editer</a></td>
     <td><button class="btn btn-danger" (click)="delete(cursus.id)">supprimer</button></td>
   </tr>
 </table>
 <div>
-	<a class="btn btn-info" href="" [routerLink]="['/salle','cursusedit','']">creer un cursus</a>
+	<a class="btn btn-info" href="" [routerLink]="['/cursusedit']">creer un cursus</a>
 </div>
