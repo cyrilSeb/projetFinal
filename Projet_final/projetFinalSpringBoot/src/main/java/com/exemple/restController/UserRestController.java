@@ -17,26 +17,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.Competence;
+import com.exemple.model.Cursus;
+import com.exemple.model.Formateur;
+import com.exemple.model.Gestionnaire;
+import com.exemple.model.JsonViews;
+import com.exemple.model.Materiel;
+import com.exemple.model.Module;
+import com.exemple.model.Ordinateur;
+import com.exemple.model.Stagiaire;
+import com.exemple.model.Technicien;
+import com.exemple.model.User;
 import com.exemple.repository.CompetenceRepository;
 import com.exemple.repository.CursusRepository;
 import com.exemple.repository.MaterielRepository;
 import com.exemple.repository.ModuleRepository;
 import com.exemple.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import model.Competence;
-import model.Cursus;
-import model.Formateur;
-import model.Gestionnaire;
-import model.JsonViews;
-import model.Materiel;
-import model.Module;
-import model.Ordinateur;
-import model.Projecteur;
-import model.Salle;
-import model.Stagiaire;
-import model.Technicien;
-import model.User;
 
 @RestController
 @RequestMapping("/user")

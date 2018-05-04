@@ -2,7 +2,6 @@ package com.exemple.restController;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,23 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.Cursus;
+import com.exemple.model.JsonViews;
+import com.exemple.model.Materiel;
+import com.exemple.model.Ordinateur;
+import com.exemple.model.Projecteur;
+import com.exemple.model.Stagiaire;
+import com.exemple.model.User;
 import com.exemple.repository.CursusRepository;
 import com.exemple.repository.MaterielRepository;
 import com.exemple.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import model.Competence;
-import model.Cursus;
-import model.Formateur;
-import model.Gestionnaire;
-import model.JsonViews;
-import model.Materiel;
-import model.Module;
-import model.Ordinateur;
-import model.Projecteur;
-import model.Salle;
-import model.Stagiaire;
-import model.User;
 
 @RestController
 @RequestMapping("/materiel")

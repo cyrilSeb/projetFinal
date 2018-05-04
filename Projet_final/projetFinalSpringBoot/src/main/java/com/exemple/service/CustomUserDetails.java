@@ -8,22 +8,21 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import model.User;
+import com.exemple.model.User;
 
-
-
-public class CustomUserDetails extends User implements UserDetails{
+public class CustomUserDetails extends User implements UserDetails {
 
 	List<String> roles;
-	
-	public CustomUserDetails(User user, List<String> roles){
+
+	public CustomUserDetails(User user, List<String> roles) {
 		super(user);
-		this.roles=roles;
+		this.roles = roles;
 	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
-		String roles=StringUtils.collectionToCommaDelimitedString(this.roles);
+		String roles = StringUtils.collectionToCommaDelimitedString(this.roles);
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 	}
 
