@@ -21,6 +21,7 @@ import com.exemple.model.Competence;
 import com.exemple.model.Cursus;
 import com.exemple.model.FormateurMatierePK;
 import com.exemple.model.JsonViews;
+import com.exemple.model.Salle;
 import com.exemple.repository.CompetenceRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -42,6 +43,17 @@ public class CompetenceRestController {
 	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ResponseEntity<List<Competence>> findAllWithLinks() {
 		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
+	}
+
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{key.formateur.id}/{key.matiere.id}", method = RequestMethod.GET)
+	public ResponseEntity<Competence> findById(@PathVariable(name = "key") FormateurMatierePK clef) {
+		Optional<Competence> opt = competenceRepository.findById(clef);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Competence>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
