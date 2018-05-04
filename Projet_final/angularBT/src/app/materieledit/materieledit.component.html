@@ -1,3 +1,25 @@
-<p>
-  materieledit works!
-</p>
+<div>
+	<fieldset>
+		<legend> edition de materiel</legend>
+		<form>
+		<input type="hidden" [(ngModel)]="materiel.code" name="code">
+		
+			<div class="form-group">
+				<label for="cout">cout:</label>
+				<input id="cout" Class="form-control" [(ngModel)]="materiel.cout" name="cout">
+			</div>
+			<div class="form-group">
+				<label for="disponible">disponible:</label>
+				<input id="disponible" Class="form-control" [(ngModel)]="materiel.disponible" name="disponible">
+			</div>
+			<div class="form-group">
+				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
+				<button (click)="retour()" class="btn btn-info">retour</button>
+			</div>
+		
+		</form>
+
+	</fieldset>
+
+</div>
+

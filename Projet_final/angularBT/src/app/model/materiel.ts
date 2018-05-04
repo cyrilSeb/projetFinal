@@ -1,6 +1,6 @@
 
 
-export abstract class Materiel  {
+export class Materiel  {
    constructor (private _code:string='', private _cout:string ='', private _disponible :boolean =  null ){
      
    }

@@ -21,4 +21,13 @@ export class MaterielService {
   public update(materiel: Materiel):Observable<any>{
     return this.http.put(this.baseUrl, materiel);
   }
+  
+  public create(materiel: Materiel): Observable<any>{
+    const obj={
+      code:materiel.code,
+      cout:materiel.cout,
+      disponible:materiel.disponible,
+    };
+    return this.http.post(this.baseUrl, obj);
+  }
 }
