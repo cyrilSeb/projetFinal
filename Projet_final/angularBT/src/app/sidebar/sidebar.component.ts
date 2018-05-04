@@ -15,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'formateurlist', title: 'Formateurs',  icon:'ti-user', class: '' },
     { path: 'matierelist', title: 'matiere',  icon:'ti-text', class: '' },
     { path: 'sallelist', title: 'salles',  icon:'ti-pencil-alt2', class: '' },
-    { path: 'maps', title: 'BLBLBLBB',  icon:'ti-map', class: '' },
+    { path: 'modulelist', title: 'Modules',  icon:'ti-map', class: '' },
     { path: 'notifications', title: 'BLBLBLBLB',  icon:'ti-bell', class: '' },
    
 ];

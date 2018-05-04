@@ -1,3 +1,33 @@
-<p>
-  moduleedit works!
-</p>
+<div>
+	<fieldset>
+		<legend> edition de module</legend>
+		<form>
+		<input type="hidden" [(ngModel)]="module.id" name="id">
+		
+			<div class="form-group">
+				<label for="id">id:</label>
+				<input id="id" Class="form-control" [(ngModel)]="module.id" name="id">
+			</div>
+			
+			<div class="form-group">
+				<label for="matière">matiere:</label>
+				<input id="matière" Class="form-control" [(ngModel)]="module.matiere" name="matiere">
+			</div>
+			<div class="form-group">
+				<label for="formateur">formateur:</label>
+				<input id="formateur" Class="form-control" [(ngModel)]="module.formateur" name="formateur">
+			</div>
+			<div class="form-group">
+				<label for="cursus">cursus:</label>
+				<input id="cursus" Class="form-control" [(ngModel)]="module.cursus" name="cursus">
+			</div>
+			<div class="form-group">
+				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
+				<button (click)="retour()" class="btn btn-info">retour</button>
+			</div>
+		
+		</form>
+
+	</fieldset>
+
+</div>
