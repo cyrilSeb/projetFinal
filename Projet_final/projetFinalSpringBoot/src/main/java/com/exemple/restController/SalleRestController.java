@@ -40,6 +40,17 @@ public class SalleRestController {
 		return new ResponseEntity<List<Salle>>(salleRepository.findAll(), HttpStatus.OK);
 	}
 
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Salle> findById(@PathVariable(name = "id") Long numero) {
+		Optional<Salle> opt = salleRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Salle>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Salle salle, BindingResult rs, UriComponentsBuilder ucb) {
 		if (salle.getId() != null) {

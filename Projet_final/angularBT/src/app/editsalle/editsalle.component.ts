@@ -19,8 +19,8 @@ export class EditsalleComponent implements OnInit {
       this.salle= new Salle();
       this.salle.adresse=new Adresse();
       
-  } //router est utile pour reconstituer url d'une page ou l'on veut aller 
-                                                                        //adherentService est utilisé pour le form edit
+  } 
+  
   ngOnInit() {
     this.route.paramMap.subscribe((params:ParamMap) =>{
     this.id =params.get('id');
@@ -37,7 +37,7 @@ export class EditsalleComponent implements OnInit {
   }
   
   submit() {
-    if(!!this.salle.numero){
+    if(!!this.salle.id){
       //maj
     this.salleService.update(this.salle).subscribe(res=>{
       this.retour();
