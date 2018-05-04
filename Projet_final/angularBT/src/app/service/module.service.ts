@@ -11,7 +11,7 @@ private baseUrl:string='http://localhost:8080/projetfinal/module';
   constructor(private http: HttpClient) { }
 
   list() :Observable<Module[]>{
-    return this.http.get<Module[]>(this.baseUrl);
+    return this.http.get<Module[]>(`${this.baseUrl}/infos`);
   }
   
   public delete(id:number):Observable<any>{
