@@ -31,6 +31,8 @@ import { MaterieleditComponent } from './materieledit/materieledit.component';
 import { FormateureditComponent } from './formateuredit/formateuredit.component';
 import { MatiereService } from './service/matiere.service';
 import { ModuleService } from './service/module.service';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './service/alert.service';
 
 
 const appRoutes: Routes=[
@@ -125,13 +127,14 @@ const appRoutes: Routes=[
      ModuleeditComponent,
      MaterieleditComponent,
      FormateureditComponent,
+     AlertComponent,
 
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule,SidebarModule,NavbarModule,
     FooterModule
   ],
-  providers: [UserService,AuthgardGuard, SalleService,MaterielService, CursusService,FormateurService,ModuleService,MatiereService],
+  providers: [UserService,AuthgardGuard, SalleService,MaterielService, CursusService,FormateurService,ModuleService,MatiereService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

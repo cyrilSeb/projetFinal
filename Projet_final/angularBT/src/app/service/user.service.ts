@@ -13,7 +13,6 @@ export class UserService {
   }
   
   login(username: string, password: string) {
-    localStorage.setItem('currentUser',JSON.stringify(this.findByUsername(username, password)))
      return this.findByUsername(username, password);
   }
 
