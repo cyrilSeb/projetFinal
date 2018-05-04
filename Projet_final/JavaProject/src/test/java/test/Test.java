@@ -67,7 +67,7 @@ public class Test {
 		// Gestionnaire
 		Gestionnaire johanna = new Gestionnaire();
 		johanna.setAdresse(ajc);
-		johanna.setNom("LEBLANC");
+		johanna.setNom("ZANARELLI");
 		johanna.setPrenom("Johanna");
 
 		// Stagiaire
