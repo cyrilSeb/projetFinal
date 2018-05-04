@@ -115,9 +115,9 @@
 								<td>{{materiel.ram}}</td>
 								<td>{{materiel.DD}}</td>
 								<td>{{materiel.anneeAchat}}</td>
-								<td>{{materiel.stagiaire}}</td>
+								<td>{{(!!materiel.stagiaire)?materiel.stagiaire.id:''}}</td>
 
-								<td>{{materiel.cursus}}</td>
+								<td>{{(!!materiel.cursus)?materiel.cursus.id:''}}</td>
 								<td><a href="" [routerLink]="['/materieledit']"
 									class="btn btn-info">editer</a></td>
 								<td><button class="btn btn-danger"

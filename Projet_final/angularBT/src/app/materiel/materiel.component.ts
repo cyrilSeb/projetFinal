@@ -19,6 +19,7 @@ export class MaterielComponent implements OnInit {
   list() {
     this.materielService.list().subscribe(result => {
       this.materiels = result;
+      console.log(this.materiels);
     }, error => {
       console.log(`erreur:${error}`);
     });
