@@ -9,7 +9,7 @@ export class MaterielService {
   constructor(private http: HttpClient) { }
 
   public list(): Observable<Materiel[]> {
-    return this.http.get<Materiel[]>(this.baseUrl);
+    return this.http.get<Materiel[]>(`${this.baseUrl}/infos`);
   }
   public delete(code: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${code}`);
