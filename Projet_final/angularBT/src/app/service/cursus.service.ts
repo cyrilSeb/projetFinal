@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CursusService {
   
-  private baseUrl:string='http://localhost:8080/projetfinal/salle';
+  private baseUrl:string='http://localhost:8080/projetfinal/cursus';
 
   constructor(private http: HttpClient) { }
   

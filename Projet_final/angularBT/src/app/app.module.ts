@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
+import { CursuseditComponent } from './cursusedit/cursusedit.component';
+import { CursuslistComponent } from './cursuslist/cursuslist.component';
 import { AuthgardGuard } from './guard/authgard.guard';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes} from '@angular/router';
@@ -14,6 +16,7 @@ import { SalleComponent } from './salle/salle.component';
 import { EditsalleComponent } from './editsalle/editsalle.component';
 import { SalleService } from './service/salle.service';
 import { MaterielComponent } from './materiel/materiel.component';
+import { CursusService } from './service/cursus.service';
 import { MaterielService } from './service/materiel.service';
 
 
@@ -38,6 +41,14 @@ const appRoutes: Routes=[
     component: EditsalleComponent
   },
   {
+    path: 'cursuslist',
+    component: CursuslistComponent
+  },
+  {
+    path: 'cursusedit',
+    component: CursuseditComponent
+  },
+  {
     path: 'materiel',
     component: MaterielComponent
   }
@@ -51,12 +62,14 @@ const appRoutes: Routes=[
     SalleComponent,
     EditsalleComponent,
     MaterielComponent,
+    CursuslistComponent,
+    CursuseditComponent
 
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule
   ],
-  providers: [UserService,AuthgardGuard, SalleService,MaterielService],
+  providers: [UserService,AuthgardGuard, SalleService,MaterielService, CursusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

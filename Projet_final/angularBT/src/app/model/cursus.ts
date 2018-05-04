@@ -5,8 +5,8 @@ import { Projecteur } from './projecteur';
 import { Salle } from './salle';
 import { Stagiaire } from './stagiaire';
 export class Cursus {
-  constructor (private _id: string='',private _nom: string ='', private _date: Date=null, private _gestionnaire : Gestionnaire, private _referent : Formateur,
-  private _module :Module, private _projecteur: Projecteur=null, private _stagiaire : Stagiaire=null,private _salle : Salle){  
+  constructor (private _id: string='',private _nom: string ='', private _date: Date=null, private _gestionnaire : Gestionnaire =null, private _referent : Formateur=null,
+  private _module :Module=null, private _projecteur: Projecteur=null, private _stagiaire : Stagiaire=null,private _salle : Salle=null){  
   }
   
   public get id(): string {

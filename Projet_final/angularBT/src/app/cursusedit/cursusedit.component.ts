@@ -1,7 +1,7 @@
 import { Cursus } from '../model/cursus';
 import { CursusService } from '../service/cursus.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-cursusedit',
@@ -10,14 +10,27 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CursuseditComponent implements OnInit {
 
+  private id;
   private cursus: Cursus;
-  constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService) { }
+  
+  constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService) {
+  this.cursus=new Cursus();
+  
+   }
 
-  ngOnInit() {
+   ngOnInit() {
+    this.route.paramMap.subscribe((params:ParamMap) =>{
+    this.id =params.get('id');
+      if(!!this.id){
+    this.cursusService.findById(this.id).subscribe(res=>{
+      this.cursus=res;
+         });
+       }
+    });
   }
   
   retour(){
-    this.router.navigate(['/cursus','list']);
+    this.router.navigate(['/cursuslist']);
   }
   
   submit() {
