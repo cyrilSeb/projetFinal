@@ -31,7 +31,7 @@ public class Matiere {
 	private Integer nbHeure;
 	@Column(name = "Matiere_objectifs")
 	@JsonView(JsonViews.Common.class)
-	private String Objectifs;
+	private String objectifs;
 	@OneToMany
 	@JsonView(JsonViews.MatiereWithPrerequis.class)
 	private Set<Matiere> prerequis;
@@ -68,11 +68,11 @@ public class Matiere {
 	}
 
 	public String getObjectifs() {
-		return Objectifs;
+		return objectifs;
 	}
 
 	public void setObjectifs(String objectifs) {
-		Objectifs = objectifs;
+		this.objectifs = objectifs;
 	}
 
 	public Set<Matiere> getPrerequis() {
