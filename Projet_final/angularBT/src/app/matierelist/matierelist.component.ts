@@ -1,3 +1,5 @@
+import { Matiere } from '../model/matiere';
+import { MatiereService } from '../service/matiere.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatierelistComponent implements OnInit {
 
-  constructor() { }
+  private matieres: Matiere[];
+  constructor(private matiereService: MatiereService) { }
 
   ngOnInit() {
+    
+    this.list();
+  }
+  
+  list(){
+    this.matiereService.list().subscribe(result=>{
+      this.matieres=result;
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
+  }
+  
+  delete(id:number){
+    this.matiereService.delete(id).subscribe(result=>{
+       this.list();
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
   }
 
 }

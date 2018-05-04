@@ -67,7 +67,7 @@ const appRoutes: Routes=[
   },
   {
     path: 'materieledit',
-    component: MatiereeditComponent
+    component: MaterieleditComponent
   },
     {path: 'formateurlist',
     component: FormateurComponent
@@ -82,7 +82,7 @@ const appRoutes: Routes=[
   },
   {
     path: 'matiereedit',
-    component: MaterieleditComponent
+    component: MatiereeditComponent
   },
   {
     path: 'modulelist',

@@ -1,8 +1,38 @@
+import { Matiere } from '../model/matiere';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MatiereService {
 
-  constructor() { }
+ private baseUrl:string='http://localhost:8080/projetfinal/matierelist';
+
+  constructor(private http: HttpClient) { }
+  
+  list() :Observable<Matiere[]>{
+    return this.http.get<Matiere[]>(this.baseUrl);
+  }
+  
+  public delete(id:number):Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+  
+  public findById(id):Observable<Matiere>{
+    return this.http.get<Matiere>(`${this.baseUrl}/${id}`);
+  }
+
+  public update(matiere: Matiere):Observable<any>{
+    return this.http.put(this.baseUrl, matiere);
+  }
+  
+  public create(matiere: Matiere): Observable<any>{
+    const obj={
+      id:matiere.id,
+      titre:matiere.titre,
+      
+    };
+    return this.http.post(this.baseUrl, obj);
+  }
 
 }

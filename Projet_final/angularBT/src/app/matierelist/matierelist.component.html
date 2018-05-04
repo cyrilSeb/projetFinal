@@ -1,3 +1,23 @@
-<p>
-  matierelist works!
-</p>
+<table class="table table-hover">
+  <tr>
+  	<th>id</th>
+    <th>titre</th>
+    <th>nombres d'heures</th>
+    <th>objectifs</th>
+    <th>prerequis</th>
+    <th>contenu</th>
+  </tr>
+  <tr *ngFor="let matiere of matieres">
+    <td>{{matiere.id}}</td>
+    <td>{{matiere.titre}}</td>
+    <td>{{matiere.nbHeure}}</td>
+    <td>{{matiere.objectifs}}</td>
+    <td>{{matiere.contenu}}</td>
+    <td>{{matiere.prerequis}}</td>
+    <td><a class="btn btn-info" href="" [routerLink]="['/matiereedit',matiere.id]">editer</a></td>
+    <td><button class="btn btn-danger" (click)="delete(matiere.id)">supprimer</button></td>
+  </tr>
+</table>
+<div>
+	<a class="btn btn-info" href="" [routerLink]="['/matiereedit']">creer une matiere</a>
+</div>

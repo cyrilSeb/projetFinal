@@ -1,3 +1,37 @@
-<p>
-  matiereedit works!
-</p>
+<div>
+	<fieldset>
+		<legend> edition de matiere</legend>
+		<form>
+		<input type="hidden" [(ngModel)]="matiere.id" name="id">
+		
+			<div class="form-group">
+				<label for="titre">titre:</label>
+				<input id="titre" Class="form-control" [(ngModel)]="matiere.titre" name="titre">
+			</div>
+			<div class="form-group">
+				<label for="nbHeure">nombres d'heures:</label>
+				<input id="nbHeure" Class="form-control" [(ngModel)]="matiere.nbHeure" name="nbHeure">
+			</div>
+			<div class="form-group">
+				<label for="objectifs">objectifs:</label>
+				<input id="objectifs" Class="form-control" [(ngModel)]="matiere.objectifs" name="objectifs">
+			</div>
+			<div class="form-group">
+				<label for="contenu">contenu:</label>
+				<input id="contenu" Class="form-control" [(ngModel)]="matiere.contenu" name="contenu">
+			</div>
+			<div class="form-group">
+				<label for="prerequis">prerequis:</label>
+				<input id="prerequis" Class="form-control" [(ngModel)]="matiere.prerequis" name="prerequis">
+			</div>
+			<div class="form-group">
+				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
+				<button (click)="retour()" class="btn btn-info">retour</button>
+			</div>
+		
+		</form>
+
+	</fieldset>
+
+</div>
+
