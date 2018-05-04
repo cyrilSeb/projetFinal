@@ -51,7 +51,7 @@ public class SalleRestController {
 		}
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Salle salle, BindingResult rs, UriComponentsBuilder ucb) {
 		if (salle.getId() != null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -79,7 +79,7 @@ public class SalleRestController {
 		}
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.PUT)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.PUT)
 	public ResponseEntity<Salle> update(@RequestBody Salle salle) {
 		Optional<Salle> opt = salleRepository.findById(salle.getId());
 		if (opt.isPresent()) {

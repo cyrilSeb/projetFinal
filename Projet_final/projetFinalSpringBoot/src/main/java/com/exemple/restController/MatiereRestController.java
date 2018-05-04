@@ -53,7 +53,7 @@ public class MatiereRestController {
 		}
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Matiere matiere, BindingResult rs, UriComponentsBuilder ucb) {
 		if (matiere.getId() != null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -87,7 +87,7 @@ public class MatiereRestController {
 		}
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.PUT)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.PUT)
 	public ResponseEntity<Matiere> update(@RequestBody Matiere matiere) {
 		Optional<Matiere> opt = matiereRepository.findById(matiere.getId());
 		if (opt.isPresent()) {
