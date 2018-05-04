@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class MatiereService {
 
- private baseUrl:string='http://localhost:8080/projetfinal/matierelist';
+ private baseUrl:string='http://localhost:8080/projetfinal/matiere';
 
   constructor(private http: HttpClient) { }
   

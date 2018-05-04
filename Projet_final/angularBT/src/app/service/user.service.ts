@@ -17,7 +17,7 @@ export class UserService {
         return this.http.get<User>(this.baseUrl);
       }else{
         if (this.findByUsername(username))
-        return this.http.get<User>(`${this.baseUrl}/${'materiellist'}`);
+        return this.http.get<User>(`http://localhost:8080/projetfinal/materiel`);
       }
         
   }

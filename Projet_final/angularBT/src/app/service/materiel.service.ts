@@ -27,6 +27,10 @@ export class MaterielService {
       code:materiel.code,
       cout:materiel.cout,
       disponible:materiel.disponible,
+      processeur:materiel.processeur,
+      ram:materiel.ram,
+      DD:materiel.DD,
+      anneeAchat: materiel.anneeAchat
     };
     return this.http.post(this.baseUrl, obj);
   }

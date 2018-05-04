@@ -15,7 +15,6 @@
     <th>code Postal</th>
     <th>ville</th>
     <th>pays</th>
-    <th>cursus</th>
   </tr>
   <tr *ngFor="let salle of salles">
   	<td>{{salle.id}}</td>
@@ -25,7 +24,6 @@
     <td>{{(salle.adresse)?salle.adresse.codePostal:''}}</td>
     <td>{{(salle.adresse)?salle.adresse.ville:''}}</td>
     <td>{{(salle.adresse)?salle.adresse.pays:''}}</td>
-    <td>{{salle.cursus}}</td>
     <td><a class="btn btn-info" href="" [routerLink]="['/salleedit',salle.id]">editer</a></td>
     <td><button class="btn btn-danger" (click)="delete(salle.id)">supprimer</button></td>
   </tr>
