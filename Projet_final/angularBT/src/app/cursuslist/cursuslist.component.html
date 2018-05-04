@@ -8,27 +8,24 @@
                 <table class="table table-hover">
 
   <tr>
+  	<th>id</th>
   	<th>nom</th>
     <th>date</th>
     <th>gestionnaire</th>
     <th>referent</th>
-    <th>module</th>
-    <th>projecteur</th>
     <th>salle</th>
-    <th>stagiaire</th>
   </tr>
   <tr *ngFor="let cursus of cursuss">
+ 	 <td>{{cursus.id}}</td>
     <td>{{cursus.nom}}</td>
     <td>{{cursus.date}}</td>
-    <td>{{cursus.gestionnaire.nom}}</td>
-    <td>{{cursus.module.matiere}}</td>
-    <td>{{cursus.projecteur.code}}</td>
-    <td>{{cursus.salle.numero}}</td>
-    <td>{{cursus.stagiaire.prenom}} {{cursus.stagiaire.nom}}</td>
-    <td><a class="btn btn-info" href="" [routerLink]="['/cursus','cursusedit',cursus.id]">editer</a></td>
+    <td>{{(!!cursus.gestionnaire)?cursus.gestionnaire.prenom:''}} {{(!!cursus.gestionnaire)?cursus.gestionnaire.nom:''}}</td>
+    <td>{{(!!cursus.referent)?cursus.referent.prenom:''}} {{(!!cursus.referent)?cursus.referent.nom:''}}</td>
+    <td>{{(!!cursus.salle)?cursus.salle.numero:''}}</td>
+    <td><a class="btn btn-info" href="" [routerLink]="['/cursusedit',cursus.id]">editer</a></td>
     <td><button class="btn btn-danger" (click)="delete(cursus.id)">supprimer</button></td>
   </tr>
 </table>
 <div>
-	<a class="btn btn-info" href="" [routerLink]="['/salle','cursusedit','']">creer un cursus</a>
+	<a class="btn btn-info" href="" [routerLink]="['/cursusedit']">creer un cursus</a>
 </div>

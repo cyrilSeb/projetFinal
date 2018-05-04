@@ -13,17 +13,13 @@ export class UserService {
   }
   
   login(username: string, password: string) {
-      if (this.findByUsername(username, password)==null){
-        return this.http.get<User>(this.baseUrl);
-      }else{
-        return this.http.get<User>(`${this.baseUrl}/${'home'}`);
-      }
-        
+     return this.findByUsername(username, password);
   }
 
 
+
    public list() :Observable<User[]>{
-    return this.http.get<User[]>(this.baseUrl);
+    return this.http.get<User[]>(`${this.baseUrl}/infos`);
   }
   
   public delete(id:number):Observable<any>{
@@ -35,7 +31,7 @@ export class UserService {
   }
   
   public findByUsername(username, password):Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}/${username}`);
+    return this.http.get<User>(`${this.baseUrl}/user/authentification/${username}/${password}`);
   }
 
   public update(user: User):Observable<any>{

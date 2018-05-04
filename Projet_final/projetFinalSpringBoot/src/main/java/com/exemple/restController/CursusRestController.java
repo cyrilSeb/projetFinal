@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.Competence;
 import com.exemple.model.Cursus;
 import com.exemple.model.Formateur;
+import com.exemple.model.FormateurMatierePK;
 import com.exemple.model.Gestionnaire;
 import com.exemple.model.JsonViews;
 import com.exemple.model.Materiel;
@@ -63,6 +65,28 @@ public class CursusRestController {
 	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ResponseEntity<List<Cursus>> findAllWithLinks() {
 		return new ResponseEntity<List<Cursus>>(cursusRepository.findAll(), HttpStatus.OK);
+	}
+
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Cursus> findById(@PathVariable(name = "id") Long numero) {
+		Optional<Cursus> opt = cursusRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Cursus>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@JsonView(JsonViews.Cursus.class)
+	@RequestMapping(value = "/{id}/infos", method = RequestMethod.GET)
+	public ResponseEntity<Cursus> findByIdWithLinks(@PathVariable(name = "id") Long numero) {
+		Optional<Cursus> opt = cursusRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Cursus>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)

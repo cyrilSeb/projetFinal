@@ -2,16 +2,16 @@
   <tr>
   	<th>id</th>
     <th>dates</th>
-    <th>matière</th>
+    <th>matiere</th>
     <th>formateur</th>
     <th>cursus</th>
   </tr>
    <tr *ngFor="let module of modules">
     <td>{{module.id}}</td>
     <td>{{module.dates}}</td>
-    <td>{{module.matiere}}</td>
+    <td>{{(module.matiere)?module.matiere.titre:''}}</td>
     <td>{{(module.formateur)?module.formateur.nom:''}} {{(module.formateur)?module.formateur.prenom:''}}</td>
-    <td>{{module.cursus}}</td>
+    <td>{{(module.cursus)?module.cursus.nom:''}}</td>
     <td><a class="btn btn-info" href="" [routerLink]="['/moduleedit',module.id]">editer</a></td>
     <td><button class="btn btn-danger" (click)="delete(module.id)">supprimer</button></td>
   </tr>

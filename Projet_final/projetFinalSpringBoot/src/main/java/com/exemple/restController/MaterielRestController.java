@@ -47,6 +47,34 @@ public class MaterielRestController {
 		return new ResponseEntity<List<Materiel>>(materielRepository.findAll(), HttpStatus.OK);
 	}
 
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Materiel> findById(@PathVariable(name = "id") Long numero) {
+		Optional<Materiel> opt = materielRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Materiel>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@JsonView(JsonViews.Materiel.class)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ResponseEntity<List<Materiel>> findAllWithLinks() {
+		return new ResponseEntity<List<Materiel>>(materielRepository.findAll(), HttpStatus.OK);
+	}
+
+	@JsonView(JsonViews.Materiel.class)
+	@RequestMapping(value = "/{id}/infos", method = RequestMethod.GET)
+	public ResponseEntity<Materiel> findByIdAllWithLinks(@PathVariable(name = "id") Long numero) {
+		Optional<Materiel> opt = materielRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Materiel>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 	@RequestMapping(value = "/ordinateur", method = RequestMethod.POST)
 	public ResponseEntity<Void> createOrdi(@RequestBody Ordinateur ordi, BindingResult rs, UriComponentsBuilder ucb) {
 		if (ordi.getCode() != null) {

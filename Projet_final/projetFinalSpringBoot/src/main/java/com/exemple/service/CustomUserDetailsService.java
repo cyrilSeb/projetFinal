@@ -1,5 +1,7 @@
 package com.exemple.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,12 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(arg0);
-		if (user == null) {
-			throw new UsernameNotFoundException("utilisateur inconnu");
+		Optional<User> user = userRepository.findByUsername(arg0);
+		if (user.isPresent()) {
+			return new CustomUserDetails(user.get(), UserRoleRepository.findCustomRoleByUserName(arg0));
 		}
-
-		return new CustomUserDetails(user, UserRoleRepository.findCustomRoleByUserName(arg0));
+		throw new UsernameNotFoundException("utilisateur inconnu");
 	}
-
 }

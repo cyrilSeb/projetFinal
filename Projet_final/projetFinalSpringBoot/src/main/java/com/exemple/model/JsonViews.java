@@ -8,10 +8,7 @@ public class JsonViews {
 	public static class Competence extends Common {
 	};
 
-	public static class OrdiWithStagiaire extends Common {
-	};
-
-	public static class ProjoWithCursus extends Common {
+	public static class Materiel extends Common {
 	};
 
 	public static class Cursus extends Common {

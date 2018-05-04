@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.exemple.model.Competence;
+import com.exemple.model.FormateurMatierePK;
 import com.exemple.model.JsonViews;
 import com.exemple.model.Matiere;
 import com.exemple.model.Module;
@@ -40,7 +42,18 @@ public class MatiereRestController {
 		return new ResponseEntity<List<Matiere>>(matiereRepository.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Matiere> findById(@PathVariable(name = "id") Long numero) {
+		Optional<Matiere> opt = matiereRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Matiere>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Matiere matiere, BindingResult rs, UriComponentsBuilder ucb) {
 		if (matiere.getId() != null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -74,7 +87,7 @@ public class MatiereRestController {
 		}
 	}
 
-	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.PUT)
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.PUT)
 	public ResponseEntity<Matiere> update(@RequestBody Matiere matiere) {
 		Optional<Matiere> opt = matiereRepository.findById(matiere.getId());
 		if (opt.isPresent()) {

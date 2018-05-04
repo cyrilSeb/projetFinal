@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 @DiscriminatorValue("Video_projecteur")
 public class Projecteur extends Materiel {
 	@OneToOne
-	@JoinColumn(name="Projecteur_cursus")
-	@JsonView(JsonViews.ProjoWithCursus.class)
+	@JoinColumn(name = "Projecteur_cursus")
+	@JsonView(JsonViews.Materiel.class)
 	private Cursus cursus;
 
 	public Cursus getCursus() {

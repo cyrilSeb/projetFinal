@@ -1,6 +1,8 @@
-import { Materiel } from '../model/materiel';
-import { MaterielService } from '../service/materiel.service';
-import { Component, OnInit } from '@angular/core';
+import {Materiel} from '../model/materiel';
+import {Ordinateur} from '../model/ordinateur';
+import {Projecteur} from '../model/projecteur';
+import {MaterielService} from '../service/materiel.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-materiel',
@@ -9,23 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaterielComponent implements OnInit {
   private materiels: Materiel[];
-  constructor(private materielService: MaterielService) { }
+  constructor(private materielService: MaterielService) {}
 
   ngOnInit() {
-     this.list();
+    this.list();
   }
- list(){
-    this.materielService.list().subscribe(result=>{
-      this.materiels=result;
-    }, error=>{
+  list() {
+    this.materielService.list().subscribe(result => {
+      this.materiels = result;
+      console.log(this.materiels);
+    }, error => {
       console.log(`erreur:${error}`);
     });
   }
-  
-  delete(id:number){
-    this.materielService.delete(id).subscribe(result=>{
-       this.list();
-    }, error=>{
+
+  delete(id: number) {
+    this.materielService.delete(id).subscribe(result => {
+      this.list();
+    }, error => {
       console.log(`erreur:${error}`);
     });
   }

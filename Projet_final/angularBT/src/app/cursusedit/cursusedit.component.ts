@@ -1,4 +1,7 @@
 import { Cursus } from '../model/cursus';
+import { Formateur } from '../model/formateur';
+import { Gestionnaire } from '../model/gestionnaire';
+import { Salle } from '../model/salle';
 import { CursusService } from '../service/cursus.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -15,6 +18,9 @@ export class CursuseditComponent implements OnInit {
   
   constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService) {
   this.cursus=new Cursus();
+    this.cursus.gestionnaire=new Gestionnaire();
+    this.cursus.referent= new Formateur();
+    this.cursus.salle= new Salle();
   
    }
 
