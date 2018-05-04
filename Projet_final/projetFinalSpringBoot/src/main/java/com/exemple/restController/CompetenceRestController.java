@@ -28,9 +28,9 @@ public class CompetenceRestController {
 	public ResponseEntity<List<Competence>> findAll() {
 		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@JsonView(JsonViews.Competence.class)
-	@RequestMapping(value="/infos", method = RequestMethod.GET)
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
 	public ResponseEntity<List<Competence>> findAllWithLinks() {
 		return new ResponseEntity<List<Competence>>(competenceRepository.findAll(), HttpStatus.OK);
 	}

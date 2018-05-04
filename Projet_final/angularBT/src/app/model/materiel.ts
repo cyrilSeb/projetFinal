@@ -1,7 +1,7 @@
 
 
 export abstract class Materiel  {
-   constructor (private _code:string='', private _cout:string ='', private _disponnible :boolean =  null ){
+   constructor (private _code:string='', private _cout:string ='', private _disponible :boolean =  null ){
      
    }
 
@@ -21,10 +21,10 @@ public set cout(_cout: string) {
     this._cout = _cout;
   }
 
-public get disponnible(): boolean {
-    return this._disponnible;
+public get disponible(): boolean {
+    return this._disponible;
   }
-public set disponnible(_disponnible: boolean) {
-    this._disponnible = _disponnible;
+public set disponible(_disponible: boolean) {
+    this._disponible = _disponible;
   }
   }

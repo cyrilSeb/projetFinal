@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Module")
 public class Module {
@@ -22,15 +24,22 @@ public class Module {
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
 	@Column(name = "Module_id")
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "Module_dates")
+	@JsonView(JsonViews.Common.class)
 	private Date[] dates;
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Module_matiere")
+	@JsonView(JsonViews.Module.class)
 	private Matiere matiere;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Module_formateur")
+	@JsonView(JsonViews.Module.class)
 	private Formateur formateur;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Module_cursus")
+	@JsonView(JsonViews.Module.class)
 	private Cursus cursus;
 	@Version
 	private int version;
@@ -65,5 +74,21 @@ public class Module {
 
 	public void setCursus(Cursus cursus) {
 		this.cursus = cursus;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

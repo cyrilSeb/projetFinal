@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 20, name = "type")
@@ -22,10 +24,13 @@ public abstract class Materiel {
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
 	@Column(name = "Materiel_code")
+	@JsonView(JsonViews.Common.class)
 	private Long code;
 	@Column(name = "Materiel_cout")
+	@JsonView(JsonViews.Common.class)
 	private Double cout;
 	@Column(name = "Materiel_disponible")
+	@JsonView(JsonViews.Common.class)
 	private Boolean disponible;
 	@Version
 	private int version;

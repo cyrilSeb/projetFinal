@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -25,6 +26,7 @@ public class Ordinateur extends Materiel {
 	@JsonView(JsonViews.Common.class)
 	private Date anneeAchat;
 	@OneToOne
+	@JoinColumn(name = "Ordinateur_stagiaire")
 	@JsonView(JsonViews.OrdiWithStagiaire.class)
 	private Stagiaire stagiaire;
 

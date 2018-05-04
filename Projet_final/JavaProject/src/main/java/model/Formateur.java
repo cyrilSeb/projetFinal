@@ -9,17 +9,23 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("Formateur")
 public class Formateur extends User {
 	@Column(name = "Formateur_disponibilites")
+	@JsonView(JsonViews.Common.class)
 	private Date[] disponibilites;
 	@OneToMany(mappedBy = "key.formateur")
+	@JsonView(JsonViews.User.class)
 	private Set<Competence> competences;
 	@OneToMany(mappedBy = "formateur")
+	@JsonView(JsonViews.User.class)
 	private Set<Module> modules;
-	@OneToOne
-	private Cursus cursus;
+	@OneToMany(mappedBy = "referent")
+	@JsonView(JsonViews.User.class)
+	private Set<Cursus> setCursus;
 
 	public Date[] getDisponibilite() {
 		return disponibilites;
@@ -45,11 +51,11 @@ public class Formateur extends User {
 		this.modules = modules;
 	}
 
-	public Cursus getCursus() {
-		return cursus;
+	public Set<Cursus> getCursus() {
+		return setCursus;
 	}
 
-	public void setCursus(Cursus cursus) {
-		this.cursus = cursus;
+	public void setCursus(Set<Cursus> setCursus) {
+		this.setCursus = setCursus;
 	}
 }

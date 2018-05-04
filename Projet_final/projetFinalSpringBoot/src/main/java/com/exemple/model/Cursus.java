@@ -45,7 +45,7 @@ public class Cursus {
 	@OneToMany(mappedBy = "cursus")
 	@JsonView(JsonViews.Cursus.class)
 	private Set<Module> modules;
-	@OneToOne
+	@OneToOne(mappedBy = "Projecteur_cursus")
 	@JsonView(JsonViews.Cursus.class)
 	private Projecteur projecteur;
 	@OneToMany(mappedBy = "cursus")

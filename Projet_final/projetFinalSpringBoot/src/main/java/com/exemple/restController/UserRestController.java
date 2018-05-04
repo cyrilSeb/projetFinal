@@ -25,8 +25,6 @@ import com.exemple.model.JsonViews;
 import com.exemple.model.Materiel;
 import com.exemple.model.Module;
 import com.exemple.model.Ordinateur;
-import com.exemple.model.Projecteur;
-import com.exemple.model.Salle;
 import com.exemple.model.Stagiaire;
 import com.exemple.model.Technicien;
 import com.exemple.model.User;
@@ -86,12 +84,17 @@ public class UserRestController {
 			}
 		}
 		if (formateur.getCursus() != null) {
-			if (formateur.getCursus().getId() != null) {
-				Optional<Cursus> opt = cursusRepository.findById(formateur.getCursus().getId());
-				if (opt.isPresent()) {
-					formateur.setCursus(opt.get());
-				} else {
-					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			Set<Cursus> setCursus = formateur.getCursus();
+			formateur.getCursus().clear();
+			while (setCursus.iterator().hasNext()) {
+				Cursus cursus = setCursus.iterator().next();
+				if (cursus.getId() != null) {
+					Optional<Cursus> opt = cursusRepository.findById(cursus.getId());
+					if (opt.isPresent()) {
+						formateur.getCursus().add(opt.get());
+					} else {
+						return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+					}
 				}
 			}
 		}
@@ -188,10 +191,15 @@ public class UserRestController {
 					}
 				}
 				if (user.getCursus() != null) {
-					if (user.getCursus().getId() != null) {
-						Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
-						if (optCrs.isPresent()) {
-							user.setCursus(optCrs.get());
+					Set<Cursus> setCursus = user.getCursus();
+					user.getCursus().clear();
+					while (setCursus.iterator().hasNext()) {
+						Cursus cursus = setCursus.iterator().next();
+						if (cursus.getId() != null) {
+							Optional<Cursus> optCrs = cursusRepository.findById(cursus.getId());
+							if (optCrs.isPresent()) {
+								user.getCursus().add(optCrs.get());
+							}
 						}
 					}
 				}
@@ -208,7 +216,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(formateur, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -236,7 +244,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(gestionnaire, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -269,7 +277,7 @@ public class UserRestController {
 						}
 					}
 				}
-				return update(user);
+				return update(stagiaire, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -284,7 +292,7 @@ public class UserRestController {
 		if (opt.isPresent()) {
 			if (opt.get() instanceof Technicien) {
 				Technicien user = (Technicien) opt.get();
-				return update(user);
+				return update(technicien, user);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 			}
@@ -310,10 +318,15 @@ public class UserRestController {
 					}
 				}
 				if (user.getCursus() != null) {
-					Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
-					Cursus crs = optCrs.get();
-					crs.setReferent(null);
-					cursusRepository.save(crs);
+					Set<Cursus> setCursus = user.getCursus();
+					user.getCursus().clear();
+					while (setCursus.iterator().hasNext()) {
+						Cursus cursus = setCursus.iterator().next();
+						Optional<Cursus> optCrs = cursusRepository.findById(cursus.getId());
+						cursus = optCrs.get();
+						cursus.setReferent(null);
+						cursusRepository.save(cursus);
+					}
 				}
 				if (user.getModules() != null) {
 					Set<Module> setCps = user.getModules();
@@ -363,9 +376,30 @@ public class UserRestController {
 		}
 	}
 
-	private ResponseEntity<User> update(User user) {
-		userRepository.save(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+	private ResponseEntity<User> update(User userNew, User userOld) {
+		if (userNew.getAdresse() != null) {
+			userOld.setAdresse(userNew.getAdresse());
+		}
+		if (userNew.getCoordonnees() != null) {
+			userOld.setCoordonnees(userNew.getCoordonnees());
+		}
+		if (userNew.getNom() != null) {
+			userOld.setNom(userNew.getNom());
+		}
+		if (userNew.getPassword() != null) {
+			userOld.setPassword(userNew.getPassword());
+		}
+		if (userNew.getPrenom() != null) {
+			userOld.setPrenom(userNew.getPrenom());
+		}
+		if (userNew.getRoles() != null) {
+			userOld.setRoles(userNew.getRoles());
+		}
+		if (userNew.getUsername() != null) {
+			userOld.setUsername(userNew.getUsername());
+		}
+		userRepository.save(userOld);
+		return new ResponseEntity<User>(userOld, HttpStatus.OK);
 	}
 
 	private ResponseEntity<Void> create(User user, BindingResult rs, UriComponentsBuilder ucb) {
