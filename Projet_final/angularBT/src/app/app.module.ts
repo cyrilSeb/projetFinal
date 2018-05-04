@@ -92,7 +92,8 @@ const appRoutes: Routes=[
     path: 'moduleedit',
     component: ModuleeditComponent
   },
-  {path:'salleedit/:id', component:EditsalleComponent},
+  {path:'salleedit/:id', component:EditsalleComponent},{path:'moduleedit/:id', component:ModuleeditComponent},{path:'matiereedit/:id', component:MatiereeditComponent},
+  {path:'cursusedit/:id', component:CursuseditComponent},{path:'materieledit/:id', component:MaterieleditComponent},{path:'formateuredit/:id', component:FormateureditComponent}
 ]
 
 @NgModule({

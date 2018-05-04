@@ -13,10 +13,11 @@ export class UserService {
   }
   
   login(username: string, password: string) {
-      if (this.findByUsername(username, password)==null){
+      if (this.findByUsername(username)==null){
         return this.http.get<User>(this.baseUrl);
       }else{
-        return this.http.get<User>(`${this.baseUrl}/${'home'}`);
+        if (this.findByUsername(username))
+        return this.http.get<User>(`${this.baseUrl}/${'materiellist'}`);
       }
         
   }
@@ -34,7 +35,7 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
   
-  public findByUsername(username, password):Observable<User>{
+  public findByUsername(username):Observable<User>{
     return this.http.get<User>(`${this.baseUrl}/${username}`);
   }
 
