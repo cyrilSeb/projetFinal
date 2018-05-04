@@ -13,14 +13,9 @@ export class UserService {
   }
   
   login(username: string, password: string) {
-      if (this.findByUsername(username)==null){
-        return this.http.get<User>(this.baseUrl);
-      }else{
-        if (this.findByUsername(username))
-        return this.http.get<User>(`http://localhost:8080/projetfinal/materiel`);
-      }
-        
+     return this.findByUsername(username, password);
   }
+
 
 
    public list() :Observable<User[]>{
@@ -35,8 +30,8 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
   
-  public findByUsername(username):Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}/${username}`);
+  public findByUsername(username, password):Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}/user/authentification/${username}/${password}`);
   }
 
   public update(user: User):Observable<any>{
