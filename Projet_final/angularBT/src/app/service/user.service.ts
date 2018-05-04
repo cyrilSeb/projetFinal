@@ -24,7 +24,7 @@ export class UserService {
 
 
    public list() :Observable<User[]>{
-    return this.http.get<User[]>(this.baseUrl);
+    return this.http.get<User[]>(`${this.baseUrl}/infos`);
   }
   
   public delete(id:number):Observable<any>{

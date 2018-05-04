@@ -21,10 +21,6 @@
 				<input id="contenu" Class="form-control" [(ngModel)]="matiere.contenu" name="contenu">
 			</div>
 			<div class="form-group">
-				<label for="prerequis">prerequis:</label>
-				<input id="prerequis" Class="form-control" [(ngModel)]="matiere.prerequis" name="prerequis">
-			</div>
-			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
 				<button (click)="retour()" class="btn btn-info">retour</button>
 			</div>

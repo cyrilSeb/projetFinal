@@ -11,7 +11,7 @@ export class CursusService {
   constructor(private http: HttpClient) { }
   
   list() :Observable<Cursus[]>{
-    return this.http.get<Cursus[]>(this.baseUrl);
+    return this.http.get<Cursus[]>(`${this.baseUrl}/infos`);
   }
   
   public delete(id:number):Observable<any>{
