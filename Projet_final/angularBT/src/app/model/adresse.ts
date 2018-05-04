@@ -33,7 +33,7 @@ export class Adresse {
   }
   
   public get ville(): string {
-    return this._pays;
+    return this._ville;
   }
   
   public set pays(_pays: string) {

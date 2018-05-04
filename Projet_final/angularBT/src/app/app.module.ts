@@ -47,49 +47,61 @@ const appRoutes: Routes=[
   
   {
     path: 'sallelist',
+    canActivate: [AuthgardGuard],
     component: SalleComponent
   },
   {
     path: 'salleedit',
+    canActivate: [AuthgardGuard],
     component: EditsalleComponent
   },
   {
     path: 'cursuslist',
+    canActivate: [AuthgardGuard],
     component: CursuslistComponent
   },
   {
     path: 'cursusedit',
+    canActivate: [AuthgardGuard],
     component: CursuseditComponent
   },
   {
     path: 'materiellist',
+    canActivate: [AuthgardGuard],
     component: MaterielComponent
   },
   {
     path: 'materieledit',
+    canActivate: [AuthgardGuard],
     component: MaterieleditComponent
   },
     {path: 'formateurlist',
+      canActivate: [AuthgardGuard],
     component: FormateurComponent
   },
   {
     path: 'formateuredit',
+    canActivate: [AuthgardGuard],
     component: FormateureditComponent
   },
   {
     path: 'matierelist',
+    canActivate: [AuthgardGuard],
     component: MatierelistComponent
   },
   {
     path: 'matiereedit',
+    canActivate: [AuthgardGuard],
     component: MatiereeditComponent
   },
   {
     path: 'modulelist',
+    canActivate: [AuthgardGuard],
     component: ModulelistComponent
   },
   {
     path: 'moduleedit',
+    canActivate: [AuthgardGuard],
     component: ModuleeditComponent
   },
   {path:'salleedit/:id', component:EditsalleComponent},{path:'moduleedit/:id', component:ModuleeditComponent},{path:'matiereedit/:id', component:MatiereeditComponent},
