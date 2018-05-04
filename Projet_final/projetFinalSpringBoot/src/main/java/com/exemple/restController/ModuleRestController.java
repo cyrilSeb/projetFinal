@@ -62,6 +62,28 @@ public class ModuleRestController {
 		return new ResponseEntity<List<Module>>(moduleRepository.findAll(), HttpStatus.OK);
 	}
 
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Module> findById(@PathVariable(name = "id") Long numero) {
+		Optional<Module> opt = moduleRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@JsonView(JsonViews.Module.class)
+	@RequestMapping(value = "/{id}/infos", method = RequestMethod.GET)
+	public ResponseEntity<Module> findByIdWithLinks(@PathVariable(name = "id") Long numero) {
+		Optional<Module> opt = moduleRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Module>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 	@RequestMapping(path = { "", "/", "/infos", "/infos/" }, method = RequestMethod.POST)
 	public ResponseEntity<Void> create(@RequestBody Module module, BindingResult rs, UriComponentsBuilder ucb) {
 		if (module.getId() != null) {

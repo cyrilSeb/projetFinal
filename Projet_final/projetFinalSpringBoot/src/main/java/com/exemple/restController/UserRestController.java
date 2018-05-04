@@ -66,6 +66,42 @@ public class UserRestController {
 		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
 	}
 
+	@JsonView(JsonViews.Common.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<User> findById(@PathVariable(name = "id") Long numero) {
+		Optional<User> opt = userRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<User>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@JsonView(JsonViews.User.class)
+	@RequestMapping(value = "/{id}/infos", method = RequestMethod.GET)
+	public ResponseEntity<User> findByIdWithLinks(@PathVariable(name = "id") Long numero) {
+		Optional<User> opt = userRepository.findById(numero);
+		if (opt.isPresent()) {
+			return new ResponseEntity<User>(opt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	@JsonView(JsonViews.Authentification.class)
+	@RequestMapping(value = "/authentification/{name}/{mdp}", method = RequestMethod.GET)
+	public ResponseEntity<User> findByUsername(@PathVariable(name = "name") String username,
+			@PathVariable(name = "mdp") String password) {
+		Optional<User> opt = userRepository.findByUsername(username);
+		if (opt.isPresent()) {
+			User user = opt.get();
+			if (user.getPassword().equals(password)) {
+				return new ResponseEntity<User>(user, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
+	}
+
 	@RequestMapping(value = "/formateur", method = RequestMethod.POST)
 	public ResponseEntity<Void> createFormateur(@RequestBody Formateur formateur, BindingResult rs,
 			UriComponentsBuilder ucb) {

@@ -27,7 +27,7 @@ public class Ordinateur extends Materiel {
 	private Date anneeAchat;
 	@OneToOne
 	@JoinColumn(name = "Ordinateur_stagiaire")
-	@JsonView(JsonViews.OrdiWithStagiaire.class)
+	@JsonView(JsonViews.Materiel.class)
 	private Stagiaire stagiaire;
 
 	public String getProcesseur() {
