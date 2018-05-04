@@ -40,6 +40,8 @@ public class Matiere {
 	private String contenu;
 	@Version
 	private int version;
+	@OneToMany(mappedBy = "matiere")
+	private Set<Module> setModules;
 
 	public Long getId() {
 		return id;
@@ -95,5 +97,13 @@ public class Matiere {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public Set<Module> getSetModules() {
+		return setModules;
+	}
+
+	public void setSetModules(Set<Module> setModules) {
+		this.setModules = setModules;
 	}
 }

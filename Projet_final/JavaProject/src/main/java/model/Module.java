@@ -29,10 +29,12 @@ public class Module {
 	@Column(name = "Module_dates")
 	@JsonView(JsonViews.Common.class)
 	private Date[] dates;
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Module_matiere")
 	@JsonView(JsonViews.Module.class)
 	private Matiere matiere;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Module_formateur")
 	@JsonView(JsonViews.Module.class)
 	private Formateur formateur;
 	@ManyToOne(fetch = FetchType.LAZY)
