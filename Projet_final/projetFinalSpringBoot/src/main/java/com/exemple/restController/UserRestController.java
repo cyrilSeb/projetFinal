@@ -84,12 +84,17 @@ public class UserRestController {
 			}
 		}
 		if (formateur.getCursus() != null) {
-			if (formateur.getCursus().getId() != null) {
-				Optional<Cursus> opt = cursusRepository.findById(formateur.getCursus().getId());
-				if (opt.isPresent()) {
-					formateur.setCursus(opt.get());
-				} else {
-					return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			Set<Cursus> setCursus = formateur.getCursus();
+			formateur.getCursus().clear();
+			while (setCursus.iterator().hasNext()) {
+				Cursus cursus = setCursus.iterator().next();
+				if (cursus.getId() != null) {
+					Optional<Cursus> opt = cursusRepository.findById(cursus.getId());
+					if (opt.isPresent()) {
+						formateur.getCursus().add(opt.get());
+					} else {
+						return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+					}
 				}
 			}
 		}
@@ -186,10 +191,15 @@ public class UserRestController {
 					}
 				}
 				if (user.getCursus() != null) {
-					if (user.getCursus().getId() != null) {
-						Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
-						if (optCrs.isPresent()) {
-							user.setCursus(optCrs.get());
+					Set<Cursus> setCursus = user.getCursus();
+					user.getCursus().clear();
+					while (setCursus.iterator().hasNext()) {
+						Cursus cursus = setCursus.iterator().next();
+						if (cursus.getId() != null) {
+							Optional<Cursus> optCrs = cursusRepository.findById(cursus.getId());
+							if (optCrs.isPresent()) {
+								user.getCursus().add(optCrs.get());
+							}
 						}
 					}
 				}
@@ -308,10 +318,15 @@ public class UserRestController {
 					}
 				}
 				if (user.getCursus() != null) {
-					Optional<Cursus> optCrs = cursusRepository.findById(user.getCursus().getId());
-					Cursus crs = optCrs.get();
-					crs.setReferent(null);
-					cursusRepository.save(crs);
+					Set<Cursus> setCursus = user.getCursus();
+					user.getCursus().clear();
+					while (setCursus.iterator().hasNext()) {
+						Cursus cursus = setCursus.iterator().next();
+						Optional<Cursus> optCrs = cursusRepository.findById(cursus.getId());
+						cursus = optCrs.get();
+						cursus.setReferent(null);
+						cursusRepository.save(cursus);
+					}
 				}
 				if (user.getModules() != null) {
 					Set<Module> setCps = user.getModules();
