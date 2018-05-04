@@ -1,7 +1,7 @@
 import { Cursus } from './cursus';
 import { Materiel } from './materiel';
 export class Projecteur extends Materiel{
-  constructor(private _cursus: Cursus) {
+  constructor(private _cursus: Cursus=null) {
     super();
   }
   public get cursus(): Cursus {

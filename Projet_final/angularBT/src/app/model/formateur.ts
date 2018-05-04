@@ -3,7 +3,7 @@ import { Cursus } from './cursus';
 import { Module } from './module';
 import { User } from './user';
 export class Formateur extends User{
-  constructor(private _disponnibilite: Date[] = null, private _competences: Competences, private _module: Module, private _cursus: Cursus) {
+  constructor(private _disponnibilite: Date[] = null, private _competences: Competences=null, private _module: Module=null, private _cursus: Cursus=null) {
     super();
   }
   
