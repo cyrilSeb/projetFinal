@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Matiere")
 public class Matiere {
@@ -19,16 +21,22 @@ public class Matiere {
 	@SequenceGenerator(name = "seqMateriel", sequenceName = "seq_materiel", initialValue = 101, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMateriel")
 	@Column(name = "Matiere_id")
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "Matiere_titre")
+	@JsonView(JsonViews.Common.class)
 	private String titre;
 	@Column(name = "Matiere_nombre_d_heures")
+	@JsonView(JsonViews.Common.class)
 	private Integer nbHeure;
 	@Column(name = "Matiere_objectifs")
+	@JsonView(JsonViews.Common.class)
 	private String Objectifs;
 	@OneToMany
+	@JsonView(JsonViews.MatiereWithPrerequis.class)
 	private Set<Matiere> prerequis;
 	@Column(name = "Matiere_contenu")
+	@JsonView(JsonViews.Common.class)
 	private String contenu;
 	@Version
 	private int version;

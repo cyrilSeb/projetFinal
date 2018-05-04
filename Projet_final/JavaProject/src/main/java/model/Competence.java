@@ -8,13 +8,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="Competence")
 public class Competence {
 	@EmbeddedId
+	@JsonView(JsonViews.Common.class)
 	private FormateurMatierePK key;
 	@Column(name = "competence_niveau")
 	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Common.class)
 	private Niveau niveau;
 	@Version
 	private int version;

@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exemple.model.Competence;
-import com.exemple.model.JsonViews;
 import com.exemple.repository.CompetenceRepository;
 import com.fasterxml.jackson.annotation.JsonView;
+
+import model.Competence;
+import model.JsonViews;
 
 @RestController
 @RequestMapping("/competence")

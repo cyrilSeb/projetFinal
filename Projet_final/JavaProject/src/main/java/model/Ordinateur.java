@@ -7,18 +7,25 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("Ordinateur")
 public class Ordinateur extends Materiel {
 	@Column(name = "Ordinateur_processeur")
+	@JsonView(JsonViews.Common.class)
 	private String processeur;
 	@Column(name = "Ordinateur_RAM")
+	@JsonView(JsonViews.Common.class)
 	private Integer ram;
 	@Column(name = "Ordinateur_capacite_DD")
+	@JsonView(JsonViews.Common.class)
 	private Integer DD;
 	@Column(name = "Ordinateur_annee_d_achat")
+	@JsonView(JsonViews.Common.class)
 	private Date anneeAchat;
 	@OneToOne
+	@JsonView(JsonViews.OrdiWithStagiaire.class)
 	private Stagiaire stagiaire;
 
 	public String getProcesseur() {

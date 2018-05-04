@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.exemple.repository.UserRepository;
 import com.exemple.repository.UserRoleRepository;
 
-import com.exemple.model.User;
+import model.User;
 
 
 

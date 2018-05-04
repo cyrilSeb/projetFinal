@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exemple.model.JsonViews;
-import com.exemple.model.Module;
 import com.exemple.repository.ModuleRepository;
 import com.fasterxml.jackson.annotation.JsonView;
+
+import model.JsonViews;
+import model.Module;
 
 @RestController
 @RequestMapping("/module")
