@@ -92,6 +92,7 @@ const appRoutes: Routes=[
     path: 'moduleedit',
     component: ModuleeditComponent
   },
+  {path:'salleedit/:id', component:EditsalleComponent},
 ]
 
 @NgModule({

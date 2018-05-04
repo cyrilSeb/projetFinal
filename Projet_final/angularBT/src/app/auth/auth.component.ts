@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
     this.userService.login(this.model.username, this.model.password)
       .subscribe(
       data => {
-        this.router.navigate(['home']);
+        this.router.navigate(['materiellist']);
 
       }, error => {
         console.log(`erreur:${error}`);
