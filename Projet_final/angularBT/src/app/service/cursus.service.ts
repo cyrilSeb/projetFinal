@@ -30,6 +30,71 @@ export class CursusService {
     const obj={
       nom:cursus.nom,
       date:cursus.date,
+      gestionnaire: {
+          id: 102,
+          nom: "ZANARELLI",
+          prenom: "Johanna",
+          adresse: {
+              numero: 6,
+              rue: "Rue Rougemont",
+              codePostal: "75009",
+              ville: "Paris",
+              pays: "FRANCE"
+          },
+          coordonnees: null
+      },
+      referent: {
+          id: 101,
+          nom: "MELLOUL",
+          prenom: "Jacky",
+          adresse: {
+              numero: 6,
+              rue: "Rue Rougemont",
+              codePostal: "75009",
+              ville: "Paris",
+              pays: "FRANCE"
+          },
+          coordonnees: {
+              telephone: "+33192638574",
+              email: "john.doe@gmail.com"
+          },
+          disponibilites: null
+      },
+      modules: [
+          {
+              id: 105,
+              dates: null
+          }
+      ],
+      projecteur: {
+          code: 101,
+          cout: 10,
+          disponible: null
+      },
+      stagiaires: [
+          {
+              id: 103,
+              nom: "RAZAFINDRAKOTO",
+              prenom: "Mirijason",
+              adresse: null,
+              coordonnees: {
+                  telephone: "+33192638574",
+                  email: "john.doe@gmail.com"
+              }
+          }
+      ],
+      salle: {
+          id: 107,
+          capacite: 60,
+          numero: "F345",
+          adresse: {
+              numero: 6,
+              rue: "rue rougemont",
+              codePostal: "75009",
+              ville: "Paris",
+              pays: "France"
+          }
+      }
     };
     return this.http.post(this.baseUrl, obj);
   }

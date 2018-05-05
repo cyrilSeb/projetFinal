@@ -12,17 +12,29 @@
 				<label path="date[1]">date de fin:</label>
 				<input type="date" path="date[1]" id="date[1]" cssClass="form-control"/>
 			</div>
-			<div class="form-group">
-				<label for="matière">matiere:</label>
-				<input id="matière" Class="form-control" [(ngModel)]="module.matiere" name="matiere">
+			<div  class="form-group">
+				<label for="matiere">matiere:</label>
+				<select  *ngIf="matieres!=null" Class="form-control" name="matiere" id="matiere" ng-model="module">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let matiere of matieres" [value]="(module.matiere)?module.matiere.id:''">{{(module.matiere)?module.matiere.titre:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
-			<div class="form-group">
+			<div  class="form-group">
 				<label for="formateur">formateur:</label>
-				<input id="formateur" Class="form-control" [(ngModel)]="module.formateur" name="formateur">
+				<select  *ngIf="formateurs!=null" Class="form-control" name="formateur" id="formateur" ng-model="module">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let formateur of formateurs" [value]="(module.formateur)?module.formateur.id:''">{{(module.formateur)?module.formateur.prenom:'null'}} {{(module.formateur)?module.formateur.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
-			<div class="form-group">
+			<div  class="form-group">
 				<label for="cursus">cursus:</label>
-				<input id="cursus" Class="form-control" [(ngModel)]="module.cursus" name="cursus">
+				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="module">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let cursus of cursuss" [value]="(module.cursus)?module.cursus.id:''">{{(module.cursus)?module.cursus.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
 			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>

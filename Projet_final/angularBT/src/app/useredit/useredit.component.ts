@@ -1,3 +1,5 @@
+import { Adresse } from '../model/adresse';
+import { Coordonnees } from '../model/coordonnees';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,6 +18,8 @@ export class UsereditComponent implements OnInit {
   
   constructor(private route: ActivatedRoute, private router:Router, private userService:UserService) {
   this.user=new User();
+    this.user.adresse=new Adresse();
+    this.user.coordonnees=new Coordonnees();
   
    }
 

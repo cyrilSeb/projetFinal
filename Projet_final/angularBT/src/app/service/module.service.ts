@@ -19,7 +19,7 @@ private baseUrl:string='http://localhost:8080/projetfinal/module';
   }
   
   public findById(id):Observable<Module>{
-    return this.http.get<Module>(`${this.baseUrl}/${id}`);
+    return this.http.get<Module>(`${this.baseUrl}/${id}/infos`);
   }
 
   public update(module: Module):Observable<any>{
@@ -30,13 +30,35 @@ private baseUrl:string='http://localhost:8080/projetfinal/module';
     const obj={
       id:module.id,
       dates:module.dates,
-//      adresse:{
-//        numero:salle.adresse.numero,
-//        rue:salle.adresse.rue,
-//        codePostal:salle.adresse.codePostal,
-//        ville:salle.adresse.ville,
-//        pays:salle.adresse.pays
-//      }
+      matiere: {
+        id: 104,
+        titre: "JAVA/JEE",
+        nbHeure: 16,
+        objectifs: "Devenir Dieu ",
+        contenu: "JAVA/JEE"
+      },
+      formateur: {
+          id: 101,
+          nom: "MELLOUL",
+          prenom: "Jacky",
+          adresse: {
+              numero: 6,
+              rue: "Rue Rougemont",
+              codePostal: "75009",
+              ville: "Paris",
+              pays: "FRANCE"
+          },
+          coordonnees: {
+              telephone: "+33192638574",
+              email: "john.doe@gmail.com"
+          },
+          disponibilites: null
+      },
+      cursus: {
+          id: 101,
+          nom: "Mathematiques, Physique et Informatiques",
+          dates: null
+      }
     };
     return this.http.post(this.baseUrl, obj);
   }

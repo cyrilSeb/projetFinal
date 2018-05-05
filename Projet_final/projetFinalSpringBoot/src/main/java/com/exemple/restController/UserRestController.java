@@ -412,6 +412,7 @@ public class UserRestController {
 		}
 	}
 
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.PUT)
 	private ResponseEntity<User> update(User userNew, User userOld) {
 		if (userNew.getAdresse() != null) {
 			userOld.setAdresse(userNew.getAdresse());
@@ -438,6 +439,7 @@ public class UserRestController {
 		return new ResponseEntity<User>(userOld, HttpStatus.OK);
 	}
 
+	@RequestMapping(path = { "", "/" }, method = RequestMethod.POST)
 	private ResponseEntity<Void> create(User user, BindingResult rs, UriComponentsBuilder ucb) {
 		if (user.getId() != null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);

@@ -15,7 +15,7 @@ export class MaterielService {
     return this.http.delete(`${this.baseUrl}/${code}`);
   }
   public findById(code):Observable<Materiel>{
-    return this.http.get<Materiel>(`${this.baseUrl}/${code}`);
+    return this.http.get<Materiel>(`${this.baseUrl}/${code}/infos`);
   }
 
   public update(materiel: Materiel):Observable<any>{
@@ -27,6 +27,31 @@ export class MaterielService {
       code:materiel.code,
       cout:materiel.cout,
       disponible:materiel.disponible,
+//      processeur: materiel.processeur,
+//      ram: materiel.ram,
+//      DD: materiel.DD,
+//      anneeAchat: materiel.anneeAchat,
+//      stagiaire: {
+//            id: materiel.stagiaire.id,
+//            nom: materiel.stagiaire.nom,
+//            prenom: materiel.stagiaire.prenom,
+//            adresse:{
+//              numero:materiel.stagiaire.adresse.numero,
+//              rue:materiel.stagiaire.adresse.rue,
+//              codePostal:materiel.stagiaire.adresse.codePostal,
+//              ville:materiel.stagiaire.adresse.ville,
+//              pays:materiel.stagiaire.adresse.pays
+//            },
+//            coordonnees: {
+//                telephone: materiel.stagiaire.coordonnees.telephone,
+//                email: materiel.stagiaire.coordonnees.email,
+//            }
+//        },
+//      cursus: {
+//            id: materiel.cursus.id,
+//            nom: materiel.cursus.nom,
+//            dates: materiel.cursus.date
+//        }
    
     };
     return this.http.post(this.baseUrl, obj);

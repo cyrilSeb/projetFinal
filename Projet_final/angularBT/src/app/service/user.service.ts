@@ -45,7 +45,17 @@ export class UserService {
     const obj={
       prenom:user.prenom,
       nom:user.nom,
-      
+      adresse:{
+        numero:user.adresse.numero,
+        rue:user.adresse.rue,
+        codePostal:user.adresse.codePostal,
+        ville:user.adresse.ville,
+        pays:user.adresse.pays
+      },
+    coordonnees: {
+        telephone: user.coordonnees.telephone,
+        email: user.coordonnees.email
+    }
     };
     return this.http.post(this.baseUrl, obj);
   }
