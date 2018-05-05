@@ -1,6 +1,6 @@
 <div>
 	<fieldset>
-		<legend> edition de cursus</legend>
+		<legend>Creation/edition d'un cursus</legend>
 		<form>
 		<input type="hidden" [(ngModel)]="cursus.id" name="id">
 		
@@ -12,19 +12,35 @@
 				<label for="date">dates:</label>
 				<input type="date" id="date" Class="form-control" [(ngModel)]="cursus.date" name="date">
 			</div>
-			<div class="form-group">
+			<div  class="form-group">
 				<label for="gestionnaire">gestionnaire:</label>
-				<input id="gestionnaire" Class="form-control" [(ngModel)]="cursus.gestionnaire.id" name="gestionnaire">
+				<select  *ngIf="gestionnaires!=null" Class="form-control" name="gestionnaire" id="gestionnaire" ng-model="cursus">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let gestionnaire of gestionnaires" [value]="(cursus.gestionnaire)?cursus.gestionnaire.id:''">{{(cursus.gestionnaire)?cursus.gestionnaire.prenom:'null'}} {{(cursus.gestionnaire)?cursus.gestionnaire.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
-			<div class="form-group">
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="gestionnaire">gestionnaire:</label> -->
+<!-- 				<input id="gestionnaire" Class="form-control" [(ngModel)]="cursus.gestionnaire.id" name="gestionnaire"> -->
+<!-- 			</div> -->
+			<div  class="form-group">
 				<label for="referent">referent:</label>
-				<input id="referent" Class="form-control" [(ngModel)]="cursus.referent.id" name="referent">
+				<select  *ngIf="referents!=null" Class="form-control" name="referent" id="referent" ng-model="cursus">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let referent of referents" [value]="(cursus.referent)?cursus.referent.id:''">{{(cursus.referent)?cursus.referent.prenom:'null'}} {{(cursus.referent)?cursus.referent.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
-			<div class="form-group">
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="referent">referent:</label> -->
+<!-- 				<input id="referent" Class="form-control" [(ngModel)]="cursus.referent.id" name="referent"> -->
+<!-- 			</div> -->
+			<div  class="form-group">
 				<label for="salle">salle:</label>
-				<select Class="form-control" name="salle" id="salle" ng-model="cursus">
-			      <option value="">---Please select---</option> <!-- not selected / blank option -->
-			      <option *ngFor="let salle of salles" [value]="cursus.salle.id">{{cursus.salle.numero}}</option> <!-- interpolation -->
+				<select  *ngIf="salles!=null" Class="form-control" name="salle" id="salle" ng-model="cursus">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let salle of salles" [value]="(cursus.salle)?cursus.salle.id:''">{{(cursus.salle)?cursus.salle.numero:'null'}}</option> 
 			      <option value="option-2">Option 2</option>
     			</select>
 			</div>

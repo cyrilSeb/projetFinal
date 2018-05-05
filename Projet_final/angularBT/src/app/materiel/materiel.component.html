@@ -83,7 +83,7 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="header">
-						<h4 class="title">Liste du matariel</h4>
+						<h4 class="title">Liste du materiel</h4>
 						<p class="category"></p>
 						<table class="table table-hover">
 
@@ -115,9 +115,9 @@
 								<td>{{materiel.ram}}</td>
 								<td>{{materiel.DD}}</td>
 								<td>{{materiel.anneeAchat}}</td>
-								<td>{{(!!materiel.stagiaire)?materiel.stagiaire.id:''}} - {{(!!materiel.stagiaire)?materiel.stagiaire.nom:''}} {{(!!materiel.stagiaire)?materiel.stagiaire.prenom:''}}</td>
+								<td>{{(!!materiel.stagiaire)?materiel.stagiaire.id+' - ':''}}{{(!!materiel.stagiaire)?materiel.stagiaire.nom:''}} {{(!!materiel.stagiaire)?materiel.stagiaire.prenom:''}}</td>
 
-								<td>{{(!!materiel.cursus)?materiel.cursus.id:''}} - {{(!!materiel.cursus)?materiel.cursus.nom:''}}</td>
+								<td>{{(!!materiel.cursus)?materiel.cursus.id+' - ':''}}{{(!!materiel.cursus)?materiel.cursus.nom:''}}</td>
 								<td><a href="" [routerLink]="['/materieledit']"
 									class="btn btn-info">editer</a></td>
 								<td><button class="btn btn-danger"

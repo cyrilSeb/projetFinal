@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UserService {
 
-  private baseUrl:string='http://localhost:8080/projetfinal';
+  private baseUrl:string='http://localhost:8080/projetfinal/user';
   
   constructor(private http: HttpClient) { 
     
@@ -34,7 +34,7 @@ export class UserService {
   }
   
   public findByUsername(username, password):Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}/user/authentification/${username}/${password}`);
+    return this.http.get<User>(`${this.baseUrl}/authentification/${username}/${password}`);
   }
 
   public update(user: User):Observable<any>{

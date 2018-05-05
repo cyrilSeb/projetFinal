@@ -2,8 +2,10 @@ import { Cursus } from '../model/cursus';
 import { Formateur } from '../model/formateur';
 import { Gestionnaire } from '../model/gestionnaire';
 import { Salle } from '../model/salle';
+import { User } from '../model/user';
 import { CursusService } from '../service/cursus.service';
 import { SalleService } from '../service/salle.service';
+import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -17,8 +19,10 @@ export class CursuseditComponent implements OnInit {
   private id;
   private cursus: Cursus;
   private salles: Salle[];
+  private gestionnaires: User[];
+  private referents: User[];
   
-  constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService,private salleService: SalleService) {
+  constructor(private route: ActivatedRoute, private router:Router, private cursusService:CursusService,private salleService: SalleService, private userService:UserService) {
   this.cursus=new Cursus();
     this.cursus.gestionnaire=new Gestionnaire();
     this.cursus.referent= new Formateur();
@@ -42,6 +46,16 @@ export class CursuseditComponent implements OnInit {
   list(){
     this.salleService.list().subscribe(result=>{
       this.salles=result;
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
+    this.userService.list().subscribe(result=>{
+      this.gestionnaires=result;
+    }, error=>{
+      console.log(`erreur:${error}`);
+    });
+    this.userService.list().subscribe(result=>{
+      this.referents=result;
     }, error=>{
       console.log(`erreur:${error}`);
     });

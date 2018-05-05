@@ -1,0 +1,52 @@
+<div>
+	<fieldset>
+		<legend> creation/edition d'un utilisateur</legend>
+		<form>
+		<input type="hidden" [(ngModel)]="user.id" name="id">
+		
+			<div class="form-group">
+				<label for="prenom">prenom:</label>
+				<input id="prenom" Class="form-control" [(ngModel)]="user.prenom" name="prenom">
+			</div>
+			<div class="form-group">
+				<label for="nom">nom:</label>
+				<input id="nom" Class="form-control" [(ngModel)]="user.nom" name="nom">
+			</div>
+			<div class="form-group">
+				<label for="adresseNumero">numero de rue:</label>
+				<input id="adresseNumero" Class="form-control" [(ngModel)]="user.adresse.numero" name="adresseNumero">
+			</div>
+			<div class="form-group">
+				<label for="adresseRue">rue:</label>
+				<input id="adresseRue" Class="form-control" [(ngModel)]="user.adresse.rue" name="adresseRue">
+			</div>
+			<div class="form-group">
+				<label for="adresseCodePostal">code postal:</label>
+				<input id="adresseCodePostal" Class="form-control" [(ngModel)]="user.adresse.codePostal" name="adresseCodePostal">
+			</div>
+			<div class="form-group">
+				<label for="adresseVille">ville:</label>
+				<input id="adresseVille" Class="form-control" [(ngModel)]="user.adresse.ville" name="adresseVille">
+			</div>
+			<div class="form-group">
+				<label for="adressePays">pays:</label>
+				<input id="adressePays" Class="form-control" [(ngModel)]="user.adresse.pays" name="adressePays">
+			</div>
+			<div class="form-group">
+				<label for="email">email:</label>
+				<input id="email" Class="form-control" [(ngModel)]="user.coordonnees.email" name="email">
+			</div>
+			<div class="form-group">
+				<label for="telephone">telephone:</label>
+				<input id="telephone" Class="form-control" [(ngModel)]="user.coordonnees.telephone" name="telephone">
+			</div>
+			<div class="form-group">
+				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
+				<button (click)="retour()" class="btn btn-info">retour</button>
+			</div>
+		
+		</form>
+
+	</fieldset>
+
+</div>

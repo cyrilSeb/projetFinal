@@ -1,6 +1,6 @@
 <div>
 	<fieldset>
-		<legend> edition de materiel</legend>
+		<legend>Creation/edition d'un materiel</legend>
 		<form>
 		<input type="hidden" [(ngModel)]="materiel.code" name="code">
 		
@@ -11,6 +11,38 @@
 			<div class="form-group">
 				<label for="disponible">disponible:</label>
 				<input id="disponible" Class="form-control" [(ngModel)]="materiel.disponible" name="disponible">
+			</div>
+			<div class="form-group">
+				<label for="processeur">processeur:</label>
+				<input id="processeur" Class="form-control" [(ngModel)]="materiel.processeur" name="processeur">
+			</div>
+			<div class="form-group">
+				<label for="ram">RAM:</label>
+				<input id="ram" Class="form-control" [(ngModel)]="materiel.ram" name="ram">
+			</div>
+			<div class="form-group">
+				<label for="DD">DD:</label>
+				<input id="DD" Class="form-control" [(ngModel)]="materiel.DD" name="DD">
+			</div>
+			<div class="form-group">
+				<label for="anneeAchat">annee d'achat:</label>
+				<input id="anneeAchat" Class="form-control" [(ngModel)]="materiel.anneeAchat" name="anneeAchat">
+			</div>
+			<div  class="form-group">
+				<label for="stagiaire">stagiaire:</label>
+				<select  *ngIf="stagiaires!=null" Class="form-control" name="stagiaire" id="stagiaire" ng-model="materiel">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let stagiaire of stagiaires" [value]="(materiel.stagiaire)?materiel.stagiaire.id:''">{{(materiel.stagiaire)?materiel.stagiaire.prenom:'null'}} {{(materiel.stagiaire)?materiel.stagiaire.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
+			</div>
+			<div  class="form-group">
+				<label for="cursus">cursus:</label>
+				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="materiel">
+			      <option value="">---Please select---</option> 
+			      <option *ngFor="let cursus of cursuss" [value]="(materiel.cursus)?materiel.cursus.id:''">{{(materiel.cursus)?materiel.cursus.nom:'null'}}</option> 
+			      <option value="option-2">Option 2</option>
+    			</select>
 			</div>
 			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>

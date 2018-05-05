@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Liste des utilisateurs</h4>
+                    <p class="category"></p>
+                <table class="table table-hover">
+  <tr>
+    <th>id</th>
+    <th>prenom</th>
+    <th>nom</th>
+    <th>rue</th>
+    <th>code postal</th>
+    <th>ville</th>
+    <th>pays</th>
+    <th>email</th>
+    <th>telephone</th>
+  </tr>
+ <tr *ngFor="let user of users">
+		<td>{{user.id}}</td>
+		<td>{{user.prenom}}</td>
+		<td>{{user.nom}}</td>
+		<td>{{(user.adresse)?user.adresse.numero:''}} {{(user.adresse)?user.adresse.rue:''}}</td>
+	    <td>{{(user.adresse)?user.adresse.codePostal:''}}</td>
+	    <td>{{(user.adresse)?user.adresse.ville:''}}</td>
+	    <td>{{(user.adresse)?user.adresse.pays:''}}</td>
+		<td>{{(user.coordonnees)?user.coordonnees.email:''}}</td>
+		<td>{{(user.coordonnees)?user.coordonnees.telephone:''}}</td>
+		<td><a href="" [routerLink]="['/useredit']"
+			class="btn btn-info">editer</a></td>
+		<td><button class="btn btn-danger"
+				(click)="delete(user.id)">supprimer</button></td>
+	</tr>
+</table>
+<div>
+  <a
+    href="" [routerLink]="['/useredit']" class ="btn btn-info">nouvelle utilisateur
+  </a>
+
+</div>
+

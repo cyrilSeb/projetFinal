@@ -33,6 +33,8 @@ import { MatiereService } from './service/matiere.service';
 import { ModuleService } from './service/module.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './service/alert.service';
+import { UserlistComponent } from './userlist/userlist.component';
+import { UsereditComponent } from './useredit/useredit.component';
 
 
 const appRoutes: Routes=[
@@ -106,8 +108,19 @@ const appRoutes: Routes=[
     canActivate: [AuthgardGuard],
     component: ModuleeditComponent
   },
-  {path:'salleedit/:id', component:EditsalleComponent},{path:'moduleedit/:id', component:ModuleeditComponent},{path:'matiereedit/:id', component:MatiereeditComponent},
-  {path:'cursusedit/:id', component:CursuseditComponent},{path:'materieledit/:id', component:MaterieleditComponent},{path:'formateuredit/:id', component:FormateureditComponent}
+  {
+    path: 'userlist',
+    canActivate: [AuthgardGuard],
+    component: UserlistComponent
+  },
+  {
+    path: 'useredit',
+    canActivate: [AuthgardGuard],
+    component: UsereditComponent
+  },
+  {path:'salleedit/:id',canActivate: [AuthgardGuard], component:EditsalleComponent},{path:'moduleedit/:id', canActivate: [AuthgardGuard],component:ModuleeditComponent},{path:'matiereedit/:id', canActivate: [AuthgardGuard],component:MatiereeditComponent},
+  {path:'cursusedit/:id', canActivate: [AuthgardGuard],component:CursuseditComponent},{path:'materieledit/:id', canActivate: [AuthgardGuard],component:MaterieleditComponent},{path:'formateuredit/:id', canActivate: [AuthgardGuard],component:FormateureditComponent},
+  {path:'useredit/:id', canActivate: [AuthgardGuard],component:UsereditComponent}
 ]
 
 @NgModule({
@@ -128,6 +141,8 @@ const appRoutes: Routes=[
      MaterieleditComponent,
      FormateureditComponent,
      AlertComponent,
+     UserlistComponent,
+     UsereditComponent,
 
   ],
   imports: [
