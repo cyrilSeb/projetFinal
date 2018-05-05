@@ -27,7 +27,7 @@
 	    <td>{{(user.adresse)?user.adresse.pays:''}}</td>
 		<td>{{(user.coordonnees)?user.coordonnees.email:''}}</td>
 		<td>{{(user.coordonnees)?user.coordonnees.telephone:''}}</td>
-		<td><a href="" [routerLink]="['/useredit']"
+		<td><a href="" [routerLink]="['/useredit',user.id]"
 			class="btn btn-info">editer</a></td>
 		<td><button class="btn btn-danger"
 				(click)="delete(user.id)">supprimer</button></td>

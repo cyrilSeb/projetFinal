@@ -118,7 +118,7 @@
 								<td>{{(!!materiel.stagiaire)?materiel.stagiaire.id+' - ':''}}{{(!!materiel.stagiaire)?materiel.stagiaire.nom:''}} {{(!!materiel.stagiaire)?materiel.stagiaire.prenom:''}}</td>
 
 								<td>{{(!!materiel.cursus)?materiel.cursus.id+' - ':''}}{{(!!materiel.cursus)?materiel.cursus.nom:''}}</td>
-								<td><a href="" [routerLink]="['/materieledit']"
+								<td><a href="" [routerLink]="['/materieledit',materiel.code]"
 									class="btn btn-info">editer</a></td>
 								<td><button class="btn btn-danger"
 										(click)="delete(materiel.code)">supprimer</button></td>
