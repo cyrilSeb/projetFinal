@@ -16,24 +16,21 @@
 				<label for="matiere">matiere:</label>
 				<select  *ngIf="matieres!=null" Class="form-control" name="matiere" id="matiere" ng-model="module">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let matiere of matieres" [value]="(module.matiere)?module.matiere.id:''">{{(module.matiere)?module.matiere.titre:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let matiere of matieres" [value]="matiere.id">{{matiere.titre}}</option> 
     			</select>
 			</div>
 			<div  class="form-group">
 				<label for="formateur">formateur:</label>
 				<select  *ngIf="formateurs!=null" Class="form-control" name="formateur" id="formateur" ng-model="module">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let formateur of formateurs" [value]="(module.formateur)?module.formateur.id:''">{{(module.formateur)?module.formateur.prenom:'null'}} {{(module.formateur)?module.formateur.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let formateur of formateurs" [value]="formateur.id">{{formateur.prenom}} {{formateur.nom}}</option> 
     			</select>
 			</div>
 			<div  class="form-group">
 				<label for="cursus">cursus:</label>
 				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="module">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let cursus of cursuss" [value]="(module.cursus)?module.cursus.id:''">{{(module.cursus)?module.cursus.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let cursus of cursuss" [value]="cursus.id">{{cursus.nom}}</option> 
     			</select>
 			</div>
 			<div class="form-group">

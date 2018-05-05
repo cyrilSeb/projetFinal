@@ -14,10 +14,9 @@
 			</div>
 			<div  class="form-group">
 				<label for="gestionnaire">gestionnaire:</label>
-				<select  *ngIf="gestionnaires!=null" Class="form-control" name="gestionnaire" id="gestionnaire" ng-model="cursus">
+				<select *ngIf="gestionnaires!=null" Class="form-control" name="gestionnaire" id="gestionnaire" ng-model="cursus">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let gestionnaire of gestionnaires" [value]="(cursus.gestionnaire)?cursus.gestionnaire.id:''">{{(cursus.gestionnaire)?cursus.gestionnaire.prenom:'null'}} {{(cursus.gestionnaire)?cursus.gestionnaire.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let gestionnaire of gestionnaires" [value]="gestionnaire.id" selected="{{(cursus.gestionnaire)?cursus.gestionnaire.id:''}}">{{gestionnaire.prenom}} {{gestionnaire.nom}}</option> 
     			</select>
 			</div>
 <!-- 			<div class="form-group"> -->
@@ -26,10 +25,9 @@
 <!-- 			</div> -->
 			<div  class="form-group">
 				<label for="referent">referent:</label>
-				<select  *ngIf="referents!=null" Class="form-control" name="referent" id="referent" ng-model="cursus">
-			      <option value="">---Please select---</option> 
-			      <option *ngFor="let referent of referents" [value]="(cursus.referent)?cursus.referent.id:''">{{(cursus.referent)?cursus.referent.prenom:'null'}} {{(cursus.referent)?cursus.referent.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+				<select   *ngIf="referents!=null" Class="form-control" name="referent" id="referent" ng-model="cursus">
+			      <option  value="">---Please select---</option> 
+			      <option *ngFor="let referent of referents" [value]="referent.id" selected="(cursus.referent)?cursus.referent.id:''">{{referent.prenom}} {{referent.nom}}</option> 
     			</select>
 			</div>
 <!-- 			<div class="form-group"> -->
@@ -39,9 +37,8 @@
 			<div  class="form-group">
 				<label for="salle">salle:</label>
 				<select  *ngIf="salles!=null" Class="form-control" name="salle" id="salle" ng-model="cursus">
-			      <option value="">---Please select---</option> 
-			      <option *ngFor="let salle of salles" [value]="(cursus.salle)?cursus.salle.id:''">{{(cursus.salle)?cursus.salle.numero:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option  value="">---Please select---</option> 
+			      <option *ngFor="let salle of salles" [value]="salle.id" selected="{{(cursus.salle)?cursus.salle.id:''}}">{{salle.numero}}</option> 
     			</select>
 			</div>
 			<div class="form-group">

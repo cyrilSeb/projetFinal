@@ -32,6 +32,9 @@ export class ModuleeditComponent implements OnInit {
 
   ngOnInit() {
     this.list();
+    console.log(this.matieres);
+    console.log(this.formateurs);
+    console.log(this.cursuss);
     this.route.paramMap.subscribe((params:ParamMap) =>{
     this.id =params.get('id');
       if(!!this.id){

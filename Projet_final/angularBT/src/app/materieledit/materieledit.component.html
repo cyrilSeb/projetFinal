@@ -32,16 +32,14 @@
 				<label for="stagiaire">stagiaire:</label>
 				<select  *ngIf="stagiaires!=null" Class="form-control" name="stagiaire" id="stagiaire" ng-model="materiel">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let stagiaire of stagiaires" [value]="(materiel.stagiaire)?materiel.stagiaire.id:''">{{(materiel.stagiaire)?materiel.stagiaire.prenom:'null'}} {{(materiel.stagiaire)?materiel.stagiaire.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.id">{{stagiaire.prenom}} {{stagiaire.nom}}</option> 
     			</select>
 			</div>
 			<div  class="form-group">
 				<label for="cursus">cursus:</label>
 				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="materiel">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let cursus of cursuss" [value]="(materiel.cursus)?materiel.cursus.id:''">{{(materiel.cursus)?materiel.cursus.nom:'null'}}</option> 
-			      <option value="option-2">Option 2</option>
+			      <option *ngFor="let cursus of cursuss" [value]="cursus.id">{{cursus.nom}}</option> 
     			</select>
 			</div>
 			<div class="form-group">

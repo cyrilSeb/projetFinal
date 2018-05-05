@@ -19,7 +19,7 @@ export class CursusService {
   }
   
   public findById(id):Observable<Cursus>{
-    return this.http.get<Cursus>(`${this.baseUrl}/${id}`);
+    return this.http.get<Cursus>(`${this.baseUrl}/${id}/infos`);
   }
 
   public update(cursus: Cursus):Observable<any>{
