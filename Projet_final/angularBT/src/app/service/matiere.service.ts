@@ -30,7 +30,9 @@ export class MatiereService {
     const obj={
       id:matiere.id,
       titre:matiere.titre,
-      
+      nbHeure:matiere.nbHeure,
+      objectifs: matiere.objectifs,
+      contenu: matiere.contenu,
     };
     return this.http.post(this.baseUrl, obj);
   }

@@ -28,6 +28,7 @@ export class CursuseditComponent implements OnInit {
 
    ngOnInit() {
     this.list();
+     console.log(this.salles);
     this.route.paramMap.subscribe((params:ParamMap) =>{
     this.id =params.get('id');
       if(!!this.id){

@@ -24,10 +24,9 @@
 				<label for="salle">salle:</label>
 				<select Class="form-control" name="salle" id="salle" ng-model="cursus">
 			      <option value="">---Please select---</option> <!-- not selected / blank option -->
-			      <option *ngFor="let salle of salles" value="{{(cursus.salle)?cursus.salle.id:''}}">{{cursus.salle.numero}}</option> <!-- interpolation -->
+			      <option *ngFor="let salle of salles" [value]="cursus.salle.id">{{cursus.salle.numero}}</option> <!-- interpolation -->
 			      <option value="option-2">Option 2</option>
     			</select>
-<!-- 				<input id="salle" Class="form-control" [(ngModel)]="cursus.salle.id" name="salle"> -->
 			</div>
 			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
