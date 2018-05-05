@@ -16,7 +16,7 @@
 				<label for="gestionnaire">gestionnaire:</label>
 				<select *ngIf="gestionnaires!=null" Class="form-control" name="gestionnaire" id="gestionnaire" ng-model="cursus">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let gestionnaire of gestionnaires" [value]="gestionnaire.id" selected="{{(cursus.gestionnaire)?cursus.gestionnaire.id:''}}">{{gestionnaire.prenom}} {{gestionnaire.nom}}</option> 
+			      <option *ngFor="let gestionnaire of gestionnaires" [value]="gestionnaire.id" [selected]="gestionnaire.id === ((cursus.gestionnaire)?cursus.gestionnaire.id:'')">{{gestionnaire.prenom}} {{gestionnaire.nom}}</option> 
     			</select>
 			</div>
 <!-- 			<div class="form-group"> -->
@@ -27,7 +27,7 @@
 				<label for="referent">referent:</label>
 				<select   *ngIf="referents!=null" Class="form-control" name="referent" id="referent" ng-model="cursus">
 			      <option  value="">---Please select---</option> 
-			      <option *ngFor="let referent of referents" [value]="referent.id" selected="(cursus.referent)?cursus.referent.id:''">{{referent.prenom}} {{referent.nom}}</option> 
+			      <option *ngFor="let referent of referents" [value]="referent.id" [selected]="referent.id === ((cursus.referent)?cursus.referent.id:'')">{{referent.prenom}} {{referent.nom}}</option> 
     			</select>
 			</div>
 <!-- 			<div class="form-group"> -->
@@ -38,7 +38,7 @@
 				<label for="salle">salle:</label>
 				<select  *ngIf="salles!=null" Class="form-control" name="salle" id="salle" ng-model="cursus">
 			      <option  value="">---Please select---</option> 
-			      <option *ngFor="let salle of salles" [value]="salle.id" selected="{{(cursus.salle)?cursus.salle.id:''}}">{{salle.numero}}</option> 
+			      <option *ngFor="let salle of salles" [value]="salle.id" [selected]="salle.id === ((cursus.salle)?cursus.salle.id:'')">{{salle.numero}}</option> 
     			</select>
 			</div>
 			<div class="form-group">
