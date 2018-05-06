@@ -1,6 +1,6 @@
 import { Adresse } from '../model/adresse';
 import { Salle } from '../model/salle';
-import { SalleService } from '../service/salle.service';
+import { SalleService } from '../materiel/service/salle.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 

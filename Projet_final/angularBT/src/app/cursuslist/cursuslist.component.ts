@@ -1,5 +1,5 @@
 import { Cursus } from '../model/cursus';
-import { CursusService } from '../service/cursus.service';
+import { CursusService } from '../materiel/service/cursus.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

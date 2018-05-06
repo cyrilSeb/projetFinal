@@ -5,7 +5,7 @@ import { Gestionnaire } from '../model/gestionnaire';
 import { Stagiaire } from '../model/stagiaire';
 import { Technicien } from '../model/technicien';
 import { User } from '../model/user';
-import { UserService } from '../service/user.service';
+import { UserService } from '../materiel/service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 

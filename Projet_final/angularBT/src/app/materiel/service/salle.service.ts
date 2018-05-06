@@ -1,4 +1,4 @@
-import { Salle } from '../model/salle';
+import { Salle } from '../../model/salle';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

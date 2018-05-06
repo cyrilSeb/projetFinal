@@ -1,4 +1,4 @@
-import { Matiere } from '../model/matiere';
+import { Matiere } from '../../model/matiere';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
