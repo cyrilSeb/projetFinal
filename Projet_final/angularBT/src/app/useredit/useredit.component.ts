@@ -1,5 +1,9 @@
 import { Adresse } from '../model/adresse';
 import { Coordonnees } from '../model/coordonnees';
+import { Formateur } from '../model/formateur';
+import { Gestionnaire } from '../model/gestionnaire';
+import { Stagiaire } from '../model/stagiaire';
+import { Technicien } from '../model/technicien';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -41,15 +45,44 @@ export class UsereditComponent implements OnInit {
   submit() {
     if(!!this.user.id){
       //maj
-    this.userService.update(this.user).subscribe(res=>{
-      this.retour();
-        });
+        if(this.user instanceof Gestionnaire){
+        this.userService.updateGestionnaire(this.user).subscribe(res=>{
+       this.retour();
+          });
+      }else if(this.user instanceof Formateur){
+        this.userService.updateFormateur(this.user).subscribe(res=>{
+       this.retour();
+          });
+      }else if(this.user instanceof Technicien){
+        this.userService.updateTechnicien(this.user).subscribe(res=>{
+       this.retour();
+          });
+      }else if(this.user instanceof Stagiaire){
+        this.userService.updateStagiaire(this.user).subscribe(res=>{
+       this.retour();
+          });
+      }
+        
     }
     else{
       //creation
-      this.userService.create(this.user).subscribe(res=>{
+      if(this.user instanceof Gestionnaire){
+      this.userService.createGestionnaire(this.user).subscribe(res=>{
       this.retour();
         });
+      }else if(this.user instanceof Formateur){
+      this.userService.createFormateur(this.user).subscribe(res=>{
+      this.retour();
+        });
+      }else if(this.user instanceof Technicien){
+      this.userService.createTechnicien(this.user).subscribe(res=>{
+      this.retour();
+        });
+      }else if(this.user instanceof Stagiaire){
+      this.userService.createStagiaire(this.user).subscribe(res=>{
+      this.retour();
+        });
+      }
     }
   }
 

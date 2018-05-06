@@ -114,7 +114,7 @@
 								<td>{{materiel.processeur}}</td>
 								<td>{{materiel.ram}}</td>
 								<td>{{materiel.DD}}</td>
-								<td>{{materiel.anneeAchat}}</td>
+								<td>{{materiel.anneeAchat | date:'yyyy-MM-dd'}}</td>
 								<td>{{(!!materiel.stagiaire)?materiel.stagiaire.id+' - ':''}}{{(!!materiel.stagiaire)?materiel.stagiaire.nom:''}} {{(!!materiel.stagiaire)?materiel.stagiaire.prenom:''}}</td>
 
 								<td>{{(!!materiel.cursus)?materiel.cursus.id+' - ':''}}{{(!!materiel.cursus)?materiel.cursus.nom:''}}</td>

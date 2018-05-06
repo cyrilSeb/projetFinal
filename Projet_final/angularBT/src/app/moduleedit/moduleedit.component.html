@@ -5,32 +5,28 @@
 		<input type="hidden" [(ngModel)]="module.id" name="id">
 		
 			<div class="form-group">
-				<label path="date[0]">date de debut:</label>
-				<input type="date" path="date[0]" id="date[0]" cssClass="form-control"/>
-			</div>
-				<div class="form-group">
-				<label path="date[1]">date de fin:</label>
-				<input type="date" path="date[1]" id="date[1]" cssClass="form-control"/>
+				<label for="date">date:</label>
+				<input type="date" name="date" id="date" [(ngModel)]="module.date" cssClass="form-control"/>
 			</div>
 			<div  class="form-group">
 				<label for="matiere">matiere:</label>
-				<select  *ngIf="matieres!=null" Class="form-control" name="matiere" id="matiere" ng-model="module">
+				<select  *ngIf="matieres!=null" Class="form-control" name="matiere" id="matiere" [(ngModel)]="module.matiere">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let matiere of matieres" [value]="matiere.id" [selected]="matiere.id === ((module.matiere)?module.matiere.id:'')">{{matiere.titre}}</option> 
+			      <option *ngFor="let matiere of matieres" [ngValue]="matiere" >{{matiere.titre}}</option> 
     			</select>
 			</div>
 			<div  class="form-group">
 				<label for="formateur">formateur:</label>
-				<select  *ngIf="formateurs!=null" Class="form-control" name="formateur" id="formateur" ng-model="module">
+				<select  *ngIf="formateurs!=null" Class="form-control" name="formateur" id="formateur" [(ngModel)]="module.formateur">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let formateur of formateurs" [value]="formateur.id" [selected]="formateur.id === ((module.formateur)?module.formateur.id:'')">{{formateur.prenom}} {{formateur.nom}}</option> 
+			      <option *ngFor="let formateur of formateurs" [ngValue]="formateur">{{formateur.prenom}} {{formateur.nom}}</option> 
     			</select>
 			</div>
 			<div  class="form-group">
 				<label for="cursus">cursus:</label>
-				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="module">
+				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" [(ngModel)]="module.cursus">
 			      <option value="">---Please select---</option> 
-			      <option *ngFor="let cursus of cursuss" [value]="cursus.id" [selected]="cursus.id === ((module.cursus)?module.cursus.id:'')">{{cursus.nom}}</option> 
+			      <option *ngFor="let cursus of cursuss" [ngValue]="cursus" >{{cursus.nom}}</option> 
     			</select>
 			</div>
 			<div class="form-group">

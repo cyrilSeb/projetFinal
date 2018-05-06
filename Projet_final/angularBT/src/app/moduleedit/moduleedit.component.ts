@@ -9,6 +9,7 @@ import { ModuleService } from '../service/module.service';
 import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-moduleedit',
@@ -67,9 +68,11 @@ export class ModuleeditComponent implements OnInit {
     this.router.navigate(['/modulelist']);
   }
   
-  submit() {
+  
+  submit(form: NgForm) {
     if(!!this.module.id){
       //maj
+      console.log(this.module);
     this.moduleService.update(this.module).subscribe(res=>{
       this.retour();
         });

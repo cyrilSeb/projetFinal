@@ -23,7 +23,7 @@ export class CursusService {
   }
 
   public update(cursus: Cursus):Observable<any>{
-    return this.http.put(this.baseUrl, cursus);
+    return this.http.put(`${this.baseUrl}/infos`, cursus);
   }
   
   public create(cursus: Cursus): Observable<any>{
@@ -31,68 +31,77 @@ export class CursusService {
       nom:cursus.nom,
       date:cursus.date,
       gestionnaire: {
-          id: 102,
-          nom: "ZANARELLI",
-          prenom: "Johanna",
+          id: cursus.gestionnaire.id,
+          nom: cursus.gestionnaire.nom,
+          prenom: cursus.gestionnaire.prenom,
           adresse: {
-              numero: 6,
-              rue: "Rue Rougemont",
-              codePostal: "75009",
-              ville: "Paris",
-              pays: "FRANCE"
+              numero: cursus.gestionnaire.adresse.numero,
+              rue: cursus.gestionnaire.adresse.rue,
+              codePostal: cursus.gestionnaire.adresse.codePostal,
+              ville: cursus.gestionnaire.adresse.ville,
+              pays: cursus.gestionnaire.adresse.pays
           },
-          coordonnees: null
+          coordonnees:{
+              telephone: cursus.gestionnaire.coordonnees.telephone,
+              email: cursus.gestionnaire.coordonnees.email
+          } 
       },
       referent: {
-          id: 101,
-          nom: "MELLOUL",
-          prenom: "Jacky",
+          id: cursus.referent.id,
+          nom: cursus.referent.nom,
+          prenom: cursus.referent.prenom,
           adresse: {
-              numero: 6,
-              rue: "Rue Rougemont",
-              codePostal: "75009",
-              ville: "Paris",
-              pays: "FRANCE"
+              numero: cursus.referent.adresse.numero,
+              rue: cursus.referent.adresse.rue,
+              codePostal: cursus.referent.adresse.codePostal,
+              ville: cursus.referent.adresse.ville,
+              pays: cursus.referent.adresse.pays
           },
           coordonnees: {
-              telephone: "+33192638574",
-              email: "john.doe@gmail.com"
+              telephone: cursus.referent.coordonnees.telephone,
+              email: cursus.referent.coordonnees.email
           },
-          disponibilites: null
+          disponibilites: cursus.referent.disponnibilite
       },
       modules: [
           {
-              id: 105,
-              dates: null
+              id: cursus.module.id,
+              dates: cursus.module.dates
           }
       ],
       projecteur: {
-          code: 101,
-          cout: 10,
-          disponible: null
+          code: cursus.projecteur.code,
+          cout: cursus.projecteur.cout,
+          disponible: cursus.projecteur.disponible
       },
       stagiaires: [
           {
-              id: 103,
-              nom: "RAZAFINDRAKOTO",
-              prenom: "Mirijason",
-              adresse: null,
+              id: cursus.stagiaire.id,
+              nom: cursus.stagiaire.nom,
+              prenom: cursus.stagiaire.prenom,
+              adresse: {
+                  numero: cursus.stagiaire.adresse.numero,
+                  rue: cursus.stagiaire.adresse.rue,
+                  codePostal: cursus.stagiaire.adresse.codePostal,
+                  ville: cursus.stagiaire.adresse.ville,
+                  pays: cursus.stagiaire.adresse.pays
+              },
               coordonnees: {
-                  telephone: "+33192638574",
-                  email: "john.doe@gmail.com"
+                  telephone: cursus.stagiaire.coordonnees.telephone,
+                  email: cursus.stagiaire.coordonnees.email
               }
           }
       ],
       salle: {
-          id: 107,
-          capacite: 60,
-          numero: "F345",
+          id: cursus.salle.id,
+          capacite: cursus.salle.capacite,
+          numero: cursus.salle.numero,
           adresse: {
-              numero: 6,
-              rue: "rue rougemont",
-              codePostal: "75009",
-              ville: "Paris",
-              pays: "France"
+              numero: cursus.salle.adresse.numero,
+              rue: cursus.salle.adresse.rue,
+              codePostal: cursus.salle.adresse.codePostal,
+              ville: cursus.salle.adresse.ville,
+              pays: cursus.salle.adresse.pays
           }
       }
     };

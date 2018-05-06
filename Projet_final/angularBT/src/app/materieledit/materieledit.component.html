@@ -12,36 +12,36 @@
 				<label for="disponible">disponible:</label>
 				<input id="disponible" Class="form-control" [(ngModel)]="materiel.disponible" name="disponible">
 			</div>
-			<div class="form-group">
-				<label for="processeur">processeur:</label>
-				<input id="processeur" Class="form-control" [(ngModel)]="materiel.processeur" name="processeur">
-			</div>
-			<div class="form-group">
-				<label for="ram">RAM:</label>
-				<input id="ram" Class="form-control" [(ngModel)]="materiel.ram" name="ram">
-			</div>
-			<div class="form-group">
-				<label for="DD">DD:</label>
-				<input id="DD" Class="form-control" [(ngModel)]="materiel.DD" name="DD">
-			</div>
-			<div class="form-group">
-				<label for="anneeAchat">annee d'achat:</label>
-				<input id="anneeAchat" Class="form-control" [(ngModel)]="materiel.anneeAchat" name="anneeAchat">
-			</div>
-			<div  class="form-group">
-				<label for="stagiaire">stagiaire:</label>
-				<select  *ngIf="stagiaires!=null" Class="form-control" name="stagiaire" id="stagiaire" ng-model="materiel">
-			      <option value="">---Please select---</option> 
-			      <option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.id" [selected]="stagiaire.id === ((materiel.stagiaire)?materiel.stagiaire.id:'')">{{stagiaire.prenom}} {{stagiaire.nom}}</option> 
-    			</select>
-			</div>
-			<div  class="form-group">
-				<label for="cursus">cursus:</label>
-				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="materiel">
-			      <option value="">---Please select---</option> 
-			      <option *ngFor="let cursus of cursuss" [value]="cursus.id" [selected]="cursus.id === ((materiel.cursus)?materiel.cursus.id:'')">{{cursus.nom}}</option> 
-    			</select>
-			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="processeur">processeur:</label> -->
+<!-- 				<input id="processeur" Class="form-control" [(ngModel)]="ordinateur.processeur" name="processeur"> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="ram">RAM:</label> -->
+<!-- 				<input id="ram" Class="form-control" [(ngModel)]="materiel.ram" name="ram"> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="DD">DD:</label> -->
+<!-- 				<input id="DD" Class="form-control" [(ngModel)]="materiel.DD" name="DD"> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="anneeAchat">annee d'achat:</label> -->
+<!-- 				<input type ="date" id="anneeAchat" Class="form-control" [(ngModel)]="materiel.anneeAchat" name="anneeAchat"> -->
+<!-- 			</div> -->
+<!-- 			<div  class="form-group"> -->
+<!-- 				<label for="stagiaire">stagiaire:</label> -->
+<!-- 				<select  *ngIf="stagiaires!=null" Class="form-control" name="stagiaire" id="stagiaire" ng-model="materiel"> -->
+<!-- 			      <option value="">---Please select---</option>  -->
+<!-- 			      <option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.id" [selected]="stagiaire.id === ((materiel.stagiaire)?materiel.stagiaire.id:'')">{{stagiaire.prenom}} {{stagiaire.nom}}</option>  -->
+<!--     			</select> -->
+<!-- 			</div> -->
+<!-- 			<div  class="form-group"> -->
+<!-- 				<label for="cursus">cursus:</label> -->
+<!-- 				<select  *ngIf="cursuss!=null" Class="form-control" name="cursus" id="cursus" ng-model="materiel"> -->
+<!-- 			      <option value="">---Please select---</option>  -->
+<!-- 			      <option *ngFor="let cursus of cursuss" [value]="cursus.id" [selected]="cursus.id === ((materiel.cursus)?materiel.cursus.id:'')">{{cursus.nom}}</option>  -->
+<!--     			</select> -->
+<!-- 			</div> -->
 			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>
 				<button (click)="retour()" class="btn btn-info">retour</button>

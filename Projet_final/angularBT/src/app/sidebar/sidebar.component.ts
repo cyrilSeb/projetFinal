@@ -10,10 +10,10 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: 'materiellist', title: 'Materiel',  icon: 'ti-settings', class: '' },
+    { path: 'materiellist', title: 'Materiels',  icon: 'ti-settings', class: '' },
     { path: 'cursuslist', title: 'Cursus',  icon:'ti-view-list-alt', class: '' },
     { path: 'userlist', title: 'Utilisateurs',  icon:'ti-user', class: '' },
-    { path: 'matierelist', title: 'matiere',  icon:'ti-text', class: '' },
+    { path: 'matierelist', title: 'matieres',  icon:'ti-text', class: '' },
     { path: 'sallelist', title: 'salles',  icon:'ti-pencil-alt2', class: '' },
     { path: 'modulelist', title: 'Modules',  icon:'ti-map', class: '' },
     { path: '', title: 'deconnecter',  icon:'ti-power-off', class: '' },

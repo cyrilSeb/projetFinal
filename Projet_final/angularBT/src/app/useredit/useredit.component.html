@@ -14,31 +14,31 @@
 			</div>
 			<div class="form-group">
 				<label for="adresseNumero">numero de rue:</label>
-				<input id="adresseNumero" Class="form-control" [(ngModel)]="user.adresse.numero" name="adresseNumero">
+				<input id="adresseNumero" Class="form-control" [ngModel]="(user.adresse)?.numero" (ngModelChange)="user.adresse.numero = $event" name="adresseNumero">
 			</div>
 			<div class="form-group">
 				<label for="adresseRue">rue:</label>
-				<input id="adresseRue" Class="form-control" [(ngModel)]="user.adresse.rue" name="adresseRue">
+				<input id="adresseRue" Class="form-control" [ngModel]="(user.adresse)?.rue" (ngModelChange)="user.adresse.rue = $event" name="adresseRue">
 			</div>
 			<div class="form-group">
 				<label for="adresseCodePostal">code postal:</label>
-				<input id="adresseCodePostal" Class="form-control" [(ngModel)]="user.adresse.codePostal" name="adresseCodePostal">
+				<input id="adresseCodePostal" Class="form-control" [ngModel]="(user.adresse)?.codePostal" (ngModelChange)="user.adresse.codePostal = $event" name="adresseCodePostal">
 			</div>
 			<div class="form-group">
 				<label for="adresseVille">ville:</label>
-				<input id="adresseVille" Class="form-control" [(ngModel)]="user.adresse.ville" name="adresseVille">
+				<input id="adresseVille" Class="form-control" [ngModel]="(user.adresse)?.ville" (ngModelChange)="user.adresse.ville = $event" name="adresseVille">
 			</div>
 			<div class="form-group">
 				<label for="adressePays">pays:</label>
-				<input id="adressePays" Class="form-control" [(ngModel)]="user.adresse.pays" name="adressePays">
+				<input id="adressePays" Class="form-control" [ngModel]="(user.adresse)?.pays" (ngModelChange)="user.adresse.pays = $event" name="adressePays">
 			</div>
 			<div class="form-group">
 				<label for="email">email:</label>
-				<input id="email" Class="form-control" [(ngModel)]="user.coordonnees.email" name="email">
+				<input id="email" Class="form-control" [ngModel]="(user.coordonnees)?.email" (ngModelChange)="user.coordonnees.email = $event" name="email">
 			</div>
 			<div class="form-group">
 				<label for="telephone">telephone:</label>
-				<input id="telephone" Class="form-control" [(ngModel)]="user.coordonnees.telephone" name="telephone">
+				<input id="telephone" Class="form-control" [ngModel]="(user.coordonnees)?.telephone" (ngModelChange)="user.coordonnees.telephone = $event" name="telephone">
 			</div>
 			<div class="form-group">
 				<input (click)=submit() type="submit" value="enregistrer" class="btn btn-success"/>

@@ -31,33 +31,33 @@ private baseUrl:string='http://localhost:8080/projetfinal/module';
       id:module.id,
       dates:module.dates,
       matiere: {
-        id: 104,
-        titre: "JAVA/JEE",
-        nbHeure: 16,
-        objectifs: "Devenir Dieu ",
-        contenu: "JAVA/JEE"
+        id: module.matiere.id,
+        titre: module.matiere.titre,
+        nbHeure: module.matiere.nbHeure,
+        objectifs: module.matiere.objectifs,
+        contenu: module.matiere.contenu
       },
       formateur: {
-          id: 101,
-          nom: "MELLOUL",
-          prenom: "Jacky",
+          id: module.formateur.id,
+          nom: module.formateur.nom,
+          prenom: module.formateur.prenom,
           adresse: {
-              numero: 6,
-              rue: "Rue Rougemont",
-              codePostal: "75009",
-              ville: "Paris",
-              pays: "FRANCE"
+              numero: module.formateur.adresse.numero,
+              rue: module.formateur.adresse.rue,
+              codePostal: module.formateur.adresse.codePostal,
+              ville: module.formateur.adresse.ville,
+              pays: module.formateur.adresse.pays
           },
           coordonnees: {
-              telephone: "+33192638574",
-              email: "john.doe@gmail.com"
+              telephone: module.formateur.coordonnees.telephone,
+              email: module.formateur.coordonnees.email
           },
-          disponibilites: null
+          disponibilites: module.formateur.disponnibilite
       },
       cursus: {
-          id: 101,
-          nom: "Mathematiques, Physique et Informatiques",
-          dates: null
+          id: module.cursus.id,
+          nom: module.cursus.nom,
+          dates: module.cursus.date
       }
     };
     return this.http.post(this.baseUrl, obj);
