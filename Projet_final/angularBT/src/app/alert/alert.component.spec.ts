@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormateureditComponent } from './formateuredit.component';
+import { AlertComponent } from './alert.component';
 
-describe('FormateureditComponent', () => {
-  let component: FormateureditComponent;
-  let fixture: ComponentFixture<FormateureditComponent>;
+describe('AlertComponent', () => {
+  let component: AlertComponent;
+  let fixture: ComponentFixture<AlertComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormateureditComponent ]
+      declarations: [ AlertComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormateureditComponent);
+    fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

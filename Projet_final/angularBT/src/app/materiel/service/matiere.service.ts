@@ -1,4 +1,4 @@
-import { Matiere } from '../model/matiere';
+import { Matiere } from '../../model/matiere';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -30,7 +30,9 @@ export class MatiereService {
     const obj={
       id:matiere.id,
       titre:matiere.titre,
-      
+      nbHeure:matiere.nbHeure,
+      objectifs: matiere.objectifs,
+      contenu: matiere.contenu,
     };
     return this.http.post(this.baseUrl, obj);
   }

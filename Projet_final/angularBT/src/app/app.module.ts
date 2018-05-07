@@ -9,17 +9,14 @@ import { CursuslistComponent } from './cursuslist/cursuslist.component';
 import { AuthgardGuard } from './guard/authgard.guard';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes} from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { UserService } from './service/user.service';
+import { UserService } from './materiel/service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SalleComponent } from './salle/salle.component';
 import { EditsalleComponent } from './editsalle/editsalle.component';
-import { FormateurComponent } from './formateur/formateur.component';
-import { SalleService } from './service/salle.service';
+import { SalleService } from './materiel/service/salle.service';
 import { MaterielComponent } from './materiel/materiel.component';
-import { CursusService } from './service/cursus.service';
-import { FormateurService } from './service/formateur.service';
-import { MaterielService } from './service/materiel.service';
+import { CursusService } from './materiel/service/cursus.service';
+import { MaterielService } from './materiel/service/materiel.service';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -28,9 +25,12 @@ import { MatiereeditComponent } from './matiereedit/matiereedit.component';
 import { ModulelistComponent } from './modulelist/modulelist.component';
 import { ModuleeditComponent } from './moduleedit/moduleedit.component';
 import { MaterieleditComponent } from './materieledit/materieledit.component';
-import { FormateureditComponent } from './formateuredit/formateuredit.component';
-import { MatiereService } from './service/matiere.service';
-import { ModuleService } from './service/module.service';
+import { MatiereService } from './materiel/service/matiere.service';
+import { ModuleService } from './materiel/service/module.service';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './materiel/service/alert.service';
+import { UserlistComponent } from './userlist/userlist.component';
+import { UsereditComponent } from './useredit/useredit.component';
 
 
 const appRoutes: Routes=[
@@ -38,88 +38,96 @@ const appRoutes: Routes=[
   path: '', 
   component: AuthComponent
 },
-  
-  {
-    path: 'home',
-    canActivate: [AuthgardGuard],
-    component: HomeComponent
-  },
-  
   {
     path: 'sallelist',
+    canActivate: [AuthgardGuard],
     component: SalleComponent
   },
   {
     path: 'salleedit',
+    canActivate: [AuthgardGuard],
     component: EditsalleComponent
   },
   {
     path: 'cursuslist',
+    canActivate: [AuthgardGuard],
     component: CursuslistComponent
   },
   {
     path: 'cursusedit',
+    canActivate: [AuthgardGuard],
     component: CursuseditComponent
   },
   {
     path: 'materiellist',
+    canActivate: [AuthgardGuard],
     component: MaterielComponent
   },
   {
     path: 'materieledit',
+    canActivate: [AuthgardGuard],
     component: MaterieleditComponent
-  },
-    {path: 'formateurlist',
-    component: FormateurComponent
-  },
-  {
-    path: 'formateuredit',
-    component: FormateureditComponent
   },
   {
     path: 'matierelist',
+    canActivate: [AuthgardGuard],
     component: MatierelistComponent
   },
   {
     path: 'matiereedit',
+    canActivate: [AuthgardGuard],
     component: MatiereeditComponent
   },
   {
     path: 'modulelist',
+    canActivate: [AuthgardGuard],
     component: ModulelistComponent
   },
   {
     path: 'moduleedit',
+    canActivate: [AuthgardGuard],
     component: ModuleeditComponent
   },
-  {path:'salleedit/:id', component:EditsalleComponent},{path:'moduleedit/:id', component:ModuleeditComponent},{path:'matiereedit/:id', component:MatiereeditComponent},
-  {path:'cursusedit/:id', component:CursuseditComponent},{path:'materieledit/:id', component:MaterieleditComponent},{path:'formateuredit/:id', component:FormateureditComponent}
+  {
+    path: 'userlist',
+    canActivate: [AuthgardGuard],
+    component: UserlistComponent
+  },
+  {
+    path: 'useredit',
+    canActivate: [AuthgardGuard],
+    component: UsereditComponent
+  },
+  {path:'salleedit/:id',canActivate: [AuthgardGuard], component:EditsalleComponent},{path:'moduleedit/:id', canActivate: [AuthgardGuard],component:ModuleeditComponent},{path:'matiereedit/:id', canActivate: [AuthgardGuard],component:MatiereeditComponent},
+  {path:'cursusedit/:id', canActivate: [AuthgardGuard],component:CursuseditComponent},
+  {path:'materieledit/:id', canActivate: [AuthgardGuard],component:MaterieleditComponent},
+  {path:'useredit/:id', canActivate: [AuthgardGuard],component:UsereditComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent,
     SalleComponent,
     EditsalleComponent,
     MaterielComponent,
     CursuslistComponent,
     CursuseditComponent,
-     FormateurComponent,
      MatierelistComponent,
      MatiereeditComponent,
      ModulelistComponent,
      ModuleeditComponent,
      MaterieleditComponent,
-     FormateureditComponent,
+     AlertComponent,
+     UserlistComponent,
+     UsereditComponent,
 
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule,SidebarModule,NavbarModule,
     FooterModule
   ],
-  providers: [UserService,AuthgardGuard, SalleService,MaterielService, CursusService,FormateurService,ModuleService,MatiereService],
+  providers: [UserService,AuthgardGuard, SalleService,MaterielService, CursusService,ModuleService,MatiereService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

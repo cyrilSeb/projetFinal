@@ -1,7 +1,7 @@
 import {Materiel} from '../model/materiel';
 import {Ordinateur} from '../model/ordinateur';
 import {Projecteur} from '../model/projecteur';
-import {MaterielService} from '../service/materiel.service';
+import {MaterielService} from './service/materiel.service';
 import {Component, OnInit} from '@angular/core';
 
 @Component({

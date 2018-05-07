@@ -1,5 +1,6 @@
 import {User} from '../model/user';
-import {UserService} from '../service/user.service';
+import { AlertService } from '../materiel/service/alert.service';
+import {UserService} from '../materiel/service/user.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -9,12 +10,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+  
+  message:String='';
 
   model: User = new User();
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, private alertService: AlertService) {}
 
   ngOnInit() {
+    this.userService.logout();
   }
 
   login() {
@@ -22,9 +26,14 @@ export class AuthComponent implements OnInit {
       .subscribe(
       data => {
         if(data!=null){
+        localStorage.setItem('currentUser',JSON.stringify(data));
         this.router.navigate(['materiellist']);}
+        else{
+          this.message='Erreur de login ou mot de passe';
+        }
 
       }, error => {
+        this.alertService.error('Erreur de login ou mot de passe');
         console.log(`erreur:${error}`);
       });
 
