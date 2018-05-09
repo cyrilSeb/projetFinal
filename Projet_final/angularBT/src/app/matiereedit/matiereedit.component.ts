@@ -1,5 +1,5 @@
 import { Matiere } from '../model/matiere';
-import { MatiereService } from '../materiel/service/matiere.service';
+import { MatiereService } from '../service/matiere.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 

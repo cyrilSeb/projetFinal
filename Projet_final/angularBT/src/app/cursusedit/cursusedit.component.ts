@@ -3,9 +3,9 @@ import { Formateur } from '../model/formateur';
 import { Gestionnaire } from '../model/gestionnaire';
 import { Salle } from '../model/salle';
 import { User } from '../model/user';
-import { CursusService } from '../materiel/service/cursus.service';
-import { SalleService } from '../materiel/service/salle.service';
-import { UserService } from '../materiel/service/user.service';
+import { CursusService } from '../service/cursus.service';
+import { SalleService } from '../service/salle.service';
+import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 

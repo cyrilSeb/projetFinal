@@ -1,4 +1,4 @@
-import { Salle } from '../../model/salle';
+import { Salle } from '../model/salle';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class SalleService {
   }
 
   public update(salle: Salle):Observable<any>{
-    return this.http.put(this.baseUrl, salle);
+    return this.http.put(this.baseUrl, salle,{responseType: 'text'});
   }
   
   public create(salle: Salle): Observable<any>{

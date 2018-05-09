@@ -3,9 +3,9 @@ import { Materiel } from '../model/materiel';
 import { Ordinateur } from '../model/ordinateur';
 import { Projecteur } from '../model/projecteur';
 import { User } from '../model/user';
-import { CursusService } from '../materiel/service/cursus.service';
-import { MaterielService } from '../materiel/service/materiel.service';
-import { UserService } from '../materiel/service/user.service';
+import { CursusService } from '../service/cursus.service';
+import { MaterielService } from '../service/materiel.service';
+import { UserService } from '../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 

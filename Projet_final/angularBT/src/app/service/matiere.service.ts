@@ -1,4 +1,4 @@
-import { Matiere } from '../../model/matiere';
+import { Matiere } from '../model/matiere';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class MatiereService {
   }
 
   public update(matiere: Matiere):Observable<any>{
-    return this.http.put(this.baseUrl, matiere);
+    return this.http.put(this.baseUrl, matiere,{responseType: 'text'});
   }
   
   public create(matiere: Matiere): Observable<any>{

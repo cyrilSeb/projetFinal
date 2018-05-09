@@ -1,6 +1,6 @@
 import {User} from '../model/user';
-import { AlertService } from '../materiel/service/alert.service';
-import {UserService} from '../materiel/service/user.service';
+import { AlertService } from '../service/alert.service';
+import {UserService} from '../service/user.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
